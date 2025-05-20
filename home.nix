@@ -39,6 +39,7 @@
   	prismlauncher
   	unityhub
   	tela-icon-theme
+  	thunderbird
   	wqy_microhei
   	wqy_zenhei
   	texlivePackages.arphic-ttf
