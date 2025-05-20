@@ -19,7 +19,6 @@
   };
   outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpaks, plasma-manager, nur,  ... }:
     let
-      username = "ryann";
       system = "x86_64-linux";
     in
     {
@@ -45,6 +44,28 @@
               ];
             }
             ./hosts/oldfart12/configuration.nix
+          ];
+        };
+        vyasapura = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            nix-flatpaks.nixosModules.nix-flatpak
+            home-manager.nixosModules.home-manager
+            nur.modules.nixos.default
+            {
+              home-manager.backupFileExtension = "backup";
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs.flake-inputs = inputs;
+              home-manager.users.ryann.imports = [
+                ./hosts/vyasapura/home.nix
+                nix-flatpaks.homeManagerModules.nix-flatpak
+              ];
+              home-manager.sharedModules = [
+                  plasma-manager.homeManagerModules.plasma-manager
+              ];
+            }
+            ./hosts/vyasapura/configuration.nix
           ];
         };
       };
