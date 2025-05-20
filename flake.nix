@@ -37,14 +37,14 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs.flake-inputs = inputs;
               home-manager.users.ryann.imports = [
-                ./home.nix
+                ./hosts/oldfart12/home.nix
                 nix-flatpaks.homeManagerModules.nix-flatpak
               ];
               home-manager.sharedModules = [
                   plasma-manager.homeManagerModules.plasma-manager
               ];
             }
-            ./configuration.nix
+            ./hosts/oldfart12/configuration.nix
           ];
         };
       };
