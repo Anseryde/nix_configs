@@ -22,6 +22,13 @@
     enable = true;
     userName  = "Anseryde";
     userEmail = "ryanlupis@gmail.com";
+    extraConfig = {
+      credential = {
+      	helper = "manager";
+      	"https://github.com".username = "Anseryde";
+      	credentialStore = "cache";
+      };
+    };
   };
   # fontconfig support
   fonts = {
@@ -45,6 +52,7 @@
   	texlivePackages.arphic-ttf
   	github-desktop
   	heroic
+  	git-credential-manager
   ];
   services.flatpak.enable = true;
   services.flatpak.remotes = lib.mkOptionDefault [{
