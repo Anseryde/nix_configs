@@ -148,6 +148,8 @@
     enable = true;
     package = pkgs.vscode.fhs;
   };
+  #added for steam not using cursor theme
+  home.file.".icons/default".source = "${pkgs.kdePackages.breeze}/share/icons/breeze_cursors";
   programs.plasma = {
     enable = true;
     workspace = {
