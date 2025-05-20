@@ -28,6 +28,7 @@
       	"https://github.com".username = "Anseryde";
       	credentialStore = "cache";
       };
+      push = { autoSetupRemote = true; };
     };
   };
   # fontconfig support
