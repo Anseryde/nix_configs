@@ -1,0 +1,54 @@
+# flake.nix
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-flatpaks.url = "github:gmodena/nix-flatpak";
+    plasma-manager = {
+    	url = "github:nix-community/plasma-manager";
+    	inputs.nixpkgs.follows = "nixpkgs";
+    	inputs.home-manager.follows = "home-manager";
+    };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+  outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpaks, plasma-manager, nur,  ... }:
+    let
+      username = "ryann";
+      system = "x86_64-linux";
+    in
+    {
+      # hostname = test-system-module
+      nixosConfigurations = {
+        oldfart12 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            nix-flatpaks.nixosModules.nix-flatpak
+            home-manager.nixosModules.home-manager
+            nur.modules.nixos.default
+            {
+              home-manager.backupFileExtension = "backup";
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs.flake-inputs = inputs;
+              home-manager.users.ryann.imports = [
+                ./home.nix
+                nix-flatpaks.homeManagerModules.nix-flatpak
+                ./flatpak.nix
+              ];
+              home-manager.sharedModules = [
+                  plasma-manager.homeManagerModules.plasma-manager
+              ];
+            }
+            ./configuration.nix
+            ./flatpak.nix
+          ];
+        };
+      };
+    };
+}
