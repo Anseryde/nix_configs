@@ -54,6 +54,7 @@
   	github-desktop
   	heroic
   	git-credential-manager
+  	pulsar
   ];
   services.flatpak.enable = true;
   services.flatpak.remotes = lib.mkOptionDefault [{
