@@ -39,14 +39,12 @@
               home-manager.users.ryann.imports = [
                 ./home.nix
                 nix-flatpaks.homeManagerModules.nix-flatpak
-                ./flatpak.nix
               ];
               home-manager.sharedModules = [
                   plasma-manager.homeManagerModules.plasma-manager
               ];
             }
             ./configuration.nix
-            ./flatpak.nix
           ];
         };
       };
