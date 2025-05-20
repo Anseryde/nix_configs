@@ -181,21 +181,6 @@
 
   #flatpaks
   services.flatpak.enable = true;
-  xdg.portal = {
-    enable = true;
-    config = {
-      common = {
-        default = [
-          "kde"
-        ];
-      };
-    };
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      #      xdg-desktop-portal-kde
-      xdg-desktop-portal-gtk
-    ];
-  };
 
   # FISH shell
   programs.fish.enable = true;
