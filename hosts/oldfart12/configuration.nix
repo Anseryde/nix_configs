@@ -229,6 +229,7 @@
   	  PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
   	};
   };
+  systemd.services.sshd.wantedBy = lib.mkForce [ ];
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
