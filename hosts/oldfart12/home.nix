@@ -97,7 +97,6 @@
   programs.fish = {
   	enable = true;
   };
-  programs.ssh.enable = true;
   programs.firefox = {
     enable = true;
     languagePacks = [ "en-US" "en-GB" "zh-CN" "zh-TW" ];
