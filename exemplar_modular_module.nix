@@ -1,4 +1,4 @@
-{ pkgs, lib, config. ...  }: # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
+{ pkgs, lib, config, ...  }: # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
     exemplar_modular_module.enable =
