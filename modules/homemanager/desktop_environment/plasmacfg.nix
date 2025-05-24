@@ -22,7 +22,7 @@
         {
             name = "org.kde.plasma.weather";
             position = {
-            horizontal = 800;
+            horizontal = 900;
             vertical = 20;
             };
             size = {
