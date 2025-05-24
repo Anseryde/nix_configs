@@ -145,10 +145,6 @@
       return config
     '';
   };
-  xdg.configFile."OpenTabletDriver" = {
-    source = ./../../modules/homemanager/misc_dotfiles_src/OpenTabletDriver;
-    recursive = true;
-  };
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.fhs;
