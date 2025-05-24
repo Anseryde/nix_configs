@@ -172,7 +172,6 @@
     hunspellDicts.en_US
     kdePackages.fcitx5-configtool
     vulkan-hdr-layer-kwin6
-    kdePackages.wacomtablet
   ];
   fonts.packages = with pkgs; [
   	noto-fonts
