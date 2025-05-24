@@ -88,9 +88,8 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
-    open = true; # Set to false to use the proprietary kernel module
+    open = false; # Set to false to use the proprietary kernel module
     modesetting.enable = true;
-    powerManagement.enable = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
