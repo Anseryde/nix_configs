@@ -9,6 +9,13 @@
     home.file.".icons/default".source = "${pkgs.kdePackages.breeze}/share/icons/breeze_cursors";
     programs.plasma = {
         enable = true;
+        configFile = {
+          "kdeglobals" = {
+          	"General" = {
+          	  "AccentColor" = "114, 11, 152";
+          	};
+          };
+        };
         workspace = {
         lookAndFeel = "org.kde.breezedark.desktop";
         iconTheme = "Tela-purple-dark";
