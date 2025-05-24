@@ -61,7 +61,6 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 flake-inputs = inputs;
-                rootPath = ./.;
               };
               home-manager.users.ryann.imports = [
                 ./hosts/vyasapura/home.nix
