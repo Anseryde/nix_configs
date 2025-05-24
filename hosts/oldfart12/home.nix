@@ -145,7 +145,7 @@
     '';
   };
   xdg.configFile."OpenTabletDriver" = {
-    source = ./modules/homemanager/misc_dotfiles_src;
+    source = rootPath + /modules/homemanager/misc_dotfiles_src;
     recursive = true;
   };
   programs.vscode = {
