@@ -7,6 +7,6 @@
 
   plasmacfg.enable =
     lib.mkDefault true;
-  misc_dotfiles_src =
+  misc_dotfiles_src.enable =
     lib.mkDefault true;
 }
