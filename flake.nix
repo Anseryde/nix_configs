@@ -34,7 +34,10 @@
               home-manager.backupFileExtension = "backup";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs.flake-inputs = inputs;
+              home-manager.extraSpecialArgs= {
+                flake-inputs = inputs;
+                rootPath = ./.;
+              };
               home-manager.users.ryann.imports = [
                 ./hosts/oldfart12/home.nix
                 nix-flatpaks.homeManagerModules.nix-flatpak
@@ -56,7 +59,10 @@
               home-manager.backupFileExtension = "backup";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs.flake-inputs = inputs;
+              home-manager.extraSpecialArgs = {
+                flake-inputs = inputs;
+                rootPath = ./.;
+              };
               home-manager.users.ryann.imports = [
                 ./hosts/vyasapura/home.nix
                 nix-flatpaks.homeManagerModules.nix-flatpak

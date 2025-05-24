@@ -1,4 +1,4 @@
-{ config, pkgs,lib, ... }:
+{ config, pkgs,lib, rootPath, ... }:
 
 {
   # Home Manager needs a bit of information about you and the
@@ -143,6 +143,10 @@
 
       return config
     '';
+  };
+  xdg.configFile."OpenTabletDriver" = {
+    source = ./modules/homemanager/misc_dotfiles_src;
+    recursive = true;
   };
   programs.vscode = {
     enable = true;
