@@ -172,10 +172,6 @@
     hunspellDicts.en_US
     kdePackages.fcitx5-configtool
     vulkan-hdr-layer-kwin6
-    appimage-run.override { extraPkgs = pkgs: with pkgs; [
-      icu
-      libxcrypt-legacy
-    ]; }
   ];
   fonts.packages = with pkgs; [
   	noto-fonts
@@ -191,7 +187,6 @@
   programs.appimage = {
   	enable = true;
   	binfmt = true;
-  	package = pkgs.appimage-run;
   };
   
   # FISH shell
