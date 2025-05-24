@@ -87,7 +87,7 @@
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = false; # Set to false to use the proprietary kernel module
+  hardware.nvidia.open = true; # Set to false to use the proprietary kernel module
   hardware.nvidia.prime = {
     offload = {
       enable = true;
