@@ -174,6 +174,7 @@
     vulkan-hdr-layer-kwin6
     kdePackages.wacomtablet
     libinput
+    libwacom
   ];
   fonts.packages = with pkgs; [
   	noto-fonts
