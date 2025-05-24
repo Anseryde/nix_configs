@@ -181,6 +181,9 @@
   	liberation_ttf
   ];
 
+  # drawing tablets
+  services.xserver.wacom.enable = true;
+
   #flatpaks
   services.flatpak.enable = true;
 
