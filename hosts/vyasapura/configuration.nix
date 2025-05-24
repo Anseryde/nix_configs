@@ -182,6 +182,15 @@
 
   #flatpaks
   services.flatpak.enable = true;
+  programs.appimage = {
+  	enable = true;
+  	binfmt = true;
+  };
+  programs.appimage.package = pkgs.appimage-run.override { extraPkgs = pkgs: [
+  	pkgs.icu
+  	pkgs.libxcrypt-legacy
+  	pkgs.python312
+  ]; };
 
   # FISH shell
   programs.fish.enable = true;
