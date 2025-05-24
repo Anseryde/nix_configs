@@ -184,8 +184,7 @@
   ];
 
   # drawing tablets
-  services.xserver.wacom.enable = true;
-  services.xserver.digimend.enable = true;
+  hardware.opentabletdriver.enable = true;
 
   #flatpaks
   services.flatpak.enable = true;
