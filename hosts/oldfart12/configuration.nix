@@ -87,15 +87,17 @@
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true; # Set to false to use the proprietary kernel module
+  hardware.nvidia.open = false; # Set to false to use the proprietary kernel module
   hardware.nvidia.prime = {
-    offload.enable = true;
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
 
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:1:0:0";
     #amdgpuBusId = "PCI:54:0:0"; # If you have an AMD iGPU
   };
-
   
 
   # Configure keymap in X11
