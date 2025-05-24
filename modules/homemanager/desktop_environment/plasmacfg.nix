@@ -1,10 +1,10 @@
 { pkgs, lib, config, ...  }: # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
-    exemplar_modular_module.enable =
-  	  lib.mkEnableOption "enables exemplar_modular_module";
+    plasmacfg.enable =
+  	  lib.mkEnableOption "enables plasmacfg module";
   };
-  config = lib.mkIf config.exemplar_modular_module.enable {
+  config = lib.mkIf config.plasmacfg.enable {
     #added for steam not using cursor theme
     home.file.".icons/default".source = "${pkgs.kdePackages.breeze}/share/icons/breeze_cursors";
     programs.plasma = {
