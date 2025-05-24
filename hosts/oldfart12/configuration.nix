@@ -173,6 +173,7 @@
     kdePackages.fcitx5-configtool
     vulkan-hdr-layer-kwin6
     kdePackages.wacomtablet
+    libinput
   ];
   fonts.packages = with pkgs; [
   	noto-fonts
@@ -183,6 +184,7 @@
 
   # drawing tablets
   services.xserver.wacom.enable = true;
+  services.xserver.digimend.enable = true;
 
   #flatpaks
   services.flatpak.enable = true;
