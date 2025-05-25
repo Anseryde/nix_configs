@@ -20,6 +20,13 @@
           formatter.command = lib.getExe pkgs.alejandra;
         }
       ];
+      languages.language-server.nixd = {
+        config = {
+          nixpkgs.expr = "import (builtins.getFlake \"/home/ryann/nix-configs\").inputs.nixpkgs { }";
+          options.nixos.expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.oldfart12.options";
+          options.home-manager.expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.oldfart12.options.home-manager.users.type.getSubOptions []";
+        };
+      };
       settings = {
         theme = "dracula_at_night";
         editor.cursor-shape = {
