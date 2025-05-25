@@ -1,10 +1,10 @@
 { pkgs, lib, config, ...  }: # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
-    pkgs.enable =
-  	  lib.mkEnableOption "enables pkgs";
+    nixos_pkgs.enable =
+  	  lib.mkEnableOption "enables nixos_pkgs";
   };
-  config = lib.mkIf config.pkgs.enable {
+  config = lib.mkIf config.nixos_pkgs.enable {
       # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
