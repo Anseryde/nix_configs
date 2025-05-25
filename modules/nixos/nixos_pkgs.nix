@@ -14,6 +14,7 @@
       wget
       epson-escpr2
       nixd
+      alejandra
       vlc
       libdvdcss
       libdvdread

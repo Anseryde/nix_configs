@@ -15,6 +15,11 @@
           insert = "bar";
           select = "underline";
         };
+      languages.language = [{
+        name = "nix";
+        auto-format = false;
+        formatter.command = lib.getExe pkgs.alejandra;
+      }];
       };
     };
   };
