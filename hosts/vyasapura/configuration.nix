@@ -11,6 +11,8 @@
       ./../../modules/nixos
     ];
   # custom module selection
+  nvidia.enable = true;
+  nvidia-optimus.enable = true;
   steam.enable = true;
   gamescopeandgamemode.enable = true;
   # Use the systemd-boot EFI boot loader.
@@ -62,24 +64,6 @@
   	powerOnBoot = true;
   };
   hardware.enableAllFirmware = true;
-
-  # NVIDIA drivers
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [nvidia-vaapi-driver];
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true; # Set to false to use the proprietary kernel module
-  hardware.nvidia.prime = {
-    offload.enable = true;
-
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
-    #amdgpuBusId = "PCI:54:0:0"; # If you have an AMD iGPU
-  };
-
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";

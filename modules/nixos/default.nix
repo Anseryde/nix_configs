@@ -5,6 +5,8 @@
     ./language/fcitx.nix
     ./gaming/steam.nix
     ./gaming/gamescopeandgamemode.nix
+    ./drivers/nvidia.nix
+    ./drivers/nvidia-optimus.nix
   ];
 
   nixos_pkgs.enable =
