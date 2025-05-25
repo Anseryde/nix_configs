@@ -26,7 +26,7 @@
         config.nixd = {
           nixpkgs = {
             expr = "import (builtins.getFlake \"/home/ryann/nix-configs\").inputs.nixpkgs { }";
-            };
+          };
           options = {
             nixos = {
               expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.oldfart12.options";
