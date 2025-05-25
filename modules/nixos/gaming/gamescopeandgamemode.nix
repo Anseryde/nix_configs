@@ -1,8 +1,14 @@
-{ pkgs, lib, config, ...  }: # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+# lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
     gamescopeandgamemode.enable =
-  	  lib.mkEnableOption "enables gamescopeandgamemode";
+      lib.mkEnableOption "enables gamescopeandgamemode";
   };
   config = lib.mkIf config.gamescopeandgamemode.enable {
     programs.gamescope = {

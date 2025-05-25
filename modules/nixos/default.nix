@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./nixos_pkgs.nix
     ./language/fcitx.nix

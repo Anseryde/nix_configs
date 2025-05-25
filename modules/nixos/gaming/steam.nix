@@ -1,8 +1,14 @@
-{ pkgs, lib, config, ...  }: # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+# lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
     steam.enable =
-  	  lib.mkEnableOption "enables steam";
+      lib.mkEnableOption "enables steam";
   };
   config = lib.mkIf config.steam.enable {
     programs.steam = {

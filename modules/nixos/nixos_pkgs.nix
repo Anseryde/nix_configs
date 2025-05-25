@@ -1,11 +1,17 @@
-{ pkgs, lib, config, ...  }: # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+# lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
     nixos_pkgs.enable =
-  	  lib.mkEnableOption "enables nixos_pkgs";
+      lib.mkEnableOption "enables nixos_pkgs";
   };
   config = lib.mkIf config.nixos_pkgs.enable {
-      # List packages installed in system profile. To search, run:
+    # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
       #vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -28,10 +34,10 @@
       libwacom
     ];
     fonts.packages = with pkgs; [
-    	noto-fonts
-    	noto-fonts-cjk-sans
-    	noto-fonts-cjk-serif
-    	liberation_ttf
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      liberation_ttf
     ];
   };
 }

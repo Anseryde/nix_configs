@@ -1,8 +1,14 @@
-{ pkgs, lib, config, ...  }: # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+# lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
     wezterm.enable =
-  	  lib.mkEnableOption "enables wezterm";
+      lib.mkEnableOption "enables wezterm";
   };
   config = lib.mkIf config.wezterm.enable {
     programs.wezterm = {

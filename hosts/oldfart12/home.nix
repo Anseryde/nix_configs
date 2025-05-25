@@ -1,6 +1,9 @@
-{ config, pkgs,lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "ryann";
@@ -16,30 +19,30 @@
   # changes in each release.
   home.stateVersion = "24.11";
   #import modules
-  imports = [ ./../../modules/homemanager ];
+  imports = [./../../modules/homemanager];
   flatpak.enable = true;
   helix.enable = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName  = "Anseryde";
+    userName = "Anseryde";
     userEmail = "ryanlupis@gmail.com";
     extraConfig = {
       credential = {
-      	helper = "manager";
-      	"https://github.com".username = "Anseryde";
-      	credentialStore = "cache";
+        helper = "manager";
+        "https://github.com".username = "Anseryde";
+        credentialStore = "cache";
       };
-      push = { autoSetupRemote = true; };
+      push = {autoSetupRemote = true;};
     };
   };
   programs.fish = {
-  	enable = true;
+    enable = true;
   };
   programs.firefox = {
     enable = true;
-    languagePacks = [ "en-US" "en-GB" "zh-CN" "zh-TW" ];
+    languagePacks = ["en-US" "en-GB" "zh-CN" "zh-TW"];
     policies = {
       DisableTelemetry = true;
       DisableFirefoxStudies = true;
