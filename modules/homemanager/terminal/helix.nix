@@ -17,10 +17,12 @@
         {
           name = "nix";
           auto-format = false;
+          language-servers = "nixd";
           formatter.command = lib.getExe pkgs.alejandra;
         }
       ];
       languages.language-server.nixd = {
+        command = "nixd";
         config = {
           nixpkgs.expr = "import (builtins.getFlake \"/home/ryann/nix-configs\").inputs.nixpkgs { }";
           options.nixos.expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.oldfart12.options";
