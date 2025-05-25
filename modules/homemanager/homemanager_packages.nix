@@ -32,6 +32,7 @@
       nixd
       zed-editor
       vscodium-fhs
+      kew
     ];
   };
 }
