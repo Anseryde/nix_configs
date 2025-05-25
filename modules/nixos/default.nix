@@ -8,10 +8,13 @@
     ./drivers/nvidia.nix
     ./drivers/nvidia-optimus.nix
     ./drivers/msi-ec.nix
+    ./services/docker.nix
   ];
 
   nixos_pkgs.enable =
     lib.mkDefault true;
   fcitx.enable =
+    lib.mkDefault true;
+  docker.enable =
     lib.mkDefault true;
 }

@@ -139,13 +139,6 @@
   # FISH shell
   programs.fish.enable = true;
   
-  # Docker for distrobox
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
-  systemd.user.services.docker.enable = true;
-
   # Waydroid
   virtualisation.waydroid.enable = true;
 
