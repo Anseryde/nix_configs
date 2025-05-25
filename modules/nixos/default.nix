@@ -2,7 +2,7 @@
 {
   imports = [
     ./nixos_pkgs.nix
-    ./modules/nixos/language/fcitx.nix
+    ./language/fcitx.nix
   ];
 
   nixos_pkgs.enable =
