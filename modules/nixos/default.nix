@@ -1,9 +1,9 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ./pkgs.nix
+    ./nixos_pkgs.nix
   ];
 
-  pkgs.enable =
+  nixos_pkgs.enable =
     lib.mkDefault true;
 }
