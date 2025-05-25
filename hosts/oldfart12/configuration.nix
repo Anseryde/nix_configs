@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ./../../modules/nixos
     ];
-  #custom module selection
+  # custom module selection
   steam.enable = true;
   gamescopeandgamemode.enable = true;
   # Use the systemd-boot EFI boot loader.
