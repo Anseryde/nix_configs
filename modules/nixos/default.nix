@@ -7,6 +7,7 @@
     ./gaming/gamescopeandgamemode.nix
     ./drivers/nvidia.nix
     ./drivers/nvidia-optimus.nix
+    ./drivers/msi-ec.nix
   ];
 
   nixos_pkgs.enable =
