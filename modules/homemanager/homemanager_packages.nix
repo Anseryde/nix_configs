@@ -29,7 +29,6 @@
     	heroic
     	git-credential-manager
       helix
-      nixd
       zed-editor
       vscodium-fhs
       kew
