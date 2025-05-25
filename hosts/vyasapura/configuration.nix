@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./../../modules/nixos
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -43,26 +44,6 @@
     #keyMap = "us";
     #useXkbConfig = true; # use xkb.options in tty.
   #};
-
-  # fcitx
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5 = {
-      waylandFrontend = true;
-      addons = with pkgs; [
-      	rime-data
-      	fcitx5-rime
-      	libchewing
-      	fcitx5-chewing
-      	fcitx5-table-extra
-      	fcitx5-table-other
-      	kdePackages.fcitx5-qt
-      	kdePackages.fcitx5-chinese-addons
-      ];
-    };
-  };
-  
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -152,33 +133,6 @@
       dates = lib.mkDefault "weekly";
     };
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    micro
-    wget
-    distrobox
-    epson-escpr2
-    nil
-    vlc
-    libdvdcss
-    libdvdread
-    libdvdnav
-    libbluray
-    libreoffice-qt-fresh
-    hunspell
-    hunspellDicts.en_US
-    kdePackages.fcitx5-configtool
-    vulkan-hdr-layer-kwin6
-  ];
-  fonts.packages = with pkgs; [
-  	noto-fonts
-  	noto-fonts-cjk-sans
-  	noto-fonts-cjk-serif
-  	liberation_ttf
-  ];
 
   # drawing tablets
   hardware.opentabletdriver.enable = true;

@@ -2,8 +2,11 @@
 {
   imports = [
     ./nixos_pkgs.nix
+    ./modules/nixos/language/fcitx.nix
   ];
 
   nixos_pkgs.enable =
+    lib.mkDefault true;
+  fcitx.enable =
     lib.mkDefault true;
 }

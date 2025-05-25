@@ -23,7 +23,6 @@
       libreoffice-qt-fresh
       hunspell
       hunspellDicts.en_US
-      kdePackages.fcitx5-configtool
       vulkan-hdr-layer-kwin6
       libinput
       libwacom
