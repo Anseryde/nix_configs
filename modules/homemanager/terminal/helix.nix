@@ -17,7 +17,7 @@
         {
           name = "nix";
           auto-format = false;
-          language-servers = "nixd";
+          language-servers = ["nixd"];
           formatter.command = lib.getExe pkgs.alejandra;
         }
       ];
