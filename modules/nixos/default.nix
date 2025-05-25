@@ -9,6 +9,7 @@
     ./drivers/nvidia-optimus.nix
     ./drivers/msi-ec.nix
     ./services/docker.nix
+    ./programs/distrobox.nix
   ];
 
   nixos_pkgs.enable =
@@ -16,5 +17,7 @@
   fcitx.enable =
     lib.mkDefault true;
   docker.enable =
+    lib.mkDefault true;
+  distrobox.enable =
     lib.mkDefault true;
 }

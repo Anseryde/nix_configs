@@ -12,7 +12,6 @@
       micro
       helix
       wget
-      distrobox
       epson-escpr2
       nil
       vlc
