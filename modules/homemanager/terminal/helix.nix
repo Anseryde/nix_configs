@@ -22,8 +22,8 @@
         }
       ];
       languages.language-server.nixd = {
-        command = "nixd";
-        config = {
+        command = lib.getExe pkgs.nixd;
+        config.nixd = {
           nixpkgs.expr = "import (builtins.getFlake \"/home/ryann/nix-configs\").inputs.nixpkgs { }";
           options.nixos.expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.oldfart12.options";
           options.home-manager.expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.oldfart12.options.home-manager.users.type.getSubOptions []";
