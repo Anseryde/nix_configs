@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./../../modules/nixos
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -157,36 +158,6 @@
       dates = lib.mkDefault "weekly";
     };
   };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    micro
-    wget
-    distrobox
-    epson-escpr2
-    nil
-    vlc
-    libdvdcss
-    libdvdread
-    libdvdnav
-    libbluray
-    libreoffice-qt-fresh
-    hunspell
-    hunspellDicts.en_US
-    kdePackages.fcitx5-configtool
-    vulkan-hdr-layer-kwin6
-    libinput
-    libwacom
-  ];
-  fonts.packages = with pkgs; [
-  	noto-fonts
-  	noto-fonts-cjk-sans
-  	noto-fonts-cjk-serif
-  	liberation_ttf
-  ];
-
   # drawing tablets
   hardware.opentabletdriver.enable = true;
 
