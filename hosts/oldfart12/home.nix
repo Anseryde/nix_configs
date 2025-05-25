@@ -55,6 +55,9 @@
   	github-desktop
   	heroic
   	git-credential-manager
+    helix
+    nxd
+    zed-editor
   ];
   services.flatpak.enable = true;
   services.flatpak.remotes = lib.mkOptionDefault [{
