@@ -23,6 +23,7 @@
     in
     {
       # hostname = test-system-module
+      nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
       nixosConfigurations = {
         oldfart12 = nixpkgs.lib.nixosSystem {
           inherit system;
