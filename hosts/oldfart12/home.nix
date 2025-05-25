@@ -17,6 +17,7 @@
   home.stateVersion = "24.11";
   #import modules
   imports = [ ./../../modules/homemanager ];
+  flatpak.enable = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   programs.git = {
@@ -58,6 +59,7 @@
     helix
     nixd
     zed-editor
+    vscodium-fhs
   ];
   services.flatpak.enable = true;
   services.flatpak.remotes = lib.mkOptionDefault [{
