@@ -34,30 +34,6 @@
       push = { autoSetupRemote = true; };
     };
   };
-  # fontconfig support
-  fonts = {
-  	fontconfig = {
-  	  enable = true;
-  	};
-  };
-  home.packages = with pkgs; [
-  	fastfetch
-  	hyfetch
-  	fishPlugins.fzf-fish
-  	courier-prime
-  	vollkorn
-  	gimp3-with-plugins
-  	prismlauncher
-  	unityhub
-  	tela-icon-theme
-  	thunderbird-latest
-  	wqy_microhei
-  	wqy_zenhei
-  	texlivePackages.arphic-ttf
-  	github-desktop
-  	heroic
-  	git-credential-manager
-  ];
   programs.fish = {
   	enable = true;
   };
