@@ -3,6 +3,8 @@
   imports = [
     ./nixos_pkgs.nix
     ./language/fcitx.nix
+    ./gaming/steam.nix
+    ./gaming/gamescopeandgamemode.nix
   ];
 
   nixos_pkgs.enable =
