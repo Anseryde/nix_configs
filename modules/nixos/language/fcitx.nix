@@ -24,8 +24,8 @@
         ];
       };
     };
+    environment.systemPackages = with pkgs; [
+      kdePackages.fcitx5-configtool
+    ];
   };
-  environment.systemPackages = with pkgs; [
-    kdePackages.fcitx5-configtool
-  ];
 }
