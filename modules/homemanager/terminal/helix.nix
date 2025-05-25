@@ -8,6 +8,11 @@
   config = lib.mkIf config.helix.enable {
     programs.helix = {
       enable = true;
+      languages.language = [{
+        name = "nix";
+        auto-format = false;
+        formatter.command = lib.getExe pkgs.alejandra;
+      }];
       settings = {
         theme = "dracula_at_night";
         editor.cursor-shape = {
@@ -15,11 +20,6 @@
           insert = "bar";
           select = "underline";
         };
-      languages.language = [{
-        name = "nix";
-        auto-format = false;
-        formatter.command = lib.getExe pkgs.alejandra;
-      }];
       };
     };
   };
