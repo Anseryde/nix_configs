@@ -56,7 +56,7 @@
   	heroic
   	git-credential-manager
     helix
-    nxd
+    nixd
     zed-editor
   ];
   services.flatpak.enable = true;
