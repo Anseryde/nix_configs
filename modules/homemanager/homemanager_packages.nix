@@ -42,7 +42,7 @@
       gdtoolkit_4
       lua-language-server
       lua
-      homemanager
+      home-manager
     ];
   };
 }
