@@ -49,6 +49,7 @@
       "org.kde.krita"
       "org.telegram.desktop"
       "dev.pulsar_edit.Pulsar"
+      "io.github.MakovWait.Godots"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];
