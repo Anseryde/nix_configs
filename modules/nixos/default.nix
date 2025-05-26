@@ -13,6 +13,7 @@
     ./drivers/msi-ec.nix
     ./services/docker.nix
     ./programs/distrobox.nix
+    ./services/syncthing.nix
   ];
 
   nixos_pkgs.enable =

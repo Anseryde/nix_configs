@@ -11,6 +11,7 @@
     ./homemanager_packages.nix
     ./programs/wezterm.nix
     ./terminal/fish.nix
+    ./services/syncthing.nix
   ];
 
   plasmacfg.enable =
