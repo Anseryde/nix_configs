@@ -25,19 +25,6 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "Anseryde";
-    userEmail = "ryanlupis@gmail.com";
-    extraConfig = {
-      credential = {
-        helper = "manager";
-        "https://github.com".username = "Anseryde";
-        credentialStore = "cache";
-      };
-      push = {autoSetupRemote = true;};
-    };
-  };
   programs.firefox = {
     enable = true;
     languagePacks = ["en-US" "en-GB" "zh-CN" "zh-TW"];

@@ -12,6 +12,7 @@
     ./programs/wezterm.nix
     ./terminal/fish.nix
     ./services/syncthing.nix
+    ./services/git.nix
   ];
 
   plasmacfg.enable =
@@ -23,5 +24,7 @@
   wezterm.enable =
     lib.mkDefault true;
   fish.enable =
+    lib.mkDefault true;
+  git.enable =
     lib.mkDefault true;
 }

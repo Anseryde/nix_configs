@@ -31,9 +31,7 @@
       wqy_microhei
       wqy_zenhei
       texlivePackages.arphic-ttf
-      github-desktop
       heroic
-      git-credential-manager
       helix
       zed-editor
       vscodium-fhs
