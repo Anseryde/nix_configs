@@ -7,10 +7,10 @@
 # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
-    exemplar_modular_module.enable =
-      lib.mkEnableOption "enables exemplar_modular_module";
+    firefox.enable =
+      lib.mkEnableOption "enables firefox";
   };
-  config = lib.mkIf config.exemplar_modular_module.enable {
+  config = lib.mkIf config.firefox.enable {
     programs.firefox = {
       enable = true;
       languagePacks = ["en-US" "en-GB" "zh-CN" "zh-TW"];
