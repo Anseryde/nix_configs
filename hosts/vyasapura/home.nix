@@ -37,9 +37,6 @@
       push = {autoSetupRemote = true;};
     };
   };
-  programs.fish = {
-    enable = true;
-  };
   programs.firefox = {
     enable = true;
     languagePacks = ["en-US" "en-GB" "zh-CN" "zh-TW"];

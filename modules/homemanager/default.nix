@@ -10,6 +10,7 @@
     ./terminal/helix.nix
     ./homemanager_packages.nix
     ./programs/wezterm.nix
+    ./terminal/fish.nix
   ];
 
   plasmacfg.enable =
@@ -19,5 +20,7 @@
   homemanager_packages.enable =
     lib.mkDefault true;
   wezterm.enable =
+    lib.mkDefault true;
+  fish.enable =
     lib.mkDefault true;
 }
