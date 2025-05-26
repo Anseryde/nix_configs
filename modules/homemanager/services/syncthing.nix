@@ -13,10 +13,12 @@
   config = lib.mkIf config.syncthing.enable {
     services.syncthing = {
       enable = true;
-      options = {
-        listenAddresses = [
-          "default"
-        ];
+      settings = {
+        options = {
+          listenAddresses = [
+            "default"
+          ];
+        };
       };
     };
   };
