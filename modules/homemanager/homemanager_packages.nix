@@ -42,7 +42,6 @@
       gdtoolkit_4
       lua-language-server
       lua
-      home-manager
     ];
   };
 }
