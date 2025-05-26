@@ -14,6 +14,7 @@
     ./services/syncthing.nix
     ./services/git.nix
     ./programs/firefox.nix
+    ./programs/vscode.nix
   ];
 
   plasmacfg.enable =

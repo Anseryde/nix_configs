@@ -8,12 +8,14 @@
   # paths it should manage.
   home.username = "ryann";
   home.homeDirectory = "/home/ryann";
-  #import modules
+  # import modules
+  # for full list of modules, as well as default modules, view nix-configs/modules/homemanager/default.nix
   imports = [./../../modules/homemanager];
   flatpak.enable = true;
   helix.enable = true;
   syncthing.enable = true;
   firefox.enable = true;
+  vscode.enable = true;
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

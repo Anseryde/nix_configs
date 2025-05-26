@@ -18,16 +18,14 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "24.11";
-  #import modules
+  # import modules
+  # for full list of modules, as well as default modules, view nix-configs/modules/homemanager/default.nix
   imports = [./../../modules/homemanager];
   flatpak.enable = true;
   helix.enable = true;
   syncthing.enable = true;
   firefox.enable = true;
+  vscode.enable = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode.fhs;
-  };
 }

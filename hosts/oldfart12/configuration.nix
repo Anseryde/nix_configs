@@ -13,6 +13,7 @@
     ./../../modules/nixos
   ];
   # custom module selection
+  # for full list of modules, as well as default modules, view nix-configs/modules/nixos/default.nix
   nvidia.enable = true;
   nvidia-optimus.enable = true;
   steam.enable = true;
