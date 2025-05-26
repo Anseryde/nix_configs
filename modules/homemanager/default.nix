@@ -13,6 +13,7 @@
     ./terminal/fish.nix
     ./services/syncthing.nix
     ./services/git.nix
+    ./programs/firefox.nix
   ];
 
   plasmacfg.enable =
