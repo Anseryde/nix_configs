@@ -39,11 +39,7 @@
           { run = "plugin chmod"; on = [ "c" "m" ]; }
         ];
       };
-      initLua.text = ''
-        require("full-border"):setup {
-          type = ui.Border.ROUNDED,
-        }
-      '';
+      initLua = ./yazi/init.lua;
     };
   };
 }
