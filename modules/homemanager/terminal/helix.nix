@@ -13,6 +13,7 @@
   config = lib.mkIf config.helix.enable {
     programs.helix = {
       enable = true;
+      defaultEditor = true;
       languages.language = [
         {
           name = "nix";
