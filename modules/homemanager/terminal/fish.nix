@@ -15,7 +15,7 @@
       enable = true;
       shellInit = "
         starship init fish | source
-        setenv VISUAL hx
+        setenv EDITOR hx
       ";
     };
     home.packages = with pkgs; [
