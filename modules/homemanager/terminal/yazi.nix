@@ -64,15 +64,15 @@
           sort_reverse = false;
         };
         plugin = {
-          prepend_fetchers = {
+          prepend_fetchers = [{
             id = "git";
             name = "*/";
             run = "git";
-          };
-          prepend_previewers = {
+          }];
+          prepend_previewers = [{
             name = "*.md";
             run = "glow";
-          };
+          }];
         };
       };
       initLua = ./yazi/init.lua;
