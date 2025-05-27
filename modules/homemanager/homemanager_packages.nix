@@ -42,6 +42,9 @@
       lua
       ruff
       mcontrolcenter
+      duckdb
+      mediainfo
+      glow
     ];
   };
 }
