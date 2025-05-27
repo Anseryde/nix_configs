@@ -36,7 +36,7 @@
           { run = "escape"; on = [ "<Esc>" ]; }
           { run = "quit"; on = [ "q" ]; }
           { run = "close"; on = [ "<C-q>" ]; }
-          { run = "plugin chmod"; on = [ "c", "m" ]; }
+          { run = "plugin chmod"; on = [ "c" "m" ]; }
         ];
       };
       initLua.text = ''
