@@ -47,6 +47,7 @@
       glow
       trash-cli
       nushell
+      foliate
     ];
   };
 }
