@@ -66,7 +66,7 @@
         plugin = {
           prepend_fetchers = {
             id = "git";
-            name = "*";
+            name = "*/";
             run = "git";
           };
           prepend_previewers = {
