@@ -37,7 +37,33 @@
           { run = "quit"; on = [ "q" ]; }
           { run = "close"; on = [ "<C-q>" ]; }
           { run = "plugin chmod"; on = [ "c" "m" ]; }
+          { run = "plugin duckdb -1"; on = [ "<C-h>" ]; }
+          { run = "plugin duckdb +1"; on = [ "<C-l>" ]; }
+          { run = "plugin duckdb -open"; on = [ "g" "o" ]; }
+          { run = "plugin duckdb -ui"; on = [ "g" "u" ]; }
         ];
+      };
+      settings = {
+        log = {
+          enabled = true;
+        };
+        manager = {
+          show_hidden = true;
+          sort_by = "natural";
+          sort_dir_first = false;
+          sort_reverse = false;
+        };
+        plugin = {
+          prepend_fetchers = {
+            id = "git";
+            name = "*";
+            run = "git";
+          };
+          prepend_previewers = {
+            name = "*.md";
+            run = "glow";
+          };
+        };
       };
       initLua = ./yazi/init.lua;
     };

@@ -45,6 +45,7 @@
       duckdb
       mediainfo
       glow
+      trash-cli
     ];
   };
 }
