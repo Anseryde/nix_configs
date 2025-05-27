@@ -41,7 +41,7 @@
           { run = "plugin duckdb +1"; on = [ "<C-l>" ]; }
           { run = "plugin duckdb -open"; on = [ "g" "o" ]; }
           { run = "plugin duckdb -ui"; on = [ "g" "u" ]; }
-          { run = "plugin restore"; on = [ "d" "u" ]; }
+          { run = "plugin restore"; on = [ "u" ]; }
           { run = "plugin sudo -- paste"; on = [ "R" "p" ]; }
           { run = "plugin sudo -- paste -- force"; on = [ "R" "P" ]; }
           { run = "plugin sudo -- rename"; on = [ "R" "r" ]; }
