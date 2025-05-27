@@ -32,7 +32,6 @@
       vulkan-hdr-layer-kwin6
       libinput
       libwacom
-      yazi
     ];
     fonts.packages = with pkgs; [
       noto-fonts

@@ -15,6 +15,7 @@
     ./services/git.nix
     ./programs/firefox.nix
     ./programs/vscode.nix
+    ./terminal/yazi.nix
   ];
 
   plasmacfg.enable =
@@ -28,5 +29,7 @@
   fish.enable =
     lib.mkDefault true;
   git.enable =
+    lib.mkDefault true;
+  yazi.enable =
     lib.mkDefault true;
 }
