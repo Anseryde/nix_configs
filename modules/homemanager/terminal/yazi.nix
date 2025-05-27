@@ -41,6 +41,16 @@
           { run = "plugin duckdb +1"; on = [ "<C-l>" ]; }
           { run = "plugin duckdb -open"; on = [ "g" "o" ]; }
           { run = "plugin duckdb -ui"; on = [ "g" "u" ]; }
+          { run = "plugin restore"; on = [ "d" "u" ]; }
+          { run = "plugin sudo -- paste"; on = [ "R" "p" ]; }
+          { run = "plugin sudo -- paste -- force"; on = [ "R" "P" ]; }
+          { run = "plugin sudo -- rename"; on = [ "R" "r" ]; }
+          { run = "plugin sudo -- link"; on = [ "R" "-" ]; }
+          { run = "plugin sudo -- link -- relative"; on = [ "R" "_" ]; }
+          { run = "plugin sudo -- link -- hardlink"; on = [ "R" "<C-->" ]; }
+          { run = "plugin sudo -- create"; on = [ "R" "a" ]; }
+          { run = "plugin sudo -- remove"; on = [ "R" "d" ]; }
+          { run = "plugin sudo -- remove --permanently"; on = [ "R" "D" ]; }
         ];
       };
       settings = {

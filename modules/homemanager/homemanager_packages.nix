@@ -46,6 +46,7 @@
       mediainfo
       glow
       trash-cli
+      nushell
     ];
   };
 }
