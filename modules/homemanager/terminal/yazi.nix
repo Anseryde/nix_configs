@@ -15,27 +15,16 @@
       enable = true;
       enableFishIntegration = true;
       plugins = {
-        git = pkgs.yaziPlugins.git;
-        sudo = pkgs.yaziPlugins.sudo;
-        chmod = pkgs.yaziPlugins.chmod;
-        duckdb = pkgs.yaziPlugins.duckdb;
-        full-border = pkgs.yaziPlugins.full-border;
-        glow = pkgs.yaziPlugins.glow;
-        restore = pkgs.yaziPlugins.restore;
-        mediainfo = pkgs.yaziPlugins.mediainfo;
-        starship = pkgs.yaziPlugins.starship;
+        "git" = pkgs.yaziPlugins.git;
+        "sudo" = pkgs.yaziPlugins.sudo;
+        "chmod" = pkgs.yaziPlugins.chmod;
+        "duckdb" = pkgs.yaziPlugins.duckdb;
+        "full-border" = pkgs.yaziPlugins.full-border;
+        "glow" = pkgs.yaziPlugins.glow;
+        "restore" = pkgs.yaziPlugins.restore;
+        "mediainfo" = pkgs.yaziPlugins.mediainfo;
+        "starship" = pkgs.yaziPlugins.starship;
       };
     };
-    home.packages = with pkgs; [
-      yaziPlugins.git
-      yaziPlugins.sudo
-      yaziPlugins.chmod
-      yaziPlugins.duckdb
-      yaziPlugins.full-border
-      yaziPlugins.glow
-      yaziPlugins.restore
-      yaziPlugins.mediainfo
-      yaziPlugins.starship
-    ];
   };
 }
