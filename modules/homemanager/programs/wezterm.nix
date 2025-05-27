@@ -20,6 +20,7 @@
         config.color_scheme = 'Ibm3270 (Gogh)'
         config.font = wezterm.font 'Courier Prime'
         config.font_size = 12.0
+        config.enable_wayland = false
 
         return config
       '';
