@@ -41,6 +41,7 @@
       lua-language-server
       lua
       ruff
+      mcontrolcenter
     ];
   };
 }
