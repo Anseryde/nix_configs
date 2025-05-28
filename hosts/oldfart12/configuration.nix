@@ -86,28 +86,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.ryann = {
-    isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "docker"]; # Enable ‘sudo’ for the user.
-    shell = pkgs.fish;
-    packages = with pkgs; [
-      tree
-    ];
-    subGidRanges = [
-      {
-        count = 65536;
-        startGid = 1000;
-      }
-    ];
-    subUidRanges = [
-      {
-        count = 65536;
-        startUid = 1000;
-      }
-    ];
-  };
-
   #programs.firefox.enable = true;
 
   #unfree packages

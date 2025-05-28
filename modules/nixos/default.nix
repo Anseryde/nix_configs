@@ -13,13 +13,14 @@
     ./drivers/msi-ec.nix
     ./services/docker.nix
     ./programs/distrobox.nix
+    ./users.nix
   ];
 
   nixos_pkgs.enable =
     lib.mkDefault true;
-  fcitx.enable =
+  users.enable =
     lib.mkDefault true;
-  docker.enable =
+  fcitx.enable =
     lib.mkDefault true;
   distrobox.enable =
     lib.mkDefault true;
