@@ -9,6 +9,7 @@
     ./gaming/steam.nix
     ./gaming/gamescopeandgamemode.nix
     ./drivers/nvidia.nix
+    ./drivers/nvidia-open-kernel-module.nix
     ./drivers/nvidia-optimus.nix
     ./drivers/msi-ec.nix
     ./services/docker.nix
