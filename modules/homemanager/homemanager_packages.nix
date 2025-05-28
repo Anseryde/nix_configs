@@ -48,6 +48,7 @@
       trash-cli
       nushell
       foliate
+      inkscape-with-extensions
     ];
   };
 }
