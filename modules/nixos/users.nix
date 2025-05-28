@@ -20,18 +20,6 @@
       packages = with pkgs; [
         tree
       ];
-      subGidRanges = [
-        {
-          count = 65536;
-          startGid = 1000;
-        }
-      ];
-      subUidRanges = [
-        {
-          count = 65536;
-          startUid = 1000;
-        }
-      ];
     };
   };
 }
