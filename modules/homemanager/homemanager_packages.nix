@@ -41,7 +41,6 @@
       lua-language-server
       lua
       ruff
-      mcontrolcenter
       duckdb
       mediainfo
       glow
