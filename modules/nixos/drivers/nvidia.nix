@@ -22,7 +22,7 @@
       open = false; # Set to false to use the proprietary kernel module
       modesetting.enable = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
+    hardware.nvidia-container-toolkit.enable = true;
   };
 }
