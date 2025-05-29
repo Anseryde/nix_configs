@@ -13,5 +13,6 @@
   config = lib.mkIf config.msi-ec.enable {
     boot.extraModulePackages = [config.boot.kernelPackages.msi-ec];
     boot.kernelModules = ["msi-ec"];
+    boot.initrd.kernelModules = ["ec_sys" "msi_ec"];
   };
 }
