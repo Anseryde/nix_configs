@@ -50,6 +50,7 @@
       "org.telegram.desktop"
       "dev.pulsar_edit.Pulsar"
       "io.github.MakovWait.Godots"
+      "com.heroicgameslauncher.hgl"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];

@@ -31,7 +31,6 @@
       wqy_microhei
       wqy_zenhei
       texlivePackages.arphic-ttf
-      heroic
       helix
       zed-editor
       vscodium-fhs
