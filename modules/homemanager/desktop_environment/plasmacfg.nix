@@ -18,7 +18,7 @@
       configFile = {
         "kdeglobals" = {
           "General" = {
-            "AccentColor" = "114, 11, 152";
+            "AccentColor" = "131, 102, 244";
           };
         };
       };
