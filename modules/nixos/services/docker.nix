@@ -14,8 +14,7 @@
     # Docker for distrobox
     virtualisation.docker = {
       enable = true;
-      setSocketVariable = true;
+      enableOnBoot = true;
     };
-    systemd.services.docker.enable = true;
   };
 }
