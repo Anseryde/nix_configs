@@ -24,5 +24,6 @@
       nvidiaSettings = true;
     };
     hardware.nvidia-container-toolkit.enable = true;
+    environment.systemPackages = [pkgs.nvidia-container-toolkit];
   };
 }
