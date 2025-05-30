@@ -24,7 +24,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   #switch to latest stable linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_15;
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
 
   # zstd compression
   fileSystems = {
