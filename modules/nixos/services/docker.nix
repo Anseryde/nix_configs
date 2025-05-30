@@ -12,10 +12,10 @@
   };
   config = lib.mkIf config.docker.enable {
     # Docker for distrobox
-    virtualisation.docker.rootless = {
+    virtualisation.docker = {
       enable = true;
       setSocketVariable = true;
     };
-    systemd.user.services.docker.enable = true;
+    systemd.services.docker.enable = true;
   };
 }
