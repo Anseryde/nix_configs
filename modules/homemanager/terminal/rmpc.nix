@@ -37,6 +37,7 @@
                 vertical_align: Center,
                 horizontal_align: Center,
             ),
+            lyrics_dir: "~/Music"
             keybinds: (
                 global: {
                     ":":       CommandMode,
