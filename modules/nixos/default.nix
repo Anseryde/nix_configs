@@ -15,6 +15,7 @@
     ./services/docker.nix
     ./programs/distrobox.nix
     ./users.nix
+    ./services/docker.nix
   ];
 
   nixos_pkgs.enable =
@@ -24,5 +25,7 @@
   fcitx.enable =
     lib.mkDefault true;
   distrobox.enable =
+    lib.mkDefault true;
+  podman-container.enable =
     lib.mkDefault true;
 }

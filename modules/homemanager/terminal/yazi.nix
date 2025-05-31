@@ -15,7 +15,7 @@
       enable = true;
       enableFishIntegration = true;
       plugins = {
-        "git" = pkgs.yaziPlugins.git;
+        #"git" = pkgs.yaziPlugins.git; #uses deprecared args?
         "sudo" = pkgs.yaziPlugins.sudo;
         "chmod" = pkgs.yaziPlugins.chmod;
         "duckdb" = pkgs.yaziPlugins.duckdb;
@@ -32,7 +32,7 @@
           { run = "escape"; on = [ "<Esc>" ]; }
           { run = "backspace"; on = [ "<Backspace>" ]; }
         ];
-        manager.prepend_keymap = [
+        mgr.prepend_keymap = [
           { run = "escape"; on = [ "<Esc>" ]; }
           { run = "quit"; on = [ "q" ]; }
           { run = "close"; on = [ "<C-q>" ]; }
