@@ -47,6 +47,7 @@
       nushell
       foliate
       inkscape-with-extensions
+      discord
     ];
   };
 }

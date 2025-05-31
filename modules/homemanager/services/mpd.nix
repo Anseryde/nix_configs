@@ -24,5 +24,11 @@
         }
       '';
     };
+    services.mpd-discord-rpc = {
+      enable = true;
+    };
+    services.mpd-mpris = {
+      enable = true;
+    };
   };
 }

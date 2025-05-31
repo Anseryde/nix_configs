@@ -29,7 +29,6 @@
       "info.febvre.Komikku"
       "com.bitwarden.desktop"
       "com.calibre_ebook.calibre"
-      "com.discordapp.Discord"
       "com.github.ADBeveridge.Raider"
       "com.github.Matoking.protontricks"
       "com.github.mtkennerly.ludusavi"
