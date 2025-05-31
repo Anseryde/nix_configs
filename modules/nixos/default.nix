@@ -16,6 +16,7 @@
     ./programs/distrobox.nix
     ./users.nix
     ./services/docker.nix
+    ./services/podman-container.nix
   ];
 
   nixos_pkgs.enable =
