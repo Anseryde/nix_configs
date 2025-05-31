@@ -137,6 +137,13 @@
                     ),
                 ),
                 (
+                    name: "Lyrics"
+                    pane: Split(
+                        direction: Vertical,
+                        panes: [(size: "25%", pane: Pane(AlbumArt)), (size: "75%", pane: Pane(Lyrics))],
+                    ),
+                ),
+                (
                     name: "Directories",
                     pane: Pane(Directories),
                 ),
