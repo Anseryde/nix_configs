@@ -13,6 +13,7 @@
   config = lib.mkIf config.mpd.enable {
     services.mpd = {
       enable = true;
+      musicDirectory = /home/ryann/Music;
       network = {
         startWhenNeeded = true;
         listenAddress = "any";
