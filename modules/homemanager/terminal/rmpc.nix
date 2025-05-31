@@ -37,7 +37,7 @@
                 vertical_align: Center,
                 horizontal_align: Center,
             ),
-            lyrics_dir: "~/Music"
+            lyrics_dir: "/home/ryann/Music"
             keybinds: (
                 global: {
                     ":":       CommandMode,
