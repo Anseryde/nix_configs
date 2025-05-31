@@ -57,7 +57,7 @@
         log = {
           enabled = true;
         };
-        manager = {
+        mgr = {
           show_hidden = true;
           sort_by = "natural";
           sort_dir_first = false;
