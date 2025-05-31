@@ -26,6 +26,9 @@
   syncthing.enable = true;
   firefox.enable = true;
   vscode.enable = true;
+  mpd.enable = true;
+  rmpc.enable = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  xdg.userDirs.enable = true;
 }

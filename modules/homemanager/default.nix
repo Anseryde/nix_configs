@@ -16,6 +16,8 @@
     ./programs/firefox.nix
     ./programs/vscode.nix
     ./terminal/yazi.nix
+    ./services/mpd.nix
+    ./terminal/rmpc.nix
   ];
 
   plasmacfg.enable =
