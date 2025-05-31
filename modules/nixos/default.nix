@@ -27,6 +27,4 @@
     lib.mkDefault true;
   distrobox.enable =
     lib.mkDefault true;
-  podman-container.enable =
-    lib.mkDefault true;
 }
