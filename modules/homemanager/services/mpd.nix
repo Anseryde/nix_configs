@@ -17,6 +17,12 @@
         startWhenNeeded = true;
         listenAddress = "any";
       };
+      extraConfig = ''
+        audio_output {
+          type "pipewire"
+          name "My PipeWire Output"
+        }
+      '';
     };
   };
 }
