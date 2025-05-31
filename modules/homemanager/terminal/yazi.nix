@@ -64,11 +64,11 @@
           sort_reverse = false;
         };
         plugin = {
-          prepend_fetchers = [{
-            id = "git";
-            name = "*/";
-            run = "git";
-          }];
+          # prepend_fetchers = [{
+          #   id = "git";
+          #   name = "*/";
+          #   run = "git";
+          # }];
           prepend_previewers = [{
             name = "*.md";
             run = "glow";
