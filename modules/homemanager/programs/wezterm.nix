@@ -21,6 +21,7 @@
         config.font = wezterm.font 'Courier Prime'
         config.font_size = 12.0
         config.enable_wayland = false
+        config.enable_scroll_bar = true
 
         return config
       '';
