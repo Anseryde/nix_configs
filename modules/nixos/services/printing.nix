@@ -28,9 +28,7 @@
     };
     environment.systemPackages =  with pkgs; [
       epson-escpr
-      epsonscan2.override {
-        withNonFreePlugins = true;
-      }
+      epsonscan2
     ];
   };
 }
