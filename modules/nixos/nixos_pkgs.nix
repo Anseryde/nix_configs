@@ -18,7 +18,7 @@
       micro
       helix
       wget
-      epson-escpr2
+      epson-escpr
       nixd
       alejandra
       vlc
