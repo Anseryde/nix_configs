@@ -18,6 +18,7 @@
   nvidia-optimus.enable = true;
   steam.enable = true;
   gamescopeandgamemode.enable = true;
+  printing.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -72,14 +73,6 @@
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
-  # Enable CUPS to print documents.
-
-  services.printing = {
-    enable = true;
-    drivers = [
-      pkgs.epson-escpr2
-    ];
-  };
   # Enable sound.
   # hardware.pulseaudio.enable = true;
   # OR

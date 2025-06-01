@@ -17,6 +17,7 @@
     ./users.nix
     ./services/docker.nix
     ./services/podman-container.nix
+    ./services/printing.nix
   ];
 
   nixos_pkgs.enable =
