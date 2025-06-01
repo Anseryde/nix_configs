@@ -19,8 +19,18 @@
         pkgs.epson-escpr
       ];
     };
+    hardware.sane = {
+      enable = true;
+      extraBackends = [
+        pkgs.sane-airscan
+        pkgs.epsonscan2
+      ];
+    };
     environment.systemPackages =  with pkgs; [
       epson-escpr
+      epsonscan2.override {
+        withNonFreePlugins = true;
+      }
     ];
   };
 }
