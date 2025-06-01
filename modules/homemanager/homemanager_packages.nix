@@ -49,7 +49,6 @@
       inkscape-with-extensions
       discord
       kdePackages.kasts
-      kdePackages.akregator
       newsflash
     ];
   };
