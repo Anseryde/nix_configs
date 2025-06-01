@@ -16,11 +16,11 @@
     services.printing = {
       enable = true;
       drivers = [
-        pkgs.epson-escpr2
+        pkgs.epson-escpr
       ];
     };
     environment.systemPackages =  with pkgs; [
-      epson-escpr2
+      epson-escpr
     ];
   };
 }
