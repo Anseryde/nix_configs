@@ -78,7 +78,6 @@
     enable = true;
     drivers = [
       pkgs.epson-escpr2
-      pkgs.epson-escpr
     ];
   };
 
