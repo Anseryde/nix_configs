@@ -48,6 +48,9 @@
       foliate
       inkscape-with-extensions
       discord
+      kdePackages.kasts
+      akregator
+      newsflash
     ];
   };
 }
