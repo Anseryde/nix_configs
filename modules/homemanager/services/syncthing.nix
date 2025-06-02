@@ -13,8 +13,6 @@
   config = lib.mkIf config.syncthing.enable {
     services.syncthing = {
       enable = true;
-      dataDir = "/home/ryann";
-      configDir = "/home/ryann/.config/syncthing";
       settings = {
         devices = {
           "SM-G781B" = { id = "5HJT7HM-EM5YKX2-WODZXEQ-23XQWVY-2X2LDOF-4VDZYDC-QFUWKJH-3JISXAR"; };
