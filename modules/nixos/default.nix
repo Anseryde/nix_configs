@@ -19,6 +19,7 @@
     ./services/podman-container.nix
     ./services/printing.nix
     ./services/bees_deduplication_vyasapura.nix
+    ./swap.nix
   ];
 
   nixos_pkgs.enable =
@@ -28,5 +29,7 @@
   fcitx.enable =
     lib.mkDefault true;
   distrobox.enable =
+    lib.mkDefault true;
+  swap.enable =
     lib.mkDefault true;
 }
