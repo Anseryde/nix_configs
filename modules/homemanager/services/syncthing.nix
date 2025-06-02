@@ -40,6 +40,11 @@
             path = "/home/ryann/Documents/Art/Krita/Portable Tablet Art";
             devices = [ "SM-G781B" ];
           };
+          "KeePass" = {
+            id = "kp25-va";
+            path = "/home/ryann/KeePass";
+            devices = [ "SM-G781B" ];
+          };
         };
         gui = {
           user = "ryanlupis";
