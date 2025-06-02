@@ -20,6 +20,7 @@
   gamescopeandgamemode.enable = true;
   msi-ec.enable = true;
   printing.enable = true;
+  bees_deduplication_vyasapura.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
