@@ -51,6 +51,7 @@
       kdePackages.kasts
       newsflash
       nerd-fonts.symbols-only
+      wine
     ];
   };
 }
