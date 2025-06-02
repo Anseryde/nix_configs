@@ -7,10 +7,10 @@
 # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
-    bees_deduplication.enable =
-      lib.mkEnableOption "enables bees_deduplication";
+    bees_deduplication_vyasapura.enable =
+      lib.mkEnableOption "enables bees_deduplication_vyasapura";
   };
-  config = lib.mkIf config.bees_deduplication.enable {
+  config = lib.mkIf config.bees_deduplication_vyasapura.enable {
     services.beesd.filesystems = {
       root = {
         spec = "LABEL=fedora_vyasapura";
