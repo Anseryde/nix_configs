@@ -24,6 +24,7 @@
           Fingerprinting = true;
         };
       };
+      nativeMessagingHosts = [pkgs.keepassxc];
       profiles = {
         user = {
           search = {
