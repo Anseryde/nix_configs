@@ -33,6 +33,7 @@
       libinput
       libwacom
       mcontrolcenter
+      keepassxc
     ];
     fonts.packages = with pkgs; [
       noto-fonts
