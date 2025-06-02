@@ -52,6 +52,7 @@
       newsflash
       nerd-fonts.symbols-only
       wineWowPackages.stableFull
+      keepassxc
     ];
   };
 }
