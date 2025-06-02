@@ -18,6 +18,7 @@
     ./services/docker.nix
     ./services/podman-container.nix
     ./services/printing.nix
+    ./services/bees_deduplication.nix
   ];
 
   nixos_pkgs.enable =
@@ -27,5 +28,7 @@
   fcitx.enable =
     lib.mkDefault true;
   distrobox.enable =
+    lib.mkDefault true;
+  bees_deduplication.enable =
     lib.mkDefault true;
 }
