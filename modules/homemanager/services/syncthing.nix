@@ -22,26 +22,46 @@
             id = "edide-wfgxv";
             path = "/home/ryann/Music";
             devices = [ "SM-G781B" ];
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "7";
+            };
           };
           "Obsidian" = {
             id = "ory6u-xp2zs";
             path = "/home/ryann/Documents/Obsidian";
             devices = [ "SM-G781B" ];
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "7";
+            };
           };
           "Calibre Library" = {
             id = "qgpzw-gplks";
             path = "/home/ryann/Documents/Calibre Library";
             devices = [ "SM-G781B" ];
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "7";
+            };
           };
           "Portable Tablet Art" = {
             id = "2lznr-iaa66";
             path = "/home/ryann/Documents/Art/Krita/Portable Tablet Art";
             devices = [ "SM-G781B" ];
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "7";
+            };
           };
           "KeePass" = {
             id = "kp25-va";
             path = "/home/ryann/KeePass";
             devices = [ "SM-G781B" ];
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "7";
+            };
           };
         };
         gui = {
