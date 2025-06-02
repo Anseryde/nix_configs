@@ -35,6 +35,8 @@
     "/nix".options = ["compress=zstd" "noatime"];
   };
 
+  nix.optimise.automatic = true;
+
   networking.hostName = "vyasapura"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

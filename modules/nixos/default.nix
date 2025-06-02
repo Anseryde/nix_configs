@@ -19,6 +19,7 @@
     ./services/podman-container.nix
     ./services/printing.nix
     ./services/bees_deduplication_vyasapura.nix
+    ./services/bees_deduplication.nix
     ./swap.nix
   ];
 

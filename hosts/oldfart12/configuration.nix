@@ -19,6 +19,7 @@
   steam.enable = true;
   gamescopeandgamemode.enable = true;
   printing.enable = true;
+  bees_deduplication = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -32,6 +33,8 @@
     "/home".options = ["compress=zstd"];
     "/nix".options = ["compress=zstd" "noatime"];
   };
+
+  nix.optimise.automatic = true;
 
   networking.hostName = "oldfart12"; # Define your hostname.
   # Pick only one of the below networking options.
