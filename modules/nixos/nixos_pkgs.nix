@@ -33,7 +33,7 @@
       libinput
       libwacom
       mcontrolcenter
-      keepassxc
+      kdePackages.partitionmanager
     ];
     fonts.packages = with pkgs; [
       noto-fonts
