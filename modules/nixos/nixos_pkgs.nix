@@ -34,6 +34,7 @@
       libwacom
       mcontrolcenter
       kdePackages.partitionmanager
+      cryptsetup
     ];
     fonts.packages = with pkgs; [
       noto-fonts
