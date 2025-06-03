@@ -130,6 +130,7 @@
       pkgs.libxcrypt-legacy
       pkgs.python312
       pkgs.fuse_3
+      pkgs.fuse
     ];
   };
 
