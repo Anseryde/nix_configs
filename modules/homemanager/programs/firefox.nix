@@ -24,26 +24,28 @@
           Fingerprinting = true;
         };
       };
-      profiles = {
-        user = {
-          search = {
-            force = true;
-            default = "ddg";
-            privateDefault = "ddg";
-          };
-          settings = {
-            "sidebar.revamp" = true;
-            "sidebar.verticalTabs" = true;
-            "sidebar.visibility" = "expand-on-hover";
-            "widget.use-xdg-desktop-portal.file-picker" = 1;
-            "widget.use-xdg-desktop-portal.location" = 1;
-            "widget.use-xdg-desktop-portal.mime-handler" = 1;
-            "widget.use-xdg-desktop-portal.native-messaging" = 1;
-            "widget.use-xdg-desktop-portal.open-uri" = 1;
-            "widget.use-xdg-desktop-portal.settings" = 1;
-          };
-        };
-      };
+      nativeMessagingHosts = [pkgs.keepassxc];
+      # setting profile via home-manager breaks keepassxc for some reason
+      # profiles = {
+      #   user = {
+      #     search = {
+      #       force = true;
+      #       default = "ddg";
+      #       privateDefault = "ddg";
+      #     };
+      #     settings = {
+      #       "sidebar.revamp" = true;
+      #       "sidebar.verticalTabs" = true;
+      #       "sidebar.visibility" = "expand-on-hover";
+      #       "widget.use-xdg-desktop-portal.file-picker" = 1;
+      #       "widget.use-xdg-desktop-portal.location" = 1;
+      #       "widget.use-xdg-desktop-portal.mime-handler" = 1;
+      #       "widget.use-xdg-desktop-portal.native-messaging" = 1;
+      #       "widget.use-xdg-desktop-portal.open-uri" = 1;
+      #       "widget.use-xdg-desktop-portal.settings" = 1;
+      #     };
+      #   };
+      # };
     };
   };
 }
