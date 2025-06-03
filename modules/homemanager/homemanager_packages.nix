@@ -54,6 +54,7 @@
       wineWowPackages.stableFull
       keepassxc
       raider
+      corefonts
     ];
   };
 }
