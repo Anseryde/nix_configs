@@ -53,6 +53,7 @@
       nerd-fonts.symbols-only
       wineWowPackages.stableFull
       keepassxc
+      raider
     ];
   };
 }
