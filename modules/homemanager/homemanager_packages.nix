@@ -55,6 +55,9 @@
       keepassxc
       raider
       corefonts
+      vista-fonts
+      vista-fonts-chs
+      vista-fonts-cht
     ];
   };
 }
