@@ -1,4 +1,3 @@
-
 {
   pkgs,
   lib,
@@ -29,6 +28,9 @@
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
     hardware.nvidia-container-toolkit.enable = true;
-    environment.systemPackages = [pkgs.nvidia-container-toolkit];
+    environment.systemPackages = [
+      pkgs.nvidia-container-toolkit
+      pkgs.cudaPackages.cudatoolkit
+    ];
   };
 }
