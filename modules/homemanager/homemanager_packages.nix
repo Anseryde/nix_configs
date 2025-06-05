@@ -58,8 +58,8 @@
       vista-fonts
       vista-fonts-chs
       vista-fonts-cht
-      # wl-clipboard
-      # python313Packages.pyperclip
+      wl-clipboard
+      python313Packages.pyperclip
     ];
   };
 }
