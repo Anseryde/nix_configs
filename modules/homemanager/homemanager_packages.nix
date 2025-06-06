@@ -55,9 +55,9 @@
       keepassxc
       raider
       corefonts
-      vista-fonts
-      vista-fonts-chs
-      vista-fonts-cht
+      # vista-fonts
+      # vista-fonts-chs
+      # vista-fonts-cht
       wl-clipboard
       python313Packages.pyperclip
       kid3
