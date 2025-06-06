@@ -23,7 +23,17 @@
         config.enable_wayland = false
         config.enable_scroll_bar = true
         config.window_background_image = '/home/ryann/Pictures/NitW Backer Files/Wallpapers/NITW_Backer_Wallpapers.zip/Desktop/Emoticons/NITW_Emoticons_wide_2560x1440.png'
-        config.text_background_opacity = 0.3
+        config.window_background_image_hsb = {
+          -- Darken the background image by reducing it to 1/3rd
+          brightness = 0.3,
+
+          -- You can adjust the hue by scaling its value.
+          -- a multiplier of 1.0 leaves the value unchanged.
+          hue = 1.0,
+
+          -- You can adjust the saturation also.
+          saturation = 1.0,
+        }
 
         return config
       '';
