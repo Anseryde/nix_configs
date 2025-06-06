@@ -7,10 +7,10 @@
 # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
-    wezterm.enable =
-      lib.mkEnableOption "enables wezterm";
+    wezterm_noBG.enable =
+      lib.mkEnableOption "enables wezterm without window background image";
   };
-  config = lib.mkIf config.wezterm.enable {
+  config = lib.mkIf config.wezterm_noBG.enable {
     programs.wezterm = {
       enable = true;
       enableBashIntegration = true;
