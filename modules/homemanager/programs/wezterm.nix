@@ -24,8 +24,7 @@
         config.enable_scroll_bar = true
         config.window_background_image = '/home/ryann/Pictures/NitW Backer Files/Wallpapers/NITW_Backer_Wallpapers.zip/Desktop/Emoticons/NITW_Emoticons_wide_2560x1440.png'
         config.window_background_image_hsb = {
-          -- Darken the background image by reducing it to 1/3rd
-          brightness = 0.3,
+          brightness = 0.1,
 
           -- You can adjust the hue by scaling its value.
           -- a multiplier of 1.0 leaves the value unchanged.
