@@ -19,7 +19,7 @@
   steam.enable = true;
   gamescopeandgamemode.enable = true;
   printing.enable = true;
-  bees_deduplication = true;
+  bees_deduplication.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
