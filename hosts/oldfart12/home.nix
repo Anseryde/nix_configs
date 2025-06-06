@@ -28,6 +28,8 @@
   vscode.enable = true;
   mpd.enable = true;
   rmpc.enable = true;
+  wezterm.enable = false;
+  wezterm_noBG.enable = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   xdg.userDirs.enable = true;

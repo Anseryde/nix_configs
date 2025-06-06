@@ -10,6 +10,7 @@
     ./terminal/helix.nix
     ./homemanager_packages.nix
     ./programs/wezterm.nix
+    ./programs/wezterm_noBG.nix
     ./terminal/fish.nix
     ./services/syncthing.nix
     ./services/git.nix
