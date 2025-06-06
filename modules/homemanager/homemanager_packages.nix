@@ -60,6 +60,9 @@
       vista-fonts-cht
       wl-clipboard
       python313Packages.pyperclip
+      kid3
+      lrcget
+      caligula
     ];
   };
 }
