@@ -23,7 +23,7 @@
         config.enable_wayland = false
         config.enable_scroll_bar = true
         config.window_background_image = '/home/ryann/Pictures/NitW Backer Files/Wallpapers/NITW_Backer_Wallpapers.zip/Desktop/Emoticons/NITW_Emoticons_wide_2560x1440.png'
-        config.text_background_opacity = 0.4
+        config.text_background_opacity = 1.0
 
         return config
       '';
