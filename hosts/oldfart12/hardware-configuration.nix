@@ -19,7 +19,10 @@
       options = [ "subvol=root" ];
     };
 
-  boot.initrd.luks.devices."oldfart12".device = "/dev/disk/by-uuid/136e0b1c-2d48-4e52-a26a-a9e4a52f1840";
+  boot.initrd.luks.devices."oldfart12" = {
+    device = "/dev/disk/by-uuid/136e0b1c-2d48-4e52-a26a-a9e4a52f1840";
+    crypttabExtraOpts = [ "tpm2-device=auto" "tpm2-measure-pcr=yes" ];
+  };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/d1c9204f-42dc-46a3-82fe-748b364d09f2";
