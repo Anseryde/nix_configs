@@ -22,6 +22,7 @@
   bees_deduplication.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot = {
+    bootspec.enable = true;
     initrd.systemd.enable = true;
     loader.systemd-boot.enable = lib.mkForce false;
     lanzaboote = {
@@ -31,7 +32,6 @@
   };
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 10;
-  boot.bootspec.enabled = true;
 
   #switch to latest stable linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
