@@ -16,6 +16,7 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanazboote.url = "github:nix-community/lanzaboote";
   };
   outputs = inputs @ {
     self,
@@ -24,6 +25,7 @@
     nix-flatpaks,
     plasma-manager,
     nur,
+    lanzaboote,
     ...
   }: let
     system = "x86_64-linux";
@@ -37,6 +39,7 @@
           nix-flatpaks.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
           nur.modules.nixos.default
+          lanzaboote.nixosModules.lanzaboote
           {
             home-manager.backupFileExtension = "backup";
             home-manager.useGlobalPkgs = true;

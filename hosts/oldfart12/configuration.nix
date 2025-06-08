@@ -21,9 +21,17 @@
   printing.enable = true;
   bees_deduplication.enable = true;
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot = {
+    initrd.systemd.enable = true;
+    loader.systemd-boot.enable = lib.mkForce false;
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
+  };
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 10;
+  boot.bootspec.enabled = true;
 
   #switch to latest stable linux kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
