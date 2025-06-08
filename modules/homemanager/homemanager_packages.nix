@@ -63,6 +63,7 @@
       kid3
       lrcget
       caligula
+      deja-dup
     ];
   };
 }
