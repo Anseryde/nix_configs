@@ -14,19 +14,21 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/d666eb61-6053-4f65-b0ca-11181e781c14";
+    { device = "/dev/disk/by-uuid/808b9e43-22f8-4228-91cc-04a85bf47d82";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
+  boot.initrd.luks.devices."vyasapura".device = "/dev/disk/by-uuid/054e48e6-808f-409f-b4d8-373c54de26c4";
+
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/d666eb61-6053-4f65-b0ca-11181e781c14";
+    { device = "/dev/disk/by-uuid/808b9e43-22f8-4228-91cc-04a85bf47d82";
       fsType = "btrfs";
       options = [ "subvol=home" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/d666eb61-6053-4f65-b0ca-11181e781c14";
+    { device = "/dev/disk/by-uuid/808b9e43-22f8-4228-91cc-04a85bf47d82";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
@@ -34,7 +36,7 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/0071-9234";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0022" "dmask=0022" "umask=0077" "defaults" ];
     };
 
   swapDevices = [ ];
