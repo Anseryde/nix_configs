@@ -63,7 +63,7 @@
       kid3
       lrcget
       caligula
-      deja-dup
+      pika-backup
     ];
   };
 }
