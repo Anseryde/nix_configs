@@ -19,7 +19,10 @@
       options = [ "subvol=root" ];
     };
 
-  boot.initrd.luks.devices."vyasapura".device = "/dev/disk/by-uuid/054e48e6-808f-409f-b4d8-373c54de26c4";
+  boot.initrd.luks.devices."vyasapura" = {
+    device = "/dev/disk/by-uuid/054e48e6-808f-409f-b4d8-373c54de26c4";
+    cryttabExtraOpts = [ "tpm2-device=auto" "tpm2-measure-pcr=yes" ];
+  };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/808b9e43-22f8-4228-91cc-04a85bf47d82";
