@@ -35,6 +35,7 @@
       mcontrolcenter
       kdePackages.partitionmanager
       cryptsetup
+      libsecret
     ];
     fonts.packages = with pkgs; [
       noto-fonts
