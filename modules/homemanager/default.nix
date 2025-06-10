@@ -19,6 +19,7 @@
     ./terminal/yazi.nix
     ./services/mpd.nix
     ./terminal/rmpc.nix
+    ./programs/keepassxc.nix
   ];
 
   plasmacfg.enable =
@@ -34,5 +35,7 @@
   git.enable =
     lib.mkDefault true;
   yazi.enable =
+    lib.mkDefault true;
+  keepassxc.enable =
     lib.mkDefault true;
 }
