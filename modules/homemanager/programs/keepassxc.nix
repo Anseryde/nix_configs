@@ -15,7 +15,7 @@
       enable = true;
       settings = {
         Browser.Enabled = true;
-        BackupBeforeSave = true;
+        General.BackupBeforeSave = true;
         FdoSecrets = {
           Enabled = true;
           ShowNotification = true;
