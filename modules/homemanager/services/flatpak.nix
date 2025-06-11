@@ -50,6 +50,7 @@
       "dev.pulsar_edit.Pulsar"
       "io.github.MakovWait.Godots"
       "com.heroicgameslauncher.hgl"
+      "com.discordapp.Discord"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];

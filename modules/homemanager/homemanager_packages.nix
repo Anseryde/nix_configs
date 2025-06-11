@@ -47,7 +47,6 @@
       nushell
       foliate
       inkscape-with-extensions
-      discord
       kdePackages.kasts
       newsflash
       nerd-fonts.symbols-only
