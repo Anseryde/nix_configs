@@ -41,7 +41,6 @@
       "io.itch.itch"
       "md.obsidian.Obsidian"
       "net.davidotek.pupgui2"
-      "net.epson.epsonscan2"
       "org.audacityteam.Audacity"
       "org.beeref.BeeRef"
       "org.gustavoperedo.FontDownloader"
