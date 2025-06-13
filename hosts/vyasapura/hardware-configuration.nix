@@ -42,6 +42,14 @@
       options = [ "fmask=0022" "dmask=0022" "umask=0077" "defaults" ];
     };
 
+  fileSystems."/mnt/Lexar_SSD" =
+    { device = "/dev/disk/by-uuid/d29c5ad3-c420-4cd7-94cb-ad5e86192d37";
+      fsType = "btrfs";
+      options = [ "subvol=primary" ];
+    };
+
+  boot.initrd.luks.devices."Lexar_SSD".device = "/dev/disk/by-uuid/6fd5fba3-3a0f-43c6-abe7-3586415f9e75";
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
