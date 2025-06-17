@@ -21,6 +21,7 @@
     ./services/bees_deduplication_vyasapura.nix
     ./services/bees_deduplication.nix
     ./swap.nix
+    ./services/smartd_vyasapura.nix
   ];
 
   nixos_pkgs.enable =

@@ -21,6 +21,7 @@
   msi-ec.enable = true;
   printing.enable = true;
   bees_deduplication_vyasapura.enable = true;
+  smartd_vyasapura.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot = {
     bootspec.enable = true;
