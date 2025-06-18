@@ -36,6 +36,8 @@
       kdePackages.partitionmanager
       cryptsetup
       libsecret
+      rar
+      unrar
     ];
     fonts.packages = with pkgs; [
       noto-fonts
