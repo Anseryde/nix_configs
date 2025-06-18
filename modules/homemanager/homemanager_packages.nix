@@ -62,6 +62,7 @@
       lrcget
       caligula
       pika-backup
+      heroic
     ];
   };
 }
