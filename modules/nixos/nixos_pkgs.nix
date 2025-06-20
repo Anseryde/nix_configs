@@ -38,7 +38,6 @@
       libsecret
       rar
       unrar
-      python3Packages.cython
     ];
     fonts.packages = with pkgs; [
       noto-fonts
