@@ -25,7 +25,7 @@
       vollkorn
       gimp3-with-plugins
       prismlauncher
-      unityhub
+      # unityhub
       tela-icon-theme
       thunderbird-latest
       wqy_microhei

@@ -50,6 +50,7 @@
       "io.github.MakovWait.Godots"
       # "com.heroicgameslauncher.hgl"
       "com.discordapp.Discord"
+      "com.unity.UnityHub"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];
