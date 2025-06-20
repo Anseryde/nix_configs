@@ -152,7 +152,7 @@
   programs.fish.enable = true;
 
   # Waydroid
-  # virtualisation.waydroid.enable = true;
+  virtualisation.waydroid.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
