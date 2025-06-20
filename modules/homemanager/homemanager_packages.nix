@@ -63,6 +63,7 @@
       caligula
       pika-backup
       heroic
+      lumafly
     ];
   };
 }
