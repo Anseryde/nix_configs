@@ -64,6 +64,7 @@
       pika-backup
       heroic
       lumafly
+      kdePackages.kcharselect
     ];
   };
 }
