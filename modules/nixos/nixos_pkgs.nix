@@ -38,6 +38,7 @@
       libsecret
       rar
       unrar
+      xorg.xhost
     ];
     fonts.packages = with pkgs; [
       noto-fonts

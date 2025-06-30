@@ -31,4 +31,8 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   xdg.userDirs.enable = true;
+  #distrobox and I'm too lazy to modularise this
+  home.file.".distroboxrc".text = ''
+    xhost +si:localuser:$USER >/dev/null
+  '';
 }
