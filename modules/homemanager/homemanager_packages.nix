@@ -65,6 +65,7 @@
       heroic
       lumafly
       kdePackages.kcharselect
+      anki-bin
     ];
   };
 }
