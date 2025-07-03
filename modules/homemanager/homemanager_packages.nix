@@ -66,6 +66,9 @@
       lumafly
       kdePackages.kcharselect
       anki-bin
+      converseen
+      mission-center
+      gearlever
     ];
   };
 }
