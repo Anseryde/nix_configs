@@ -18,9 +18,12 @@
     };
 
     services.xserver.videoDrivers = ["nvidia"];
+    hardware.enableAllFirmware = true;
+    hardware.enableRedistributableFirmware = true;
     hardware.nvidia = {
       open = true; # Set to false to use the proprietary kernel module
       modesetting.enable = true;
+      nvidiaPersistenced = true;
       nvidiaSettings = true;
       powerManagement = {
         enable = true;
