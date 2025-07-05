@@ -69,7 +69,6 @@
       converseen
       mission-center
       gearlever
-      lact
     ];
   };
 }
