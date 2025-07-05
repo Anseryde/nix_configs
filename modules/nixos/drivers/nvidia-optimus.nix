@@ -21,6 +21,7 @@
         nvidiaBusId = "PCI:01:00:0";
         #amdgpuBusId = "PCI:54:0:0"; # If you have an AMD iGPU
       };
+      nvidiaPersistenced = true;
     };
   };
 }
