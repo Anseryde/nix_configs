@@ -70,6 +70,7 @@
       mission-center
       gearlever
       mangohud
+      goverlay
     ];
   };
 }
