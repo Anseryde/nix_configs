@@ -69,6 +69,7 @@
       converseen
       mission-center
       gearlever
+      mangohud
     ];
   };
 }
