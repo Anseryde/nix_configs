@@ -44,7 +44,7 @@
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
           ({ self, ... }: {
-            nixppkgs.overlays = [
+            nixpkgs.overlays = [
               self.inputs.nix-alien.overlays.default
             ];
             # Optional, needed for 'nix-alien-ld'
@@ -78,7 +78,7 @@
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
           ({ self, ... }: {
-            nixppkgs.overlays = [
+            nixpkgs.overlays = [
               self.inputs.nix-alien.overlays.default
             ];
             # Optional, needed for 'nix-alien-ld'
