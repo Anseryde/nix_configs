@@ -39,6 +39,7 @@
       rar
       unrar
       xorg.xhost
+      nix-alien
     ];
     fonts.packages = with pkgs; [
       noto-fonts

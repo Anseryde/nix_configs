@@ -17,6 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote.url = "github:nix-community/lanzaboote";
+    nix-alien.url = "github:thiagokokada/nix-alien";
   };
   outputs = inputs @ {
     self,
@@ -26,6 +27,7 @@
     plasma-manager,
     nur,
     lanzaboote,
+    nix-alien,
     ...
   }: let
     system = "x86_64-linux";
@@ -40,6 +42,13 @@
           home-manager.nixosModules.home-manager
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
+          ({ self, ... }: {
+            nixppkgs.overlays = [
+              self.inputs.nix-alien.overlays.default
+            ];
+            # Optional, needed for 'nix-alien-ld'
+            programs.nix-ld.enable = true;
+          })
           {
             home-manager.backupFileExtension = "backup";
             home-manager.useGlobalPkgs = true;
@@ -66,6 +75,13 @@
           home-manager.nixosModules.home-manager
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
+          ({ self, ... }: {
+            nixppkgs.overlays = [
+              self.inputs.nix-alien.overlays.default
+            ];
+            # Optional, needed for 'nix-alien-ld'
+            programs.nix-ld.enable = true;
+          })
           {
             home-manager.backupFileExtension = "backup";
             home-manager.useGlobalPkgs = true;
