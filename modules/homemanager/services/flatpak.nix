@@ -51,6 +51,7 @@
       # "com.heroicgameslauncher.hgl"
       "com.discordapp.Discord"
       "com.unity.UnityHub"
+      "io.github.achetagames.epic_asset_manager"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];
