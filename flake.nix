@@ -37,6 +37,7 @@
     nixosConfigurations = {
       oldfart12 = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit self; };
         modules = [
           nix-flatpaks.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
@@ -70,6 +71,7 @@
       };
       vyasapura = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit self; };
         modules = [
           nix-flatpaks.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
