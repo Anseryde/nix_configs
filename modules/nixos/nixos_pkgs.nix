@@ -40,6 +40,7 @@
       unrar
       xorg.xhost
       nix-alien
+      direnv
     ];
     fonts.packages = with pkgs; [
       noto-fonts
