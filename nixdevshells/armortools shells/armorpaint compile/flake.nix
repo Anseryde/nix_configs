@@ -25,6 +25,9 @@
         gtk3
         udev
       ];
+      shellHook = ''
+        fish
+      '';
     };
   };
 }
