@@ -29,6 +29,8 @@
           gtk3
           gtk3.dev
           gtk3-x11
+          gtk4
+          gtk4.dev
           udev
           libxkbcommon
           xorg.libXext
