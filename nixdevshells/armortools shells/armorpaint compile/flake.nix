@@ -24,6 +24,7 @@
         vulkan-tools
         gtk3
         udev
+        libxkbcommon
       ];
       shellHook = ''
         fish
