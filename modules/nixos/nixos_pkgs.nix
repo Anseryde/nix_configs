@@ -41,6 +41,7 @@
       xorg.xhost
       nix-alien
       direnv
+      pkg-config
     ];
     fonts.packages = with pkgs; [
       noto-fonts
