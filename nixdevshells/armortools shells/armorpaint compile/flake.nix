@@ -40,7 +40,7 @@
           zlib
         ];
         shellHook = ''
-          NIX_CFLAGS_COMPILE="$(pkg-config --cflags gtk3) $NIX_CFLAGS_COMPILE"
+          NIX_CFLAGS_COMPILE="$(pkg-config --cflags gtk+-3.0) $NIX_CFLAGS_COMPILE"
           fish
         '';
       };
