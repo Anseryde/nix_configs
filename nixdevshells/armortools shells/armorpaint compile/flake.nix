@@ -29,8 +29,10 @@
           gtk3
           gtk3.dev
           gtk3-x11
-          gtk4
-          gtk4.dev
+          (runCommand "cDependencies" {} ''
+            mkdir -p $out/include
+            cp -r ${gtk3.dev}/include/gtk-3.0/* $out/include
+          '')
           udev
           libxkbcommon
           xorg.libXext
@@ -38,6 +40,7 @@
           zlib
         ];
         shellHook = ''
+          NIX_CFLAGS_COMPILE="$(pkg-config --cflags gtk3) $NIX_CFLAGS_COMPILE"
           fish
         '';
       };
