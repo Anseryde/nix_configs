@@ -12,12 +12,11 @@
     pkgs = nixpkgs.legacyPackages."x86_64-linux";
   in {
     devShells."x86_64-linux".default =
-      pkgs.mkShell.override
+      pkgs.clangStdenv.mkDerivation
       {
-        stdenv = pkgs.clangStdenv;
-      }
-      {
-        packages = with pkgs; [
+        name = "armorpaint-build-shell";
+        nativeBuildInputs = [ pkgs.pkg-config ];
+        buildInputs = with pkgs; [
           clang
           xorg.libXinerama
           xorg.libXrandr
@@ -28,10 +27,13 @@
           xorg.libXcursor
           vulkan-tools
           gtk3
+          gtk3.dev
           gtk3-x11
           udev
           libxkbcommon
           xorg.libXext
+          pkg-config
+          zlib
         ];
         shellHook = ''
           fish
