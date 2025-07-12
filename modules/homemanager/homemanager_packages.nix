@@ -71,6 +71,8 @@
       gearlever
       mangohud
       goverlay
+      blender
+      material-maker
     ];
   };
 }
