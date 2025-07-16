@@ -39,7 +39,6 @@
       "io.github.loot.loot"
       "io.github.peazip.PeaZip"
       "io.itch.itch"
-      "md.obsidian.Obsidian"
       "net.davidotek.pupgui2"
       "org.audacityteam.Audacity"
       "org.beeref.BeeRef"

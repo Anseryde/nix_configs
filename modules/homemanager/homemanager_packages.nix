@@ -73,6 +73,8 @@
       goverlay
       blender
       material-maker
+      obsidian
+      obsidian-export
     ];
   };
 }
