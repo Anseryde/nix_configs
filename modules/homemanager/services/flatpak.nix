@@ -51,6 +51,7 @@
       "com.discordapp.Discord"
       "com.unity.UnityHub"
       "io.github.achetagames.epic_asset_manager"
+      "org.onlyoffice.desktopeditors"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];
