@@ -22,6 +22,7 @@
     ./services/bees_deduplication.nix
     ./swap.nix
     ./services/smartd_vyasapura.nix
+    ./services/podman.nix
   ];
 
   nixos_pkgs.enable =
