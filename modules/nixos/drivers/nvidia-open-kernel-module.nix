@@ -35,5 +35,6 @@
       pkgs.nvidia-container-toolkit
       pkgs.cudaPackages.cudatoolkit
     ];
+    environment.etc."cdi/nvidia-container-toolkit.json".source = "/run/cdi/nvidia-container-toolkit.json"; 
   };
 }

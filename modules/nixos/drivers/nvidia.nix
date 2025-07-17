@@ -32,5 +32,6 @@
     };
     hardware.nvidia-container-toolkit.enable = true;
     environment.systemPackages = [pkgs.nvidia-container-toolkit];
+    environment.etc."cdi/nvidia-container-toolkit.json".source = "/run/cdi/nvidia-container-toolkit.json"; 
   };
 }
