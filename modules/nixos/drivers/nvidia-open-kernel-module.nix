@@ -30,11 +30,11 @@
       };
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
-    # hardware.nvidia-container-toolkit.enable = true;
+    hardware.nvidia-container-toolkit.enable = true;
     environment.systemPackages = [
       # pkgs.nvidia-container-toolkit
       pkgs.cudaPackages.cudatoolkit
-      pkgs.nvidia-docker
+      # pkgs.nvidia-docker
     ];
     environment.etc."cdi/nvidia-container-toolkit.json".source = "/run/cdi/nvidia-container-toolkit.json"; 
   };
