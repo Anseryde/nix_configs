@@ -30,9 +30,9 @@
       };
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
-    hardware.nvidia-container-toolkit.enable = true;
+    # hardware.nvidia-container-toolkit.enable = true;
     environment.systemPackages = [
-      pkgs.nvidia-container-toolkit
+      # pkgs.nvidia-container-toolkit
       pkgs.cudaPackages.cudatoolkit
       pkgs.nvidia-docker
     ];
