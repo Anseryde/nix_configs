@@ -75,6 +75,8 @@
       material-maker
       obsidian
       obsidian-export
+      kdePackages.kdenlive
+      davinci-resolve
     ];
   };
 }
