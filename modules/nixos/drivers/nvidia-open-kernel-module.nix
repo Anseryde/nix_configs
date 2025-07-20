@@ -34,6 +34,7 @@
     environment.systemPackages = [
       pkgs.nvidia-container-toolkit
       pkgs.cudaPackages.cudatoolkit
+      pkgs.nvidia-docker
     ];
     environment.etc."cdi/nvidia-container-toolkit.json".source = "/run/cdi/nvidia-container-toolkit.json"; 
   };
