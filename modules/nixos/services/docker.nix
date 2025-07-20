@@ -15,7 +15,7 @@
     virtualisation.docker = {
       enable = true;
       enableOnBoot = true;
-      # enableNvidia = true;
+      enableNvidia = true;
       # rootless = {
       #   enable = true;
       #   setSocketVariable = true;
