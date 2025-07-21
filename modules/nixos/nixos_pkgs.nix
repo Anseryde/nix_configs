@@ -42,6 +42,7 @@
       nix-alien
       direnv
       pkg-config
+      vdhcoapp
     ];
     fonts.packages = with pkgs; [
       noto-fonts

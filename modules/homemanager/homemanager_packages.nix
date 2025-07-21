@@ -77,7 +77,6 @@
       obsidian-export
       kdePackages.kdenlive
       davinci-resolve
-      vdhcoapp
     ];
   };
 }
