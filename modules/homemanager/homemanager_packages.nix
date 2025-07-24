@@ -77,6 +77,7 @@
       obsidian-export
       kdePackages.kdenlive
       davinci-resolve
+      tor-browser
     ];
   };
 }
