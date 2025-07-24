@@ -78,6 +78,7 @@
       kdePackages.kdenlive
       davinci-resolve
       tor-browser
+      kdePackages.kcolorchooser
     ];
   };
 }
