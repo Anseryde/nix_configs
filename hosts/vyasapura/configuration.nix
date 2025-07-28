@@ -22,9 +22,9 @@
   printing.enable = true;
   bees_deduplication_vyasapura.enable = true;
   smartd_vyasapura.enable = true;
-  # docker.enable = true;
+  docker.enable = true;
   # distrobox.enable = true;
-  podman.enable = true;
+  # podman.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot = {
     bootspec.enable = true;
