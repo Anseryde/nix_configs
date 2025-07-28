@@ -31,8 +31,8 @@
     lib.mkDefault true;
   fcitx.enable =
     lib.mkDefault true;
-  distrobox.enable =
-    lib.mkDefault true;
+  # distrobox.enable =
+  #   lib.mkDefault true;
   swap.enable =
     lib.mkDefault true;
 }

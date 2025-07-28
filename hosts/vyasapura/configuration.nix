@@ -23,6 +23,7 @@
   bees_deduplication_vyasapura.enable = true;
   smartd_vyasapura.enable = true;
   docker.enable = true;
+  # distrobox.enable = true;
   # podman.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot = {
