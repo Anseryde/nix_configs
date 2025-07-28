@@ -35,4 +35,5 @@
   home.file.".distroboxrc".text = ''
     xhost +si:localuser:$USER >/dev/null
   '';
+  home.sessionPath = ["$HOME/.local/bin"];
 }
