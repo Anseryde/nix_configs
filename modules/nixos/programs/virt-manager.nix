@@ -20,5 +20,6 @@
       enable = true;
     };
     users.users.ryann.extraGroups = ["libvirtd"];
+    networking.firewall.trustedInterfaces = ["wlp5s0" "virbr0" "enp2s0"];
   };
 }
