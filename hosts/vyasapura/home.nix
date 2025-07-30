@@ -18,6 +18,7 @@
   vscode.enable = true;
   mpd.enable = true;
   rmpc.enable = true;
+  texlive.enable = true;
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

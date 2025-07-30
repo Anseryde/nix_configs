@@ -20,6 +20,7 @@
     ./services/mpd.nix
     ./terminal/rmpc.nix
     ./programs/keepassxc.nix
+    ./programs/texlive.nix
   ];
 
   plasmacfg.enable =
