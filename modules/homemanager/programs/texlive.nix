@@ -12,7 +12,7 @@
   };
   config = lib.mkIf config.texlive.enable {
     home.packages = with pkgs; [
-      texliveFull
+      # texliveFull
       texlive.combined.scheme-full
     ];
   };
