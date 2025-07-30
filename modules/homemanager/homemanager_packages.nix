@@ -79,6 +79,8 @@
       davinci-resolve
       tor-browser
       kdePackages.kcolorchooser
+      texliveFull
+      texstudio
     ];
   };
 }
