@@ -161,6 +161,12 @@
   # LACT GPU Control
   services.lact.enable = true;
 
+  # sudo-rs
+  security.sudo.enable = false;
+  security.sudo-rs = {
+    enable = true;
+    execWheelOnly = true;
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
