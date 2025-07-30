@@ -80,6 +80,7 @@
       tor-browser
       kdePackages.kcolorchooser
       texstudio
+      pandoc
     ];
   };
 }
