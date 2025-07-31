@@ -27,7 +27,7 @@
       #"org.wezfurlong.wezterm"
       "io.github.limo_app.limo"
       "info.febvre.Komikku"
-      "com.bitwarden.desktop"
+      # "com.bitwarden.desktop"
       "com.calibre_ebook.calibre"
       "com.github.ADBeveridge.Raider"
       "com.github.Matoking.protontricks"
