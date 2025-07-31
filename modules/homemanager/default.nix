@@ -21,6 +21,7 @@
     ./terminal/rmpc.nix
     ./programs/keepassxc.nix
     ./programs/texlive.nix
+    ./programs/desktop_entries_vyasapura.nix
   ];
 
   plasmacfg.enable =
