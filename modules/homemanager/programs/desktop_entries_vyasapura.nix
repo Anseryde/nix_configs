@@ -29,7 +29,7 @@
           "application/x-blender"
         ];
         settings = {
-          StartupWMClass = "ArmorPaint";
+          # StartupWMClass = "ArmorPaint";
           # Version = "0.9";
           X-KDE-SubstituteUID = "false";
         };
