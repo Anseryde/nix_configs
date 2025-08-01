@@ -81,6 +81,7 @@
       kdePackages.kcolorchooser
       texstudio
       pandoc
+      kdePackages.kcalc
     ];
   };
 }
