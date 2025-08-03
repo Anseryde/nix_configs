@@ -43,6 +43,8 @@
       direnv
       pkg-config
       vdhcoapp
+      mpv
+      mpvScripts.uosc
     ];
     fonts.packages = with pkgs; [
       noto-fonts

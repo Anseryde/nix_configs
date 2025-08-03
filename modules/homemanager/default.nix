@@ -22,6 +22,7 @@
     ./programs/keepassxc.nix
     ./programs/texlive.nix
     ./programs/desktop_entries_vyasapura.nix
+    ./programs/mpv.nix
   ];
 
   plasmacfg.enable =
@@ -39,5 +40,7 @@
   yazi.enable =
     lib.mkDefault true;
   keepassxc.enable =
+    lib.mkDefault true;
+  mpv.enable =
     lib.mkDefault true;
 }
