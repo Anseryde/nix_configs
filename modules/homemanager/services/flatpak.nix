@@ -37,7 +37,7 @@
       "io.github.dvlv.boxbuddyrs"
       "io.github.flattool.Warehouse"
       "io.github.loot.loot"
-      "io.github.peazip.PeaZip"
+      # "io.github.peazip.PeaZip"
       "io.itch.itch"
       "net.davidotek.pupgui2"
       "org.audacityteam.Audacity"

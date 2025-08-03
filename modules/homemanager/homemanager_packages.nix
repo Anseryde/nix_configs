@@ -82,6 +82,7 @@
       texstudio
       pandoc
       kdePackages.kcalc
+      peazip
     ];
   };
 }
