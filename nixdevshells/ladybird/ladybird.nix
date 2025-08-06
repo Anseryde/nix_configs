@@ -22,6 +22,7 @@ pkgs.mkShell {
     nodePackages.prettier
     fast-float
     angle
+    fish
   ] ++ extraPkgs;
   shellHook = ''
       fish
