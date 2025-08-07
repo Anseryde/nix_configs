@@ -13,6 +13,9 @@
   config = lib.mkIf config.firefox.enable {
     programs.firefox = {
       enable = true;
+      package = with pkgs; [
+        firefox-bin
+      ];
       languagePacks = ["en-US" "en-GB" "zh-CN" "zh-TW"];
       policies = {
         DisableTelemetry = true;
