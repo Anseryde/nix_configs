@@ -21,6 +21,7 @@
         config.font = wezterm.font 'Courier Prime'
         config.font_size = 12.0
         config.enable_wayland = false
+        config.scrollback_lines = 1000000000000
         config.enable_scroll_bar = true
         -- config.window_background_image = '/home/ryann/Pictures/NitW Backer Files/Wallpapers/NITW_Backer_Wallpapers.zip/Desktop/Emoticons/NITW_Emoticons_wide_2560x1440.png'
         -- config.window_background_image_hsb = {
