@@ -46,6 +46,7 @@
       vdhcoapp
       mpv
       mpvScripts.uosc
+      luajit
     ];
     fonts.packages = with pkgs; [
       noto-fonts
