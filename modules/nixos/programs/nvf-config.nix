@@ -116,7 +116,7 @@
         };  
         format = {
           enable = true;
-          package = [pkgs.alejandra];
+          package = pkgs.alejandra;
           type = "alejandra";
         };  
         lsp = {
