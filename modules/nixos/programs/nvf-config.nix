@@ -47,6 +47,13 @@
         };
       };  
     };
+    terminal = {
+      toggleterm = {
+        lazygit = {
+          enable = true;
+        };
+      };
+    };  
     binds.whichKey = {
       enable = true;
       setupOpts = {
