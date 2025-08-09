@@ -47,6 +47,8 @@
       mpv
       mpvScripts.uosc
       luajit
+      vimPlugins.lazy-nvim
+      vimPlugins.lazygit-nvim
     ];
     fonts.packages = with pkgs; [
       noto-fonts
