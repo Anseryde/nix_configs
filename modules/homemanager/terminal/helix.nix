@@ -30,10 +30,10 @@
           };
           options = {
             nixos = {
-              expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.oldfart12.options";
+              expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vysapura.options";
             };
             home-manager = {
-              expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.oldfart12.options.home-manager.users.type.getSubOptions []";
+              expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vyasapura.options.home-manager.users.type.getSubOptions []";
             };
           };
         };

@@ -26,8 +26,21 @@
       enable = true;
     };
     languages = {
-      #languages
       nix = {
+        enable = true;
+        lsp = {
+          server = "nixd";
+          options = {
+            nixos = {
+              expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vysapura.options";
+            };
+            home_manager = {
+              expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vyasapura.options.home-manager.users.type.getSubOptions []";
+            };
+          };
+        };
+      };
+      rust = {
         enable = true;
       };
     };
