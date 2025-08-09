@@ -18,8 +18,9 @@
     };
     lanzaboote.url = "github:nix-community/lanzaboote";
     nix-alien.url = "github:thiagokokada/nix-alien";
+    nvf.url = "github:notashelf/nvf";
   };
-  outputs = inputs @ {
+  outputs = {
     self,
     nixpkgs,
     home-manager,
@@ -28,12 +29,23 @@
     nur,
     lanzaboote,
     nix-alien,
+    nvf,
     ...
-  }: let
+  } @ inputs: let
     system = "x86_64-linux";
   in {
     # hostname = test-system-module
     nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+    packages."x86_64-linux".nvfNVim =
+      (nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [
+          # Or move this to a separate file and add it's path here instead
+          # IE: ./nvf_module.nix
+          ./modules/nixos/programs/nvf-config.nix
+        ];
+      })
+      .neovim;
     nixosConfigurations = {
       oldfart12 = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -43,12 +55,15 @@
           home-manager.nixosModules.home-manager
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
-          ({ self, ... }: {
+          ({ self, pkgs, ... }: {
             nixpkgs.overlays = [
               self.inputs.nix-alien.overlays.default
             ];
             # Optional, needed for 'nix-alien-ld'
             programs.nix-ld.enable = true;
+            environment.systemPackages = [
+              self.packages.${pkgs.stdenv.system}.nvfNVim
+            ];
           })
           {
             home-manager.backupFileExtension = "backup";
@@ -77,12 +92,15 @@
           home-manager.nixosModules.home-manager
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
-          ({ self, ... }: {
+          ({ self, pkgs, ... }: {
             nixpkgs.overlays = [
               self.inputs.nix-alien.overlays.default
             ];
             # Optional, needed for 'nix-alien-ld'
             programs.nix-ld.enable = true;
+            environment.systemPackages = [
+              self.packages.${pkgs.stdenv.system}.nvfNVim
+            ];
           })
           {
             home-manager.backupFileExtension = "backup";

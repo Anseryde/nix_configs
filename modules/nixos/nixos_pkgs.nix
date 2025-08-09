@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  self,
   ...
 }:
 # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
