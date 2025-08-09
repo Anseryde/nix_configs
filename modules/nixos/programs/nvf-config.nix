@@ -147,6 +147,7 @@
       clang.enable = true;
       css.enable = true;
       html.enable = true;
+      lua.enable = true;
       python.enable = true;
       csharp.enable = true;
     };
