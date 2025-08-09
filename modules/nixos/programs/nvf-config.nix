@@ -9,13 +9,65 @@
     utility = {
       snacks-nvim = {
         enable = true;
+        setupOpts = {
+          bigfile = {
+            enabled = true;
+          };
+          dashboard = {
+            enabled = true;
+          };
+          explorer = {
+            enabled = true;
+          };
+          indent = {
+            enabled = true;
+          };
+          picker = {
+            enabled = true;
+          };
+          notifier = {
+            enabled = true;
+            timeout = 3000;
+          };
+          quickfile = {
+            enabled = true;
+          };
+          scope = {
+            enabled = true;
+          };
+          scroll = {
+            enabled = true;
+          };
+          statuscolumn = {
+            enabled = true;
+          };
+          words = {
+            enabled = true;
+          };  
+        };
       };  
     };
+    binds.whichKey = {
+      enable = true;
+      setupOpts = {
+        notify = true;
+        preset = "modern";
+        win = {
+          border = "rounded";
+        };
+      };
+    };  
     statusline = {
       lualine = {
         enable = true;
       };
     };
+    git = {
+      enable = true;
+      gitsigns = {
+        enable = true;
+      };
+    };  
     telescope = {
       enable = true;
     };
@@ -31,6 +83,9 @@
     };  
     lsp = {
       enable = true;
+      trouble = {
+        enable = true;
+      };  
     };
     treesitter = {
       enable = true;
