@@ -116,8 +116,8 @@
         };  
         format = {
           enable = true;
-          package = [pkgs.nixfmt-rfc-style];
-          type = "nixfmt";
+          package = [pkgs.alejandra];
+          type = "alejandra";
         };  
         lsp = {
           server = "nixd";
@@ -135,6 +135,18 @@
         enable = true;
       };
     };
+    formatter = {
+      conform-nvim = {
+        enable = true;
+        setupOpts = {
+          formatters_by_ft = {
+            nix = [
+              "alejandra"
+            ];
+          };
+        };
+      };
+    };  
     extraPlugins = with pkgs.vimPlugins; {
       nightfox-nvim = {
         package = nightfox-nvim;
