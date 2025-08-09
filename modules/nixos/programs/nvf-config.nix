@@ -111,6 +111,14 @@
     languages = {
       nix = {
         enable = true;
+        extraDiagnostics = {
+          enable = true;
+        };  
+        format = {
+          enable = true;
+          package = [pkgs.nixfmt-rfc-style];
+          type = "nixfmt";
+        };  
         lsp = {
           server = "nixd";
           options = {
