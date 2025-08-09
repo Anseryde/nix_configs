@@ -77,10 +77,18 @@
       gitsigns = {
         enable = true;
       };
+      neogit = {
+        enable = true;
+      };  
     };  
     telescope = {
       enable = true;
     };
+    dashboard = {
+      alpha = {
+        enable = true;
+      };
+    };  
     autocomplete = {
       nvim-cmp = {
         enable = true;
