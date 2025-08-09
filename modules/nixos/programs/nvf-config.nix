@@ -20,8 +20,12 @@
       };
     };
     languages = {
-      enableLSP = true;
-      enableTreesitter = true;
+      lsp = {
+        enable = true;
+      };
+      treesitter = {
+        enable = true;
+      };
       #languages
       nix = {
         enable = true;
