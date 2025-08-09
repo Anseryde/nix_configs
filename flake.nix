@@ -49,13 +49,17 @@
     nixosConfigurations = {
       oldfart12 = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit self; };
+        specialArgs = {inherit self;};
         modules = [
           nix-flatpaks.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
-          ({ self, pkgs, ... }: {
+          ({
+            self,
+            pkgs,
+            ...
+          }: {
             nixpkgs.overlays = [
               self.inputs.nix-alien.overlays.default
             ];
@@ -86,13 +90,17 @@
       };
       vyasapura = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit self; };
+        specialArgs = {inherit self;};
         modules = [
           nix-flatpaks.nixosModules.nix-flatpak
           home-manager.nixosModules.home-manager
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
-          ({ self, pkgs, ... }: {
+          ({
+            self,
+            pkgs,
+            ...
+          }: {
             nixpkgs.overlays = [
               self.inputs.nix-alien.overlays.default
             ];

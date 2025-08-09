@@ -1,5 +1,8 @@
-{pkgs, lib, ...}:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   vim = {
     # theme = {
     #   enable = true;
@@ -43,20 +46,20 @@
           };
           words = {
             enabled = true;
-          };  
+          };
         };
-      };  
+      };
     };
     lazy = {
       enable = true;
-    };  
+    };
     terminal = {
       toggleterm = {
         lazygit = {
           enable = true;
         };
       };
-    };  
+    };
     binds.whichKey = {
       enable = true;
       setupOpts = {
@@ -66,7 +69,7 @@
           border = "rounded";
         };
       };
-    };  
+    };
     statusline = {
       lualine = {
         enable = true;
@@ -79,8 +82,8 @@
       };
       neogit = {
         enable = true;
-      };  
-    };  
+      };
+    };
     telescope = {
       enable = true;
     };
@@ -88,7 +91,7 @@
       alpha = {
         enable = true;
       };
-    };  
+    };
     autocomplete = {
       nvim-cmp = {
         enable = true;
@@ -98,12 +101,12 @@
       comment-nvim = {
         enable = true;
       };
-    };  
+    };
     lsp = {
       enable = true;
       trouble = {
         enable = true;
-      };  
+      };
     };
     treesitter = {
       enable = true;
@@ -113,12 +116,12 @@
         enable = true;
         extraDiagnostics = {
           enable = true;
-        };  
+        };
         format = {
           enable = true;
           package = pkgs.alejandra;
           type = "alejandra";
-        };  
+        };
         lsp = {
           server = "nixd";
           options = {
@@ -146,7 +149,7 @@
           };
         };
       };
-    };  
+    };
     extraPlugins = with pkgs.vimPlugins; {
       nightfox-nvim = {
         package = nightfox-nvim;
