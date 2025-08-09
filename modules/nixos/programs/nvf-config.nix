@@ -6,6 +6,11 @@
     #   name = "nightfox";
     #   style = "carbonfox";
     # };
+    utility = {
+      snacks-nvim = {
+        enable = true;
+      };  
+    };
     statusline = {
       lualine = {
         enable = true;
@@ -19,6 +24,11 @@
         enable = true;
       };
     };
+    comments = {
+      comment-nvim = {
+        enable = true;
+      };
+    };  
     lsp = {
       enable = true;
     };
