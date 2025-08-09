@@ -19,6 +19,14 @@
         enable = true;
       };
     };
+    languages = {
+      enableLSP = true;
+      enableTreesitter = true;
+      #languages
+      nix = {
+        enable = true;
+      };
+    };
     extraPlugins = with pkgs.vimPlugins; {
       nightfox-nvim = {
         package = nightfox-nvim;
