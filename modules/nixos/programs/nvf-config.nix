@@ -151,6 +151,14 @@
         };
       };
     };
+    filetree = {
+      neo-tree = {
+        enable = true;
+        setupOpts = {
+          auto_clean_after_session = true;
+        };
+      };
+    };
     extraPlugins = with pkgs.vimPlugins; {
       nightfox-nvim = {
         package = nightfox-nvim;
