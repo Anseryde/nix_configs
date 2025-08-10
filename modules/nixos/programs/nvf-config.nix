@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   vim = {
@@ -148,23 +149,6 @@
         };
       };
     };
-    startPlugins = [
-      {
-        pname = "nvim-toggler";
-        version = "0.3.1";
-        src = pkgs.fetchFromGithub {
-          owner = "nguyenvukhang";
-          repo = "nvim-toggler";
-          ref = "origin/main";
-          hash = "467808600882fd6c9e33b9dbc4889b1b80cfd917";
-        };
-        # Whether to place plugin in /start or /setupOpt 
-        optional = false;
-        # Plugins can have other plugins as dependencies
-        # this is mainly used in nixpkgs, avoid it if possible
-        dependencies = [];
-      }
-    ];
     extraPlugins = with pkgs.vimPlugins; {
       nightfox-nvim = {
         package = nightfox-nvim;
@@ -183,6 +167,15 @@
       };
       twilight-nvim = {
         package = twilight-nvim;
+      };
+      nvim-toggler = {
+        package = pkgs.vimUtils.buildVimPlugin {
+          name = "nvim-toggler";
+          src = inputs.nvim-toggler; # flake input
+        };
+        setup = ''
+          require('nvim-toggler').setup()
+        '';
       };
     };
   };
