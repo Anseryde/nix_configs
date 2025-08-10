@@ -16,9 +16,9 @@
           bigfile = {
             enabled = true;
           };
-          dashboard = {
-            enabled = true;
-          };
+          # dashboard = {
+          #   enabled = true;
+          # };
           explorer = {
             enabled = true;
           };
