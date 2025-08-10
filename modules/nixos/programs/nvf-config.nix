@@ -50,9 +50,9 @@
         };
       };
     };
-    lazy = {
-      enable = true;
-    };
+    # lazy = {
+    #   enable = true;
+    # };
     terminal = {
       toggleterm = {
         lazygit = {
@@ -132,6 +132,9 @@
               expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vyasapura.options.home-manager.users.type.getSubOptions []";
             };
           };
+        };
+        nix-develop = {
+          enable = true;
         };
         treesitter = {
           enable = true;
