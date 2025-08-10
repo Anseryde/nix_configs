@@ -171,7 +171,7 @@
       nvim-toggler = {
         package = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-toggler";
-          src = inputs.nvim-toggler; # flake input
+          src = nvim-toggler; # flake input
         };
         setup = ''
           require('nvim-toggler').setup()
