@@ -174,7 +174,7 @@
             owner = "nguyenvukhang";
             repo = "nvim-toggler";
             rev = "467808600882fd6c9e33b9dbc4889b1b80cfd917";
-            hash = "sha256-11bql1i3kdvvq9hkgwiqrxsgydl4pmsj9r6qwrkfvnj0zfq4bsp7";
+            sha256 = "11bql1i3kdvvq9hkgwiqrxsgydl4pmsj9r6qwrkfvnj0zfq4bsp7";
           }; # flake input
         };
         setup = ''
