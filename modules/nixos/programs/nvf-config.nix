@@ -22,6 +22,9 @@
     '';
     viAlias = true;
     vimAlias = true;
+    globals = {
+      mapleader = ",";
+    };
     utility = {
       nix-develop = {
         enable = true;
