@@ -66,7 +66,7 @@
     # };
     # lazy = {
     #   enable = true;
-    # };
+    };
     terminal = {
       toggleterm = {
         lazygit = {
