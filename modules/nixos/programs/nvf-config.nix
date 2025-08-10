@@ -20,6 +20,8 @@
       -- configuration. I.E., a plugin setup call.
       
     '';
+    viAlias = true;
+    vimAlias = true;
     utility = {
       nix-develop = {
         enable = true;
