@@ -10,6 +10,9 @@
     #   style = "carbonfox";
     # };
     utility = {
+      nix-develop = {
+        enable = true;
+      };  
       snacks-nvim = {
         enable = true;
         setupOpts = {
@@ -133,10 +136,7 @@
             };
           };
         };
-        nix-develop = {
-          enable = true;
-        };
-        treesitter = {
+         treesitter = {
           enable = true;
         };
       };
