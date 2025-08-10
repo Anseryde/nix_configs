@@ -195,6 +195,9 @@
       snacks-nvim = {
         package = snacks-nvim;
       };
+      nvim-rg = {
+        package = nvim-rg;
+      };
     };
   };
 }

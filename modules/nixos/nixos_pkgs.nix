@@ -47,6 +47,7 @@
       mpv
       mpvScripts.uosc
       luajit
+      fd
     ];
     fonts.packages = with pkgs; [
       noto-fonts
