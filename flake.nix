@@ -19,10 +19,6 @@
     lanzaboote.url = "github:nix-community/lanzaboote";
     nix-alien.url = "github:thiagokokada/nix-alien";
     nvf.url = "github:notashelf/nvf";
-    # nvim-toggler = {
-    #   url = "github:nguyenvukhang/nvim-toggler";
-    #   flake = false;
-    # };
   };
   outputs = {
     self,
