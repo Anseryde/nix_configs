@@ -30,15 +30,9 @@
           bigfile = {
             enabled = true;
           };
-          dashboard = {
-            enabled = true;
-            sections = {
-              section = {
-                header = "header";
-                keys = "keys, gap = 1, padding = 1";
-              };
-            };
-          };
+          # dashboard = {
+          #   enabled = true;
+          # };
           explorer = {
             enabled = true;
           };
