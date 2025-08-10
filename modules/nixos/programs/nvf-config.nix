@@ -13,7 +13,7 @@
       ./nvfLuaConfigs
     ];
     luaConfigRC.nvfLuaConfigs = /* lua */ ''
-      -- Call the Lua module from ./nvfLuaConfigs/lua/snacks
+      -- Call the Lua module from ./nvfLuaConfigs/lua/myconfig
       require("myconfig")
 
       -- Any additional Lua configuration that you might want *after* your own
