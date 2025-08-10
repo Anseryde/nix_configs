@@ -9,6 +9,17 @@
     #   name = "nightfox";
     #   style = "carbonfox";
     # };
+    additionalRuntimePaths = [
+      ./nvfLuaConfigs
+    ];
+    luaConfigRC.nvfLuaConfigs = /* lua */ ''
+      -- Call the Lua module from ./nvfLuaConfigs/lua/snacks
+      require("myconfig")
+
+      -- Any additional Lua configuration that you might want *after* your own
+      -- configuration. I.E., a plugin setup call.
+      
+    '';
     utility = {
       nix-develop = {
         enable = true;
@@ -19,9 +30,15 @@
           bigfile = {
             enabled = true;
           };
-          # dashboard = {
-          #   enabled = true;
-          # };
+          dashboard = {
+            enabled = true;
+            sections = {
+              section = {
+                header = "header";
+                keys = "keys, gap = 1, padding = 1";
+              };
+            };
+          };
           explorer = {
             enabled = true;
           };
