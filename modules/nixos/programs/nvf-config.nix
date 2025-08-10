@@ -24,8 +24,8 @@
       nix-develop = {
         enable = true;
       };  
-    #   snacks-nvim = {
-    #     enable = true;
+      snacks-nvim = {
+        enable = true;
     #     setupOpts = {
     #       bigfile = {
     #         enabled = true;
@@ -63,10 +63,11 @@
     #       };
     #     };
     #   };
-    # };
+      };
+    };
     # lazy = {
     #   enable = true;
-    };
+    # };
     terminal = {
       toggleterm = {
         lazygit = {
