@@ -19,9 +19,13 @@
           bigfile = {
             enabled = true;
           };
-          # dashboard = {
-          #   enabled = true;
-          # };
+          dashboard = {
+            enabled = true;
+            sections = ''
+              { section = "header" },
+              { section = "keys", gap = 1, padding = 1 },
+            '';
+          };
           explorer = {
             enabled = true;
           };
@@ -90,11 +94,11 @@
     telescope = {
       enable = true;
     };
-    dashboard = {
-      alpha = {
-        enable = true;
-      };
-    };
+    # dashboard = {
+    #   alpha = {
+    #     enable = true;
+    #   };
+    # };
     autocomplete = {
       nvim-cmp = {
         enable = true;
