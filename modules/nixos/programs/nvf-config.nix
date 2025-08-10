@@ -138,13 +138,13 @@
         };
         treesitter = {
           enable = true;
-        };  
+        };
       };
       rust = {
         enable = true;
         crates = {
           enable = true;
-        };  
+        };
       };
       bash.enable = true;
       clang.enable = true;
