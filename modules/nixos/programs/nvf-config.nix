@@ -150,6 +150,14 @@
       lua.enable = true;
       python.enable = true;
       csharp.enable = true;
+      markdown = {
+        enable = true;
+        extensions = {
+          render-markdown-nvim = {
+            enable = true;
+          };
+        };
+      };
     };
     formatter = {
       conform-nvim = {
