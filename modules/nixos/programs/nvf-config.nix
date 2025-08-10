@@ -184,6 +184,9 @@
           require('nvim-toggler').setup()
         '';
       };
+      urlview-nvim = {
+        package = urlview-nvim;
+      };
     };
   };
 }
