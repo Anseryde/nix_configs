@@ -23,7 +23,7 @@
     viAlias = true;
     vimAlias = true;
     globals = {
-      mapleader = ",";
+      mapleader = " ";
     };
     utility = {
       nix-develop = {
