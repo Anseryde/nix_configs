@@ -170,7 +170,7 @@
       nvim-toggler = {
         package = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-toggler";
-          src = pkgs.fetchFromGithub {
+          src = pkgs.fetchFromGitHub {
             owner = "nguyenvukhang";
             repo = "nvim-toggler";
             rev = "467808600882fd6c9e33b9dbc4889b1b80cfd917";
