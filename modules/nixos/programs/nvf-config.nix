@@ -14,7 +14,7 @@
     ];
     luaConfigRC.nvfLuaConfigs = /* lua */ ''
       -- Call the Lua module from ./nvfLuaConfigs/lua/myconfig
-      require("myconfig")
+      require("neovimconfig")
 
       -- Any additional Lua configuration that you might want *after* your own
       -- configuration. I.E., a plugin setup call.
