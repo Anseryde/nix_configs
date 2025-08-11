@@ -1,3 +1,3 @@
 -- plugins.lua
-require"plugins.snacks_config"
-require"plugins.twilight_config"
+require"plugin_configs.snacks_config"
+require"plugin_configs.twilight_config"
