@@ -29,6 +29,7 @@
     home.packages = with pkgs; [
       git-credential-manager
       github-desktop
+      gh
     ];
   };
 }
