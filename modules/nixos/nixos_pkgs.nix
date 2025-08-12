@@ -50,6 +50,7 @@
       fd # for snacks.nvim
       ripgrep # for snacks.nvim
       lazygit # for snacks.nvim
+      gdtoolkit_4
     ];
     fonts.packages = with pkgs; [
       noto-fonts

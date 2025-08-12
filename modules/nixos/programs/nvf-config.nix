@@ -131,6 +131,9 @@
     };
     treesitter = {
       enable = true;
+      grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+        gdscript
+      ];
     };
     languages = {
       enableFormat = true;
@@ -202,6 +205,9 @@
           formatters_by_ft = {
             nix = [
               "alejandra"
+            ];
+            gdscript = [
+              "gdformat"
             ];
           };
         };
