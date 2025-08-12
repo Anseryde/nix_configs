@@ -41,6 +41,9 @@
     };
     diagnostics = {
       enable = true;
+      config = {
+        virtual_text = false; #for tiny-inline-diagnostic-nvim
+      };
     };
     # lazy = {
     #   enable = true;
