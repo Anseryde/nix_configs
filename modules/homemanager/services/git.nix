@@ -15,13 +15,14 @@
       enable = true;
       userName = "Anseryde";
       userEmail = "ryanlupis@gmail.com";
-      package = pkgs.git.override {withLibsecret = true;};
+      # package = pkgs.git.override {withLibsecret = true;};
       extraConfig = {
         credential = {
           # helper = "manager";
           # "https://github.com".username = "Anseryde";
           # credentialStore = "cache";
-          helper = "libsecret";
+          # helper = "libsecret";
+          helper = "oauth";
         };
         push = {autoSetupRemote = true;};
       };
@@ -30,6 +31,7 @@
       git-credential-manager
       github-desktop
       gh
+      git-credential-oauth
     ];
   };
 }
