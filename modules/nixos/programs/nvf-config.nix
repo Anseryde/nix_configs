@@ -28,12 +28,21 @@
     keymaps = [
       {
         key = "<leader>tw";
+        desc = "lspsaga floating terminal window";
         mode = [
           "n"
           "x"
         ];
         action = "<cmd>Lspsaga term_toggle<CR>";
       } # for Lspsaga
+      {
+        desc = "neo-tree file tree";
+        key = "<leader>e";
+        mode = [
+          "n"
+        ];
+        action = "<cmd>Neotree<CR>";
+      }
     ];
     utility = {
       nix-develop = {
