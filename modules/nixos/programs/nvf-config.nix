@@ -36,12 +36,12 @@
         action = "<cmd>Lspsaga term_toggle<CR>";
       } # for Lspsaga
       {
-        desc = "neo-tree file tree";
+        desc = "Neotree";
         key = "<leader>e";
         mode = [
           "n"
         ];
-        action = "<cmd>Neotree<CR>";
+        action = "<cmd>Neotree toggle<cr>";
       }
     ];
     utility = {
