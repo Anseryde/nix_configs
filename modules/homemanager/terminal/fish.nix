@@ -15,6 +15,7 @@
       enable = true;
       shellInit = "
         starship init fish | source
+        setenv EDITOR nvim
       ";
     };
     home.packages = with pkgs; [

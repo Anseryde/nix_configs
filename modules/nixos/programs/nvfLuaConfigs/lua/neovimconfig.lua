@@ -7,4 +7,5 @@ vim.api.nvim_create_autocmd("FileType", {
                 bo.shiftwidth = 2
         end
 })
+require "languages"
 require "plugins"
