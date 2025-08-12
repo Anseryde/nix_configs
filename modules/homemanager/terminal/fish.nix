@@ -15,7 +15,6 @@
       enable = true;
       shellInit = "
         starship init fish | source
-        setenv EDITOR hx
       ";
     };
     home.packages = with pkgs; [

@@ -155,6 +155,15 @@
   # FISH shell
   programs.fish.enable = true;
 
+  # Various top-level environment stuff like variables
+  environment = {
+    variables = {
+      EDITOR = "nvim";
+      SYSTEMD_EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
+  };
+
   # Waydroid
   virtualisation.waydroid.enable = true;
 
