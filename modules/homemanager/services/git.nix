@@ -15,6 +15,7 @@
       enable = true;
       userName = "Anseryde";
       userEmail = "ryanlupis@gmail.com";
+      package = pkgs.git.override {withLibsecret = true;};
       extraConfig = {
         credential = {
           # helper = "manager";
