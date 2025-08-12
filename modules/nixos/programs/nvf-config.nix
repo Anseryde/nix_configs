@@ -32,7 +32,7 @@
           "n"
           "x"
         ];
-        action = "<cmd>Lspsaga term_toggle";
+        action = "<cmd>Lspsaga term_toggle<CR>";
       }
     ];
     utility = {
