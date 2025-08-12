@@ -30,6 +30,15 @@
         enable = true;
       };  
     };
+    ui = {
+      borders = {
+        plugins = {
+          lspsaga = {
+            enable = true;
+          };
+        };
+      };
+    };
     # lazy = {
     #   enable = true;
     # };
@@ -85,6 +94,9 @@
     lsp = {
       enable = true;
       trouble = {
+        enable = true;
+      };
+      lspsaga = {
         enable = true;
       };
     };
