@@ -221,6 +221,9 @@
       urlview-nvim = {
         package = urlview-nvim;
       };
+      tiny-inline-diagnostic-nvim = {
+        package = tiny-inline-diagnostic-nvim;
+      };
     };
   };
 }
