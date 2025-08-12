@@ -1,5 +1,5 @@
 -- tiny-inline-diagnostic_config.lua
-vim.diagnostic_config({virtual_text = false})
+-- vim.diagnostic_config({virtual_text = false})
 require("tiny-inline-diagnostic").setup({
     -- Style preset for diagnostic messages
     -- Available options:
