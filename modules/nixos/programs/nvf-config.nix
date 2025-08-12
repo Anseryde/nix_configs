@@ -39,6 +39,9 @@
         };
       };
     };
+    diagnostics = {
+      enable = true;
+    };
     # lazy = {
     #   enable = true;
     # };
