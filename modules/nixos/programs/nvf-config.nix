@@ -25,6 +25,16 @@
     globals = {
       mapleader = " ";
     };
+    keymaps = [
+      {
+        key = "<leader>tw";
+        mode = [
+          "n"
+          "x"
+        ];
+        action = "<cmd>Lspsaga term_toggle";
+      }
+    ];
     utility = {
       nix-develop = {
         enable = true;
