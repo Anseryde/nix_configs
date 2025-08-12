@@ -17,9 +17,10 @@
       userEmail = "ryanlupis@gmail.com";
       extraConfig = {
         credential = {
-          helper = "manager";
-          "https://github.com".username = "Anseryde";
-          credentialStore = "cache";
+          # helper = "manager";
+          # "https://github.com".username = "Anseryde";
+          # credentialStore = "cache";
+          helper = "libsecret";
         };
         push = {autoSetupRemote = true;};
       };
