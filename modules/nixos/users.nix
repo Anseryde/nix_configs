@@ -20,6 +20,6 @@
         tree
       ];
     };
-    users.users.root.initialHashedPassword = ""; #only for nixos lustrate install
+    # users.users.root.initialHashedPassword = ""; #only for nixos lustrate install
   };
 }
