@@ -127,7 +127,21 @@
       clang.enable = true;
       css.enable = true;
       html.enable = true;
-      lua.enable = true;
+      lua = {
+        enable = true;
+        extraDiagnostics = {
+          enable = true;
+        };
+        format = {
+          enable = true;
+        };
+        lsp = {
+          enable = true;
+        };
+        treesitter = {
+          enable = true;
+        };
+      };
       python.enable = true;
       csharp.enable = true;
       markdown = {
