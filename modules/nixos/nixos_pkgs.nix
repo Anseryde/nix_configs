@@ -48,6 +48,7 @@
       mpvScripts.uosc
       luajit
       fd
+      xorg.libX11
     ];
     fonts.packages = with pkgs; [
       noto-fonts
