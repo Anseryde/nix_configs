@@ -33,12 +33,15 @@
           "x"
         ];
         action = "<cmd>Lspsaga term_toggle<CR>";
-      }
+      } # for Lspsaga
     ];
     utility = {
       nix-develop = {
         enable = true;
       };  
+      nvim-biscuits = {
+        enable = true;
+      };
     };
     ui = {
       borders = {
