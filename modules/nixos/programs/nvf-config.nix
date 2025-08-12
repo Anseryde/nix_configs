@@ -133,6 +133,7 @@
       enable = true;
     };
     languages = {
+      enableFormat = true;
       nix = {
         enable = true;
         extraDiagnostics = {
