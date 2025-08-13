@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   vim = {
@@ -341,12 +342,13 @@
       nvim-toggler = {
         package = pkgs.vimUtils.buildVimPlugin {
           name = "nvim-toggler";
-          src = pkgs.fetchFromGitHub {
-            owner = "nguyenvukhang";
-            repo = "nvim-toggler";
-            rev = "467808600882fd6c9e33b9dbc4889b1b80cfd917";
-            sha256 = "11bql1i3kdvvq9hkgwiqrxsgydl4pmsj9r6qwrkfvnj0zfq4bsp7";
-          };
+          src = inputs.nvim-toggler;
+          # src = pkgs.fetchFromGitHub {
+          #   owner = "nguyenvukhang";
+          #   repo = "nvim-toggler";
+          #   rev = "467808600882fd6c9e33b9dbc4889b1b80cfd917";
+          #   sha256 = "11bql1i3kdvvq9hkgwiqrxsgydl4pmsj9r6qwrkfvnj0zfq4bsp7";
+          # };
         };
         setup = ''
           require('nvim-toggler').setup()
