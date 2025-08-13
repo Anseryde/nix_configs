@@ -83,6 +83,9 @@
       pandoc
       kdePackages.kcalc
       peazip
+      imagemagick # for snacks.nvim image module
+      ghostscript # for snacks.nvim image module
+      mermaid-cli # for snacks.nvim image module
     ];
   };
 }
