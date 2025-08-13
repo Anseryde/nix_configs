@@ -179,6 +179,11 @@
       grammars = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
         gdscript
       ];
+      indent = {
+        disable = [
+          "lua"
+        ];
+      };
     };
     languages = {
       enableFormat = true;
