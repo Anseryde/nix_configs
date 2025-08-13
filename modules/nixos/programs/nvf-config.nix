@@ -100,6 +100,11 @@
         };
       };
     };
+    mini = {
+      icons = {
+        enable = true;
+      };
+    };
     diagnostics = {
       enable = true;
       config = {
