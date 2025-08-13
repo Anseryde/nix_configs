@@ -45,7 +45,7 @@ require("snacks").setup({
 	words = {
 		enabled = true,
 	},
-	image = {
-		enabled = true,
-	},
+	-- image = {
+	-- 	enabled = true,
+	-- },
 })

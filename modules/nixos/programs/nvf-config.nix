@@ -55,6 +55,14 @@
       nvim-biscuits = {
         enable = true;
       };
+      images = {
+        image-nvim = {
+          enable = true;
+        };
+        img-clip = {
+          enable = true;
+        };
+      };
     };
     ui = {
       borders = {
