@@ -58,6 +58,27 @@
       images = {
         image-nvim = {
           enable = true;
+          setupOpts = {
+            hijackFilePatterns = [
+              "*.png"
+              "*.jpg"
+              "*.jpeg"
+              "*.gif"
+              "*.webp"
+              "*.svg"
+            ];
+            integrations = {
+              markdown = {
+                enable = true;
+                clearInInsertMode = true;
+                downloadRemoteImages = true;
+                filetypes = [
+                  "markdown"
+                  "vimwiki"
+                ];
+              };
+            };
+          };
         };
         img-clip = {
           enable = true;
