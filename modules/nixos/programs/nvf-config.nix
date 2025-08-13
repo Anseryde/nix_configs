@@ -47,6 +47,12 @@
         ];
         action = "<cmd>Neotree toggle<cr>";
       }
+      {
+        key = "<leader>pi";
+        desc = "Paste image via img-clip";
+        mode = "n";
+        action = "<cmd>PasteImage<cr>";
+      } # for img-clip
     ];
     utility = {
       nix-develop = {
