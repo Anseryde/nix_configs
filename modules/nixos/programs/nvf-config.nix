@@ -234,11 +234,11 @@
       markdown = {
         enable = true;
         format.enable = false;
-        # extensions = {
-        #   render-markdown-nvim = {
-        #     enable = true;
-        #   };
-        # };
+        extensions = {
+          render-markdown-nvim = {
+            enable = true;
+          };
+        };
       };
     };
     formatter = {
@@ -268,6 +268,9 @@
       obsidian = {
         enable = true;
         setupOpts = {
+          ui = {
+            enable = false;
+          };
           workspaces = lib.mkLuaInline ''
             {
               {
