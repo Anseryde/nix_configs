@@ -12,14 +12,18 @@
     additionalRuntimePaths = [
       ./nvfLuaConfigs
     ];
-    luaConfigRC.nvfLuaConfigs = /* lua */ ''
-      -- Call the Lua module from ./nvfLuaConfigs/lua/myconfig
-      require("neovimconfig")
+    luaConfigRC.nvfLuaConfigs =
+      /*
+      lua
+      */
+      ''
+        -- Call the Lua module from ./nvfLuaConfigs/lua/myconfig
+        require("neovimconfig")
 
-      -- Any additional Lua configuration that you might want *after* your own
-      -- configuration. I.E., a plugin setup call.
-      
-    '';
+        -- Any additional Lua configuration that you might want *after* your own
+        -- configuration. I.E., a plugin setup call.
+
+      '';
     viAlias = true;
     vimAlias = true;
     globals = {
@@ -47,7 +51,7 @@
     utility = {
       nix-develop = {
         enable = true;
-      };  
+      };
       nvim-biscuits = {
         enable = true;
       };
@@ -159,7 +163,7 @@
             };
           };
         };
-         treesitter = {
+        treesitter = {
           enable = true;
         };
       };
@@ -189,7 +193,15 @@
         };
       };
       python.enable = true;
-      csharp.enable = true;
+      csharp = {
+        enable = true;
+        treesitter = {
+          enable = true;
+        };
+        lsp = {
+          enable = true;
+        };
+      };
       markdown = {
         enable = true;
         extensions = {
@@ -249,7 +261,7 @@
             repo = "nvim-toggler";
             rev = "467808600882fd6c9e33b9dbc4889b1b80cfd917";
             sha256 = "11bql1i3kdvvq9hkgwiqrxsgydl4pmsj9r6qwrkfvnj0zfq4bsp7";
-          }; 
+          };
         };
         setup = ''
           require('nvim-toggler').setup()
