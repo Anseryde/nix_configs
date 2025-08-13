@@ -52,7 +52,7 @@
       lazygit # for snacks.nvim
       gdtoolkit_4
       ueberzugpp # for image-nvim
-      wl-clipboard-rs # for img-clip neovim plugin
+      wl-clipboard # for img-clip neovim plugin
     ];
     fonts.packages = with pkgs; [
       noto-fonts
