@@ -40,16 +40,16 @@
   in {
     # hostname = test-system-module
     nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-    packages."x86_64-linux".nvfNVim =
-      (nvf.lib.neovimConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        modules = [
-          # Or move this to a separate file and add it's path here instead
-          # IE: ./nvf_module.nix
-          ./modules/nixos/programs/nvf-config.nix
-        ];
-      })
-      .neovim;
+    # packages."x86_64-linux".nvfNVim =
+    #   (nvf.lib.neovimConfiguration {
+    #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    #     modules = [
+    #       # Or move this to a separate file and add it's path here instead
+    #       # IE: ./nvf_module.nix
+    #       ./modules/nixos/programs/nvf-config.nix
+    #     ];
+    #   })
+    #   .neovim;
     nixosConfigurations = {
       oldfart12 = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -69,9 +69,9 @@
             ];
             # Optional, needed for 'nix-alien-ld'
             programs.nix-ld.enable = true;
-            environment.systemPackages = [
-              self.packages.${pkgs.stdenv.system}.nvfNVim
-            ];
+            # environment.systemPackages = [
+            #   self.packages.${pkgs.stdenv.system}.nvfNVim
+            # ];
           })
           {
             home-manager.backupFileExtension = "backup";
@@ -100,6 +100,7 @@
           home-manager.nixosModules.home-manager
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
+          nvf.nixosModules.default
           ({
             self,
             pkgs,
@@ -110,9 +111,9 @@
             ];
             # Optional, needed for 'nix-alien-ld'
             programs.nix-ld.enable = true;
-            environment.systemPackages = [
-              self.packages.${pkgs.stdenv.system}.nvfNVim
-            ];
+            # environment.systemPackages = [
+            #   self.packages.${pkgs.stdenv.system}.nvfNVim
+            # ];
           })
           {
             home-manager.backupFileExtension = "backup";

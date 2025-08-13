@@ -24,6 +24,7 @@
     ./services/smartd_vyasapura.nix
     ./services/podman.nix
     ./programs/virt-manager.nix
+    ./programs/nvf-config.nix
   ];
 
   nixos_pkgs.enable =

@@ -26,6 +26,7 @@
   # distrobox.enable = true;
   # podman.enable = true;
   virt-manager.enable = true;
+  nvf-config.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot = {
     bootspec.enable = true;
