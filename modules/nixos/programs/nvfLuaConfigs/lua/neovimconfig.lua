@@ -15,6 +15,15 @@ vim.api.nvim_create_autocmd("FileType", {
 		bo.shiftwidth = 4
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function(opts)
+		local bo = vim.bo[opts.buf]
+		bo.tabstop = 2
+		bo.shiftwidth = 2
+	end,
+})
 vim.keymap.set("n", "<leader>cf", function()
 	require("conform").format()
 end, { desc = "Format current file using conform.nvim" })
