@@ -197,6 +197,15 @@
                 ripgrep = {
                   enable = true;
                 };
+                obsidian = {
+                  enable = true;
+                  package = pkgs.vimPlugins.obsidian-nvim;
+                  module = [
+                    "obsidian.completion.sources.blink.refs"
+                    "obsidian.completion.sources.blink.tags"
+                    "obsidian.completion.sources.blink.new"
+                  ];
+                };
               };
             };
           };
