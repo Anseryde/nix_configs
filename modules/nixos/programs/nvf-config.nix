@@ -364,6 +364,7 @@
                   },
                 '';
                 completion.blink =true;
+                completion.nvim_cmp = true;
               };
             };
           };
