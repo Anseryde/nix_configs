@@ -102,6 +102,12 @@
                 enable = true;
               };
             };
+            surround = {
+              enable = true;
+              # setupOpts = lib.mkLuaInline ''
+              #
+              # '';
+            };
           };
           ui = {
             borders = {
@@ -233,7 +239,13 @@
             bash.enable = true;
             clang.enable = true;
             css.enable = true;
-            html.enable = true;
+            html = {
+              enable = true;
+              treesitter = {
+                enable = true;
+                autotagHtml = true;
+              };
+            };
             lua = {
               enable = true;
               extraDiagnostics = {
@@ -373,6 +385,9 @@
             };
             autoclose-nvim = {
               package = autoclose-nvim;
+            };
+            nvim-treesitter-endwise = {
+              package = nvim-treesitter-endwise;
             };
           };
         };
