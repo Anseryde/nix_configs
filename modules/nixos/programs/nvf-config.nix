@@ -172,65 +172,65 @@
           #     enable = true;
           #   };
           # };
-          autocomplete = {
-            # nvim-cmp = {
-            #   enable = true;
-            # };
-            blink-cmp = {
-              enable = true;
-              friendly-snippets.enable = true;
-              setupOpts = {
-                fuzzy = {
-                  implementation = "prefer_rust_with_warning";
-                };
-                sources = {
-                  default = [
-                    "lsp"
-                    "path"
-                    "snippets"
-                    "buffer"
-                    "ripgrep"
-                  ];
-                  providers = {
-                    obsidian = {
-                      name = "obsidian";
-                      module = "obsidian.completion.sources.blink.refs";
-                    };
-                    obsidian_tags = {
-                      name = "obsidian_tags";
-                      module = "obsidian.completion.sources.blink.tags";
-                    };
-                    obsidian_new = {
-                      name = "obsidian_new";
-                      module ="obsidian.completion.sources.blink.new";
-                    };
-                  };
-                };
-              };
-              sourcePlugins = {
-                ripgrep = {
-                  enable = true;
-                };
-                # obsidian = {
-                #   enable = true;
-                #   module = "obsidian.completion.sources.blink.refs";
-                #   # module = [
-                #   #   "obsidian.completion.sources.blink.refs"
-                #   #   "obsidian.completion.sources.blink.tags"
-                #   #   "obsidian.completion.sources.blink.new"
-                #   # ];
-                # };
-                # obsidian_tags = {
-                #   enable = true;
-                #   module = "obsidian.completion.sources.blink.tags";
-                # };
-                # obsidian_new = {
-                #   enable = true;
-                #   module = "obsidian.completion.sources.blink.new";
-                # };
-              };
-            };
-          };
+          # autocomplete = {
+          #   # nvim-cmp = {
+          #   #   enable = true;
+          #   # };
+          #   blink-cmp = {
+          #     enable = true;
+          #     friendly-snippets.enable = true;
+          #     setupOpts = {
+          #       fuzzy = {
+          #         implementation = "prefer_rust_with_warning";
+          #       };
+          #       sources = {
+          #         default = [
+          #           "lsp"
+          #           "path"
+          #           "snippets"
+          #           "buffer"
+          #           "ripgrep"
+          #         ];
+          #         providers = {
+          #           obsidian = {
+          #             name = "obsidian";
+          #             module = "obsidian.completion.sources.blink.refs";
+          #           };
+          #           obsidian_tags = {
+          #             name = "obsidian_tags";
+          #             module = "obsidian.completion.sources.blink.tags";
+          #           };
+          #           obsidian_new = {
+          #             name = "obsidian_new";
+          #             module ="obsidian.completion.sources.blink.new";
+          #           };
+          #         };
+          #       };
+          #     };
+          #     sourcePlugins = {
+          #       ripgrep = {
+          #         enable = true;
+          #       };
+          #       # obsidian = {
+          #       #   enable = true;
+          #       #   module = "obsidian.completion.sources.blink.refs";
+          #       #   # module = [
+          #       #   #   "obsidian.completion.sources.blink.refs"
+          #       #   #   "obsidian.completion.sources.blink.tags"
+          #       #   #   "obsidian.completion.sources.blink.new"
+          #       #   # ];
+          #       # };
+          #       # obsidian_tags = {
+          #       #   enable = true;
+          #       #   module = "obsidian.completion.sources.blink.tags";
+          #       # };
+          #       # obsidian_new = {
+          #       #   enable = true;
+          #       #   module = "obsidian.completion.sources.blink.new";
+          #       # };
+          #     };
+          #   };
+          # };
           comments = {
             comment-nvim = {
               enable = true;
@@ -358,47 +358,47 @@
               };
             };
           };
-          notes = {
-            obsidian = {
-              enable = true;
-              setupOpts = {
-                completion.nvim_cmp = false;
-                completion.blink = true;
-                new_notes_location = "current_dir";
-                ui = {
-                  enable = false;
-                };
-                workspaces = lib.mkLuaInline ''
-                  {
-                    {
-                      name = "Earth B",
-                      path = "~/Documents/Obsidian/Earth B",
-                    },
-                    {
-                      name = "SP Class Notes",
-                      path = "~/Documents/Obsidian/SP Class Notes",
-                    },
-                    {
-                      name = "no-vault",
-                      path = function()
-                        -- alternatively use the CWD:
-                        -- return assert(vim.fn.getcwd())
-                        return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-                      end,
-                      overrides = {
-                        notes_subdir = vim.NIL, -- have to use 'vim.NIL' instead of 'nil'
-                        new_notes_location = "current_dir",
-                        templates = {
-                          folder=vim.NIL
-                        },
-                        disable_frontmatter = true,
-                      },
-                    },
-                  },
-                '';
-              };
-            };
-          };
+          # notes = {
+          #   obsidian = {
+          #     enable = true;
+          #     setupOpts = {
+          #       completion.nvim_cmp = false;
+          #       completion.blink = true;
+          #       new_notes_location = "current_dir";
+          #       ui = {
+          #         enable = false;
+          #       };
+          #       workspaces = lib.mkLuaInline ''
+          #         {
+          #           {
+          #             name = "Earth B",
+          #             path = "~/Documents/Obsidian/Earth B",
+          #           },
+          #           {
+          #             name = "SP Class Notes",
+          #             path = "~/Documents/Obsidian/SP Class Notes",
+          #           },
+          #           {
+          #             name = "no-vault",
+          #             path = function()
+          #               -- alternatively use the CWD:
+          #               -- return assert(vim.fn.getcwd())
+          #               return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+          #             end,
+          #             overrides = {
+          #               notes_subdir = vim.NIL, -- have to use 'vim.NIL' instead of 'nil'
+          #               new_notes_location = "current_dir",
+          #               templates = {
+          #                 folder=vim.NIL
+          #               },
+          #               disable_frontmatter = true,
+          #             },
+          #           },
+          #         },
+          #       '';
+          #     };
+          #   };
+          # };
           extraPlugins = with pkgs.vimPlugins; {
             nightfox-nvim = {
               package = nightfox-nvim;
@@ -444,6 +444,18 @@
             };
             nvim-treesitter-endwise = {
               package = nvim-treesitter-endwise;
+            };
+            friendly-snippets = {
+              package = friendly-snippets;
+            };
+            obsidian = {
+              package = obsidian-nvim;
+            };
+            blink-cmp = {
+              package = blink-cmp;
+            };
+            blink-ripgrep-nvim = {
+              package = blink-ripgrep-nvim;
             };
           };
         };
