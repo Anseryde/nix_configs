@@ -371,6 +371,9 @@
             tiny-inline-diagnostic-nvim = {
               package = tiny-inline-diagnostic-nvim;
             };
+            autoclose-nvim = {
+              package = autoclose-nvim;
+            };
           };
         };
       };
