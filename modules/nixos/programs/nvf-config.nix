@@ -173,8 +173,31 @@
           #   };
           # };
           autocomplete = {
-            nvim-cmp = {
+            # nvim-cmp = {
+            #   enable = true;
+            # };
+            blink-cmp = {
               enable = true;
+              friendly-snippets.enable = true;
+              setupOpts = {
+                fuzzy = {
+                  implementation = "prefer_rust_with_warning";
+                };
+                sources = {
+                  default = [
+                    "lsp"
+                    "path"
+                    "snippets"
+                    "buffer"
+                    "ripgrep"
+                  ];
+                };
+              };
+              sourcePlugins = {
+                ripgrep = {
+                  enable = true;
+                };
+              };
             };
           };
           comments = {
