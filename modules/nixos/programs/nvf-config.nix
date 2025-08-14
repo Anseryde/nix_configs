@@ -191,29 +191,43 @@
                     "buffer"
                     "ripgrep"
                   ];
+                  providers = {
+                    obsidian = {
+                      name = "obsidian";
+                      module = "obsidian.completion.sources.blink.refs";
+                    };
+                    obsidian_tags = {
+                      name = "obsidian_tags";
+                      module = "obsidian.completion.sources.blink.tags";
+                    };
+                    obsidian_new = {
+                      name = "obsidian_new";
+                      module ="obsidian.completion.sources.blink.new";
+                    };
+                  };
                 };
               };
               sourcePlugins = {
                 ripgrep = {
                   enable = true;
                 };
-                obsidian = {
-                  enable = true;
-                  module = "obsidian.completion.sources.blink.refs";
-                  # module = [
-                  #   "obsidian.completion.sources.blink.refs"
-                  #   "obsidian.completion.sources.blink.tags"
-                  #   "obsidian.completion.sources.blink.new"
-                  # ];
-                };
-                obsidian_tags = {
-                  enable = true;
-                  module = "obsidian.completion.sources.blink.tags";
-                };
-                obsidian_new = {
-                  enable = true;
-                  module = "obsidian.completion.sources.blink.new";
-                };
+                # obsidian = {
+                #   enable = true;
+                #   module = "obsidian.completion.sources.blink.refs";
+                #   # module = [
+                #   #   "obsidian.completion.sources.blink.refs"
+                #   #   "obsidian.completion.sources.blink.tags"
+                #   #   "obsidian.completion.sources.blink.new"
+                #   # ];
+                # };
+                # obsidian_tags = {
+                #   enable = true;
+                #   module = "obsidian.completion.sources.blink.tags";
+                # };
+                # obsidian_new = {
+                #   enable = true;
+                #   module = "obsidian.completion.sources.blink.new";
+                # };
               };
             };
           };
@@ -348,6 +362,8 @@
             obsidian = {
               enable = true;
               setupOpts = {
+                completion.nvim_cmp = false;
+                completion.blink = true;
                 new_notes_location = "current_dir";
                 ui = {
                   enable = false;
