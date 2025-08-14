@@ -200,11 +200,22 @@
                 obsidian = {
                   enable = true;
                   package = pkgs.vimPlugins.obsidian-nvim;
-                  module = [
-                    "obsidian.completion.sources.blink.refs"
-                    "obsidian.completion.sources.blink.tags"
-                    "obsidian.completion.sources.blink.new"
-                  ];
+                  module = "obsidian.completion.sources.blink.refs";
+                  # module = [
+                  #   "obsidian.completion.sources.blink.refs"
+                  #   "obsidian.completion.sources.blink.tags"
+                  #   "obsidian.completion.sources.blink.new"
+                  # ];
+                };
+                obsidian_tags = {
+                  enable = true;
+                  package = pkgs.vimPlugins.obsidian-nvim;
+                  module = "obsidian.completion.sources.blink.tags";
+                };
+                obsidian_new = {
+                  enable = true;
+                  package = pkgs.vimPlugins.obsidian-nvim;
+                  module = "obsidian.completion.sources.blink.new";
                 };
               };
             };
