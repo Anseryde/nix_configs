@@ -1,5 +1,10 @@
 require("blink.cmp").setup({
-    fuzzy = { implementation = "prefer_rust_with_warning" },
+    fuzzy = {
+        implementation = "prefer_rust_with_warning",
+        prebuilt_binaries = {
+            download = false,
+        },
+    },
     completion = {
         documentation = {
             auto_show = true,
@@ -7,9 +12,6 @@ require("blink.cmp").setup({
             update_delay_ms = 50,
             treesitter_highlighting = true,
         },
-    },
-    prebuilt_binaries  {
-        download = false,
     },
     sources = {
         default = {
@@ -19,11 +21,14 @@ require("blink.cmp").setup({
             "buffer",
             "ripgrep",
         },
-    },
-    providers = {
-        ripgrep = {
-            module = "blink-ripgrep",
-            name = "ripgrep",
+        providers = {
+            ripgrep = {
+                module = "blink-ripgrep",
+                name = "Ripgrep",
+                ---@module "blink-ripgrep"
+                ---@type blink-ripgrep.Options
+                opts = {},
+            },
         },
     },
 })
