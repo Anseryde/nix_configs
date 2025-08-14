@@ -363,6 +363,7 @@
                     },
                   },
                 '';
+                completion.blink =true;
               };
             };
           };
