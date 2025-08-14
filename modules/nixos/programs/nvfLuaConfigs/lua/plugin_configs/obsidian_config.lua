@@ -94,4 +94,6 @@ require("obsidian").setup({
 	-- 4. "vsplit_force" - always open a new vertical split if the file is not in the adjacent vsplit.
 	-- 5. "hsplit_force" - always open a new horizontal split if the file is not in the adjacent hsplit.
 	open_notes_in = "current",
+
+    legacy_commands = false,
 })
