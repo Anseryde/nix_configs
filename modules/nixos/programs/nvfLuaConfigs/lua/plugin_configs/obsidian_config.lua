@@ -3,6 +3,7 @@ require("obsidian").setup({
 		{
 			name = "Earth B",
 			path = "~/Documents/Obsidian/Earth B",
+            templates = "templates",
 		},
 		{
 			name = "SP Class Notes",
@@ -40,6 +41,10 @@ require("obsidian").setup({
                 disable_frontmatter = true,
             },
         },
+    },
+
+    templates = {
+        folder = "templates",
     },
 
 	-- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
