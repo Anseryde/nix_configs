@@ -53,6 +53,7 @@
       gdtoolkit_4
       ueberzugpp # for image-nvim
       wl-clipboard # for img-clip neovim plugin
+      openjdk # for gprojector
     ];
     fonts.packages = with pkgs; [
       noto-fonts
