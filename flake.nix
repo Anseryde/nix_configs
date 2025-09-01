@@ -86,7 +86,7 @@
               nix-flatpaks.homeManagerModules.nix-flatpak
             ];
             home-manager.sharedModules = [
-              plasma-manager.homeManagerModules.plasma-manager
+              plasma-manager.homeModules.plasma-manager
             ];
           }
           ./hosts/oldfart12/configuration.nix
@@ -127,7 +127,7 @@
               nix-flatpaks.homeManagerModules.nix-flatpak
             ];
             home-manager.sharedModules = [
-              plasma-manager.homeManagerModules.plasma-manager
+              plasma-manager.homeModules.plasma-manager
             ];
           }
           ./hosts/vyasapura/configuration.nix
