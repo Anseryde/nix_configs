@@ -23,7 +23,7 @@
     hardware.nvidia = {
       open = true; # Set to false to use the proprietary kernel module
       modesetting.enable = true;
-      nvidiaPersistenced = true;
+      nvidiaPersistenced = false; # currenty broken in nixpkgs, please re-enable on update which fixes nvidiaPersistenced
       nvidiaSettings = true;
       powerManagement = {
         enable = true;
