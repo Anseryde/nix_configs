@@ -54,6 +54,7 @@
       ueberzugpp # for image-nvim
       wl-clipboard # for img-clip neovim plugin
       openjdk # for gprojector
+      mono
     ];
     fonts.packages = with pkgs; [
       noto-fonts
