@@ -57,6 +57,10 @@
       mono
       wineWowPackages.stagingFull
       winetricks
+      unzip
+      p7zip
+      p7zip-rar
+      cabextract
     ];
     fonts.packages = with pkgs; [
       noto-fonts
