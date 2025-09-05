@@ -55,6 +55,8 @@
       wl-clipboard # for img-clip neovim plugin
       openjdk # for gprojector
       mono
+      wineWowPackages.stagingFull
+      winetricks
     ];
     fonts.packages = with pkgs; [
       noto-fonts
