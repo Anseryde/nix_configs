@@ -162,6 +162,7 @@
       EDITOR = "nvim";
       SYSTEMD_EDITOR = "nvim";
       VISUAL = "nvim";
+      SSH_ASKPASS_REQUIRE = "prefer";
     };
   };
 
@@ -188,7 +189,11 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
+  programs.ssh = {
+    startAgent = true;
+    enableAskPassword = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
