@@ -31,6 +31,10 @@
   boot = {
     bootspec.enable = true;
     initrd.systemd.enable = true;
+    kernelModules = [
+      "iptable_nat" # for winboat
+    ];
+    kernelPackages = pkgs.linuxPackages_latest; # switch to latest stable linux kernel
     loader = {
       systemd-boot.enable = lib.mkForce false;
       efi = {
@@ -43,9 +47,6 @@
       pkiBundle = "/etc/secureboot";
     };
   };
-
-  #switch to latest stable linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # zstd compression
   fileSystems = {
