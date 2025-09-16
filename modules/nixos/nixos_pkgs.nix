@@ -61,6 +61,7 @@
       p7zip
       p7zip-rar
       cabextract
+      freerdp # for winboat
     ];
     fonts.packages = with pkgs; [
       noto-fonts
