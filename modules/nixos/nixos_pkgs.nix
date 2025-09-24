@@ -62,6 +62,8 @@
       p7zip-rar
       cabextract
       freerdp # for winboat
+      lsfg-vk
+      lsfg-vk-ui
     ];
     fonts.packages = with pkgs; [
       noto-fonts
