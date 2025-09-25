@@ -27,6 +27,7 @@
       libdvdread
       libdvdnav
       libbluray
+      libaacs # for playing back AACS-protected blu-ray discs.
       libreoffice-qt-fresh
       hunspell
       hunspellDicts.en_US

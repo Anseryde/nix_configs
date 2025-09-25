@@ -55,6 +55,16 @@
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];
+      "com.spotify.Client".Context = {
+        filesystems = [ 
+          "/mnt/Lexar_SSD/Music_Secondary/Spotify_Storage:rw"
+        ];
+      };
+      "io.github.limo_app.limo".Context = {
+        filesystems = [
+          "~/.var/app/org.openmw.OpenMW/config:rw"
+        ];
+      };
     };
     services.flatpak.update.onActivation = true;
     services.flatpak.uninstallUnmanaged = true;
