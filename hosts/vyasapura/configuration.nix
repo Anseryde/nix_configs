@@ -33,6 +33,8 @@
     initrd.systemd.enable = true;
     kernelModules = [
       "iptable_nat" # for winboat
+      "uinput" # future-proofing for systemd 258 bug
+      "ntsync" # for ntsync functionality in games such as via proton or WINE
     ];
     kernelPackages = pkgs.linuxPackages_latest; # switch to latest stable linux kernel
     loader = {
