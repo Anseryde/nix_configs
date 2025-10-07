@@ -35,7 +35,7 @@
         {
           name = "org.kde.plasma.weather";
           position = {
-            horizontal = 1200;
+            horizontal = 1100;
             vertical = 20;
           };
           size = {
