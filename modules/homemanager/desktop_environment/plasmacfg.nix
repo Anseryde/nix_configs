@@ -25,6 +25,7 @@
       workspace = {
         lookAndFeel = "org.kde.breezedark.desktop";
         iconTheme = "Tela-purple-dark";
+        wallpaper = "/home/ryann/Pictures/Wallpapers/Revachol_Cityscape.png";
       };
       hotkeys.commands."launch-wezterm" = {
         name = "Launch wezterm";
