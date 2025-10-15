@@ -13,7 +13,7 @@
   config = lib.mkIf config.gamescopeandgamemode.enable {
     programs.gamescope = {
       enable = true;
-      capSysNice = true;
+      # capSysNice = true;
     };
     programs.gamemode.enable = true;
   };
