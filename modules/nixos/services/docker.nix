@@ -15,6 +15,9 @@
     virtualisation.docker = {
       enable = true;
       enableOnBoot = true;
+      daemon.settings = {
+        data-root = "/mnt/Lexar_SSD/docker";
+      };
       # enableNvidia = true;
       # rootless = {
       #   enable = true;
