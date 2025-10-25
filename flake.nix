@@ -23,6 +23,7 @@
       url = "github:nguyenvukhang/nvim-toggler";
       flake = false;
     };
+    winboat.url = "github:TibixDev/winboat";
   };
   outputs = {
     self,
@@ -34,6 +35,7 @@
     lanzaboote,
     nix-alien,
     nvf,
+    winboat,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -114,6 +116,9 @@
             # environment.systemPackages = [
             #   self.packages.${pkgs.stdenv.system}.nvfNVim
             # ];
+            environment.systemPackages = [
+              winboat.winboat
+            ];
           })
           {
             home-manager.backupFileExtension = "backup";
