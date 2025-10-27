@@ -13,10 +13,14 @@
   config = lib.mkIf config.git.enable {
     programs.git = {
       enable = true;
-      userName = "Anseryde";
-      userEmail = "ryanlupis@gmail.com";
+      # userName = "Anseryde";
+      # userEmail = "ryanlupis@gmail.com";
       # package = pkgs.git.override {withLibsecret = true;};
-      extraConfig = {
+      settings = {
+        user = {
+          name = "Anseryde";
+          email = "ryanlupis@gmail.com";
+        };
         credential = {
           # helper = "manager";
           # "https://github.com".username = "Anseryde";

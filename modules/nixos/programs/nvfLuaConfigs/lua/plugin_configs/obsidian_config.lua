@@ -38,13 +38,16 @@ require("obsidian").setup({
                 templates = {
                     folder = vim.NIL,
                 },
-                disable_frontmatter = true,
+                -- disableFrontmatter = true,
             },
         },
     },
 
     templates = {
         folder = "templates",
+    },
+    frontmatter = {
+        enable = false,
     },
 
 	-- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
