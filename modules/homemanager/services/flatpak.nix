@@ -53,6 +53,7 @@
       "io.github.achetagames.epic_asset_manager"
       "org.onlyoffice.desktopeditors"
       "re.sonny.Eloquent" # dedicated proofreading app(at least for English and Mandarin)!
+      "net.pixieditor.PixiEditor"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];
