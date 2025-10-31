@@ -25,7 +25,10 @@
           Fingerprinting = true;
         };
       };
-      nativeMessagingHosts = [pkgs.keepassxc];
+      nativeMessagingHosts = [
+        pkgs.keepassxc
+        pkgs.firefoxpwa
+      ];
       # setting profile via home-manager breaks keepassxc for some reason
       # profiles = {
       #   user = {

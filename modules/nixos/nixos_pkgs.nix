@@ -65,6 +65,7 @@
       freerdp # for winboat
       lsfg-vk
       lsfg-vk-ui
+      firefoxpwa
     ];
     fonts.packages = with pkgs; [
       noto-fonts
