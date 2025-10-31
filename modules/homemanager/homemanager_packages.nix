@@ -86,6 +86,7 @@
       imagemagick # for snacks.nvim image module
       ghostscript # for snacks.nvim image module
       mermaid-cli # for snacks.nvim image module
+      flyctl # for Actual Budget budgeting app hosting on fly.io 
     ];
   };
 }
