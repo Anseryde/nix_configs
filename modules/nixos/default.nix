@@ -25,6 +25,7 @@
     ./services/podman.nix
     ./programs/virt-manager.nix
     ./programs/nvf-config.nix
+    ./programs/devenv.nix
   ];
 
   nixos_pkgs.enable =
