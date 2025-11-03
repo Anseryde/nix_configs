@@ -66,6 +66,7 @@
       lsfg-vk
       lsfg-vk-ui
       firefoxpwa
+      kdePackages.filelight
     ];
     fonts.packages = with pkgs; [
       noto-fonts
