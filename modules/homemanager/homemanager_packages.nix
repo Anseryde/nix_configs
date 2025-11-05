@@ -23,7 +23,7 @@
       fishPlugins.fzf-fish
       courier-prime
       vollkorn
-      gimp3-with-plugins
+      gimp-with-plugins
       prismlauncher
       # unityhub
       tela-icon-theme
