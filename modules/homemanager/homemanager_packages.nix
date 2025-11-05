@@ -24,6 +24,7 @@
       courier-prime
       vollkorn
       gimp-with-plugins
+      gimpPlugins.resynthesizer
       prismlauncher
       # unityhub
       tela-icon-theme
