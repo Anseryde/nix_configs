@@ -83,6 +83,11 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # fwupd
+  services.fwupd = {
+    enable = true;
+  };
+
   # KDE
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
