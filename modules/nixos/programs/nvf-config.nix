@@ -299,7 +299,7 @@
             rust = {
               enable = true;
               extensions = {
-                crate-nvim = {
+                crates-nvim = {
                   enable = true;
                 };
               };
