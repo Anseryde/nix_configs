@@ -282,7 +282,7 @@
                 type = "alejandra";
               };
               lsp = {
-                server = "nixd";
+                servers = "nixd";
                 # options = {
                 #   nixos = {
                 #     expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vysapura.options";
@@ -298,8 +298,10 @@
             };
             rust = {
               enable = true;
-              crates = {
-                enable = true;
+              extensions = {
+                crate-nvim = {
+                  enable = true;
+                };
               };
             };
             bash.enable = true;
