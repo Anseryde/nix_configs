@@ -239,6 +239,18 @@
           lsp = {
             enable = true;
             formatOnSave = false;
+            servers = {
+              nixd = {
+                init_options = {
+                  nixos = {
+                    expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vysapura.options";
+                  };
+                  home_manager = {
+                    expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vyasapura.options.home-manager.users.type.getSubOptions []";
+                  };
+                };
+              };
+            };
             trouble = {
               enable = true;
             };
@@ -271,14 +283,14 @@
               };
               lsp = {
                 server = "nixd";
-                options = {
-                  nixos = {
-                    expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vysapura.options";
-                  };
-                  home_manager = {
-                    expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vyasapura.options.home-manager.users.type.getSubOptions []";
-                  };
-                };
+                # options = {
+                #   nixos = {
+                #     expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vysapura.options";
+                #   };
+                #   home_manager = {
+                #     expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vyasapura.options.home-manager.users.type.getSubOptions []";
+                #   };
+                # };
               };
               treesitter = {
                 enable = true;
