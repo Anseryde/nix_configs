@@ -18,7 +18,10 @@
     };
     lanzaboote.url = "github:nix-community/lanzaboote";
     nix-alien.url = "github:thiagokokada/nix-alien";
-    nvf.url = "github:notashelf/nvf";
+    nvf= {
+      url = "github:notashelf/nvf/v0.8";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nvim-toggler = {
       url = "github:nguyenvukhang/nvim-toggler";
       flake = false;
