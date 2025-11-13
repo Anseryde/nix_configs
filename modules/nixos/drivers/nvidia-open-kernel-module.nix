@@ -33,10 +33,10 @@
     # hardware.nvidia-container-toolkit.enable = true;
     hardware.nvidia-container-toolkit = {
       enable =  true;
-      extraArgs = [
-        "--disable-hook"
-        "create-symlinks"
-      ];
+      # extraArgs = [
+      #   "--disable-hook"
+      #   "create-symlinks"
+      # ];
       # package = pkgs.nvidia-container-toolkit.overrideAttrs (old: {
       #   version = "git";
       #   src = pkgs.fetchFromGitHub {
