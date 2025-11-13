@@ -23,7 +23,7 @@
   bees_deduplication_vyasapura.enable = true;
   smartd_vyasapura.enable = true;
   docker.enable = true;
-  # distrobox.enable = true;
+  distrobox.enable = true;
   # podman.enable = true;
   virt-manager.enable = true;
   nvf-config.enable = true;
