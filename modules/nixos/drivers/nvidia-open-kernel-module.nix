@@ -37,29 +37,29 @@
         "--disable-hook"
         "create-symlinks"
       ];
-      package = pkgs.nvidia-container-toolkit.overrideAttrs (old: {
-        version = "git";
-        src = pkgs.fetchFromGitHub {
-          owner = "nvidia";
-          repo = "nvidia-container-toolkit";
-          rev = "f8daa5e26de9fd7eb79259040b6dd5a52060048c"; # v 1.18.0
-          sha256 = "1lpd04ajyp1y7q6pdm0d8jqdxbjz8yq9iar5lmijkvnlw8vjw1sm";
-        };
-        postPatch = ''
-          substituteInPlace internal/config/config.go \
-            --replace-fail '/usr/bin/nvidia-container-runtime-hook' "$tools/bin/nvidia-container-runtime-hook" \
-            --replace-fail '/sbin/ldconfig' '${pkgs.glibc.bin}/sbin/ldconfig'
-
-          # substituteInPlace tools/container/toolkit/toolkit.go \
-          #   --replace-fail '/sbin/ldconfig' '${pkgs.glibc.bin}/sbin/ldconfig'
-
-          substituteInPlace cmd/nvidia-cdi-hook/update-ldcache/update-ldcache.go \
-            --replace-fail '/sbin/ldconfig' '${pkgs.glibc.bin}/sbin/ldconfig'
-        '';
-      });
+      # package = pkgs.nvidia-container-toolkit.overrideAttrs (old: {
+      #   version = "git";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "nvidia";
+      #     repo = "nvidia-container-toolkit";
+      #     rev = "f8daa5e26de9fd7eb79259040b6dd5a52060048c"; # v 1.18.0
+      #     sha256 = "1lpd04ajyp1y7q6pdm0d8jqdxbjz8yq9iar5lmijkvnlw8vjw1sm";
+      #   };
+      #   postPatch = ''
+      #     substituteInPlace internal/config/config.go \
+      #       --replace-fail '/usr/bin/nvidia-container-runtime-hook' "$tools/bin/nvidia-container-runtime-hook" \
+      #       --replace-fail '/sbin/ldconfig' '${pkgs.glibc.bin}/sbin/ldconfig'
+      #
+      #     # substituteInPlace tools/container/toolkit/toolkit.go \
+      #     #   --replace-fail '/sbin/ldconfig' '${pkgs.glibc.bin}/sbin/ldconfig'
+      #
+      #     substituteInPlace cmd/nvidia-cdi-hook/update-ldcache/update-ldcache.go \
+      #       --replace-fail '/sbin/ldconfig' '${pkgs.glibc.bin}/sbin/ldconfig'
+      #   '';
+      # });
     };
     environment.systemPackages = [
-      # pkgs.nvidia-container-toolkit
+      pkgs.nvidia-container-toolkit
       pkgs.cudaPackages.cudatoolkit
       # pkgs.nvidia-docker
     ];
