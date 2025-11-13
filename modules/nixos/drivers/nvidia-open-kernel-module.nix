@@ -59,7 +59,7 @@
       });
     };
     environment.systemPackages = [
-      pkgs.nvidia-container-toolkit
+      # pkgs.nvidia-container-toolkit
       pkgs.cudaPackages.cudatoolkit
       # pkgs.nvidia-docker
     ];
