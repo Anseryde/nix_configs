@@ -68,7 +68,7 @@
       firefoxpwa
       kdePackages.filelight
       zotero
-      winboat
+      # winboat
     ];
     fonts.packages = with pkgs; [
       noto-fonts
