@@ -279,10 +279,14 @@
               format = {
                 enable = true;
                 # package = pkgs.alejandra;
-                type = "alejandra";
+                type = [
+                  "alejandra"
+                ];
               };
               lsp = {
-                servers = "nixd";
+                servers = [
+                  "nixd"
+                ];
                 # options = {
                 #   nixos = {
                 #     expr = "(builtins.getFlake \"/home/ryann/nix-configs\").nixosConfigurations.vysapura.options";
