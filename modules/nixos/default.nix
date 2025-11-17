@@ -26,6 +26,7 @@
     ./programs/virt-manager.nix
     ./programs/nvf-config.nix
     ./programs/devenv.nix
+    ./drivers/opensourcenvidia.nix
   ];
 
   nixos_pkgs.enable =
