@@ -72,7 +72,7 @@
       gearlever
       mangohud
       goverlay
-      blender
+      # blender
       material-maker
       obsidian
       obsidian-export
