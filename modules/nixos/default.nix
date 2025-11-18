@@ -27,6 +27,7 @@
     ./programs/nvf-config.nix
     ./programs/devenv.nix
     ./drivers/opensourcenvidia.nix
+    ./drivers/opensourcenvidia_mesa-git.nix
   ];
 
   nixos_pkgs.enable =
