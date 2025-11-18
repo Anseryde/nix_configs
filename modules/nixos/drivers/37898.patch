@@ -1,0 +1,1493 @@
+From 8658686d838422c623f9b2ff209ad7fcbfb40156 Mon Sep 17 00:00:00 2001
+From: Autumn Ashton <misyl@froggi.es>
+Date: Wed, 15 Oct 2025 18:24:21 +0000
+Subject: [PATCH 1/5] cnak: Expose max_warps_per_sm
+
+Previously this was only accessible from Rust,
+but VK_NVX_binary_import needs to calculate this
+for imported cubin kernels from EIATTR_REGCOUNT.
+
+Signed-off-by: Autumn Ashton <misyl@froggi.es>
+Reviewed-by: Mel Henning <mhenning@darkrefraction.com>
+Reviewed-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
+---
+ src/nouveau/compiler/nak.h      | 2 ++
+ src/nouveau/compiler/nak/api.rs | 5 +++++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/src/nouveau/compiler/nak.h b/src/nouveau/compiler/nak.h
+index 7ee830c124cc4..eb2d3fab9ef65 100644
+--- a/src/nouveau/compiler/nak.h
++++ b/src/nouveau/compiler/nak.h
+@@ -30,6 +30,8 @@ uint64_t nak_debug_flags(const struct nak_compiler *nak);
+ const struct nir_shader_compiler_options *
+ nak_nir_options(const struct nak_compiler *nak);
+ 
++uint32_t nak_max_warps_per_sm(uint32_t num_gprs);
++
+ void nak_preprocess_nir(nir_shader *nir, const struct nak_compiler *nak);
+ 
+ bool nak_nir_lower_image_addrs(nir_shader *nir, const struct nak_compiler *nak);
+diff --git a/src/nouveau/compiler/nak/api.rs b/src/nouveau/compiler/nak/api.rs
+index 74e2f9cbe1760..713eb2e8b5cc3 100644
+--- a/src/nouveau/compiler/nak/api.rs
++++ b/src/nouveau/compiler/nak/api.rs
+@@ -231,6 +231,11 @@ pub extern "C" fn nak_nir_options(
+     &nak.nir_options
+ }
+ 
++#[no_mangle]
++pub extern "C" fn nak_max_warps_per_sm(num_gprs: u32) -> u32 {
++    crate::ir::max_warps_per_sm(num_gprs)
++}
++
+ #[repr(C)]
+ pub struct ShaderBin {
+     pub bin: nak_shader_bin,
+-- 
+GitLab
+
+
+From f0cfe6d0c07e54640bfd02b5b6d0c195c488f5fb Mon Sep 17 00:00:00 2001
+From: Autumn Ashton <misyl@froggi.es>
+Date: Wed, 15 Oct 2025 18:37:15 +0000
+Subject: [PATCH 2/5] nvk: Allow nvk_cmd_upload_qmd to take a custom root
+ descriptor
+
+The cubin kernel launches need to use a root descriptor that's
+compatible with the bytecode that nvcc generates which contains block
+dim, grid dim and the kernel params at specific layouts which can be
+influenced by ELF .nv.info attributes.
+
+Thus, expose the ability to input custom root descriptors
+in nvk_cmd_upload_qmd.
+
+Signed-off-by: Autumn Ashton <misyl@froggi.es>
+Reviewed-by: Mel Henning <mhenning@darkrefraction.com>
+Reviewed-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
+---
+ src/nouveau/vulkan/nvk_cmd_dispatch.c | 18 ++++++++++--------
+ 1 file changed, 10 insertions(+), 8 deletions(-)
+
+diff --git a/src/nouveau/vulkan/nvk_cmd_dispatch.c b/src/nouveau/vulkan/nvk_cmd_dispatch.c
+index b3a75ddc5a28a..60a1faad57fda 100644
+--- a/src/nouveau/vulkan/nvk_cmd_dispatch.c
++++ b/src/nouveau/vulkan/nvk_cmd_dispatch.c
+@@ -156,7 +156,8 @@ static VkResult
+ nvk_cmd_upload_qmd(struct nvk_cmd_buffer *cmd,
+                    const struct nvk_shader *shader,
+                    const struct nvk_descriptor_state *desc,
+-                   const struct nvk_root_descriptor_table *root,
++                   const void *root,
++                   size_t root_size,
+                    uint32_t global_size[3],
+                    uint64_t *qmd_addr_out,
+                    uint64_t *root_desc_addr_out)
+@@ -171,17 +172,16 @@ nvk_cmd_upload_qmd(struct nvk_cmd_buffer *cmd,
+     * simply allocated a buffer and upload data to it, make sure its size is
+     * 0x100 aligned.
+     */
+-   STATIC_ASSERT((sizeof(*root) & 0xff) == 0);
+-   assert(sizeof(*root) % min_cbuf_alignment == 0);
++   assert(root_size % min_cbuf_alignment == 0);
+ 
+    void *root_desc_map;
+    uint64_t root_desc_addr;
+-   result = nvk_cmd_buffer_upload_alloc(cmd, sizeof(*root), min_cbuf_alignment,
++   result = nvk_cmd_buffer_upload_alloc(cmd, root_size, min_cbuf_alignment,
+                                         &root_desc_addr, &root_desc_map);
+    if (unlikely(result != VK_SUCCESS))
+       return result;
+ 
+-   memcpy(root_desc_map, root, sizeof(*root));
++   memcpy(root_desc_map, root, root_size);
+ 
+    uint64_t qmd_addr = 0;
+    if (shader != NULL) {
+@@ -203,7 +203,7 @@ nvk_cmd_upload_qmd(struct nvk_cmd_buffer *cmd,
+          if (cbuf->type == NVK_CBUF_TYPE_ROOT_DESC) {
+             ba = (struct nvk_buffer_address) {
+                .base_addr = root_desc_addr,
+-               .size = sizeof(*root),
++               .size = root_size,
+             };
+          } else {
+             ASSERTED bool direct_descriptor =
+@@ -252,9 +252,11 @@ nvk_cmd_flush_cs_qmd(struct nvk_cmd_buffer *cmd,
+                      uint64_t *root_desc_addr_out)
+ {
+    const struct nvk_descriptor_state *desc = &state->cs.descriptors;
++   STATIC_ASSERT((sizeof(desc->root) & 0xff) == 0);
+ 
+-   return nvk_cmd_upload_qmd(cmd, state->cs.shader,
+-                             desc, (void *)desc->root, global_size,
++   return nvk_cmd_upload_qmd(cmd, state->cs.shader, desc,
++                             desc->root, sizeof(desc->root),
++                             global_size,
+                              qmd_addr_out, root_desc_addr_out);
+ }
+ 
+-- 
+GitLab
+
+
+From 5bb029c74a9bc14458cdf11e4a0adcd2ba81dad6 Mon Sep 17 00:00:00 2001
+From: Autumn Ashton <misyl@froggi.es>
+Date: Wed, 15 Oct 2025 18:38:14 +0000
+Subject: [PATCH 3/5] nvk: Add nvk_cmd_dispatch_with_root
+
+This allows making dispatch with a specifically inputted root
+descriptor, primarily for cubin kernel launches.
+
+Signed-off-by: Autumn Ashton <misyl@froggi.es>
+Reviewed-by: Mel Henning <mhenning@darkrefraction.com>
+Reviewed-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
+---
+ src/nouveau/vulkan/nvk_cmd_buffer.h   |  8 +++++
+ src/nouveau/vulkan/nvk_cmd_dispatch.c | 50 ++++++++++++++++++---------
+ 2 files changed, 41 insertions(+), 17 deletions(-)
+
+diff --git a/src/nouveau/vulkan/nvk_cmd_buffer.h b/src/nouveau/vulkan/nvk_cmd_buffer.h
+index 3fb44572df97a..dfc10f0bd8831 100644
+--- a/src/nouveau/vulkan/nvk_cmd_buffer.h
++++ b/src/nouveau/vulkan/nvk_cmd_buffer.h
+@@ -408,6 +408,14 @@ void nvk_cmd_dispatch_shader(struct nvk_cmd_buffer *cmd,
+                              uint32_t groupCountY,
+                              uint32_t groupCountZ);
+ 
++void nvk_cmd_dispatch_with_root(struct nvk_cmd_buffer *cmd,
++                                struct nvk_shader *shader,
++                                const void *root,
++                                size_t root_size,
++                                uint32_t groupCountX,
++                                uint32_t groupCountY,
++                                uint32_t groupCountZ);
++
+ void nvk_meta_resolve_rendering(struct nvk_cmd_buffer *cmd,
+                                 const VkRenderingInfo *pRenderingInfo);
+ 
+diff --git a/src/nouveau/vulkan/nvk_cmd_dispatch.c b/src/nouveau/vulkan/nvk_cmd_dispatch.c
+index 60a1faad57fda..283ec6766ceae 100644
+--- a/src/nouveau/vulkan/nvk_cmd_dispatch.c
++++ b/src/nouveau/vulkan/nvk_cmd_dispatch.c
+@@ -340,28 +340,22 @@ nvk_CmdDispatchBase(VkCommandBuffer commandBuffer,
+ }
+ 
+ void
+-nvk_cmd_dispatch_shader(struct nvk_cmd_buffer *cmd,
+-                        struct nvk_shader *shader,
+-                        const void *push_data, size_t push_size,
+-                        uint32_t groupCountX,
+-                        uint32_t groupCountY,
+-                        uint32_t groupCountZ)
++nvk_cmd_dispatch_with_root(struct nvk_cmd_buffer *cmd,
++                           struct nvk_shader *shader,
++                           const void *root,
++                           size_t root_size,
++                           uint32_t groupCountX,
++                           uint32_t groupCountY,
++                           uint32_t groupCountZ)
+ {
+    struct nvk_device *dev = nvk_cmd_buffer_device(cmd);
+ 
+-   struct nvk_root_descriptor_table root = {
+-      .cs.group_count = {
+-         groupCountX,
+-         groupCountY,
+-         groupCountZ,
+-      },
+-   };
+-   assert(push_size <= sizeof(root.push));
+-   memcpy(root.push, push_data, push_size);
++   uint32_t group_count[3] = { groupCountX, groupCountY, groupCountZ };
+ 
+    uint64_t qmd_addr;
+-   VkResult result = nvk_cmd_upload_qmd(cmd, shader, NULL, &root,
+-                                        root.cs.group_count,
++   VkResult result = nvk_cmd_upload_qmd(cmd, shader, NULL,
++                                        root, root_size,
++                                        group_count,
+                                         &qmd_addr, NULL);
+    if (result != VK_SUCCESS) {
+       vk_command_buffer_set_error(&cmd->vk, result);
+@@ -394,6 +388,28 @@ nvk_cmd_dispatch_shader(struct nvk_cmd_buffer *cmd,
+    P_IMMD(p, NVA0C0, SET_RENDER_ENABLE_OVERRIDE, MODE_USE_RENDER_ENABLE);
+ }
+ 
++void
++nvk_cmd_dispatch_shader(struct nvk_cmd_buffer *cmd,
++                        struct nvk_shader *shader,
++                        const void *push_data, size_t push_size,
++                        uint32_t groupCountX,
++                        uint32_t groupCountY,
++                        uint32_t groupCountZ)
++{
++   struct nvk_root_descriptor_table root = {
++      .cs.group_count = {
++         groupCountX,
++         groupCountY,
++         groupCountZ,
++      },
++   };
++   assert(push_size <= sizeof(root.push));
++   memcpy(root.push, push_data, push_size);
++
++   nvk_cmd_dispatch_with_root(cmd, shader, &root, sizeof(root),
++                              groupCountX, groupCountY, groupCountZ);
++}
++
+ static void
+ mme_store_global(struct mme_builder *b,
+                  struct mme_value64 addr,
+-- 
+GitLab
+
+
+From b81029b1c76402bba7dcf2a6ac084efb596ce032 Mon Sep 17 00:00:00 2001
+From: Autumn Ashton <misyl@froggi.es>
+Date: Wed, 15 Oct 2025 18:44:45 +0000
+Subject: [PATCH 4/5] nouveau/cubin: Add cubin and fatbin parsers
+
+These cubin and fatbin parsers implement a subset of the functionality
+exposed in order to launch the modern Cuda kernels used for DLSS.
+
+Co-authored-by: Mary Guillemard <mary@mary.zone>
+Signed-off-by: Autumn Ashton <misyl@froggi.es>
+Reviewed-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
+---
+ meson.build                        |   2 +
+ src/nouveau/cubin/meson.build      |  22 ++
+ src/nouveau/cubin/nv_cubin.c       | 379 +++++++++++++++++++++++++++++
+ src/nouveau/cubin/nv_cubin.h       |  71 ++++++
+ src/nouveau/cubin/nv_cubin_defs.h  |  69 ++++++
+ src/nouveau/cubin/nv_fatbin.c      |  59 +++++
+ src/nouveau/cubin/nv_fatbin.h      |  27 ++
+ src/nouveau/cubin/nv_fatbin_defs.h |  34 +++
+ src/nouveau/meson.build            |   1 +
+ 9 files changed, 664 insertions(+)
+ create mode 100644 src/nouveau/cubin/meson.build
+ create mode 100644 src/nouveau/cubin/nv_cubin.c
+ create mode 100644 src/nouveau/cubin/nv_cubin.h
+ create mode 100644 src/nouveau/cubin/nv_cubin_defs.h
+ create mode 100644 src/nouveau/cubin/nv_fatbin.c
+ create mode 100644 src/nouveau/cubin/nv_fatbin.h
+ create mode 100644 src/nouveau/cubin/nv_fatbin_defs.h
+
+diff --git a/meson.build b/meson.build
+index c7ed21a09613f..126a568f30b8a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1912,6 +1912,8 @@ if dep_elf.found()
+   pre_args += '-DUSE_LIBELF'
+ elif with_gallium_radeonsi
+   error('Gallium driver radeonsi requires libelf')
++elif with_nouveau_vk
++  error('NVK requires libelf')
+ endif
+ 
+ dep_valgrind = dependency('valgrind', required : get_option('valgrind'))
+diff --git a/src/nouveau/cubin/meson.build b/src/nouveau/cubin/meson.build
+new file mode 100644
+index 0000000000000..de548ae6c6fdf
+--- /dev/null
++++ b/src/nouveau/cubin/meson.build
+@@ -0,0 +1,22 @@
++# Copyright © 2025 Autumn Ashton
++# SPDX-License-Identifier: MIT
++
++libnouveau_cubin_files = files(
++  'nv_cubin.c',
++  'nv_fatbin.c',
++)
++
++_libnouveau_cubin = static_library(
++  'nouveau_cubin',
++  libnouveau_cubin_files,
++  include_directories : [inc_include, inc_src],
++  gnu_symbol_visibility : 'hidden',
++  dependencies : [
++    idep_mesautil,
++  ],
++)
++
++idep_nouveau_cubin = declare_dependency(
++  include_directories : include_directories('.'),
++  link_with : _libnouveau_cubin,
++)
+diff --git a/src/nouveau/cubin/nv_cubin.c b/src/nouveau/cubin/nv_cubin.c
+new file mode 100644
+index 0000000000000..441622911ab4e
+--- /dev/null
++++ b/src/nouveau/cubin/nv_cubin.c
+@@ -0,0 +1,379 @@
++/*
++ * Copyright © 2025 Autumn Ashton
++ * SPDX-License-Identifier: MIT
++ */
++#include "nv_cubin.h"
++
++#include "nv_cubin_defs.h"
++
++#include "util/macros.h"
++
++#include <gelf.h>
++#include <libelf.h>
++
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++
++static bool
++nv_cubin_error(const char *what)
++{
++   fprintf(stderr, "nvk cubin elf error: %s (%s)\n", what,
++           elf_errmsg(elf_errno()));
++   return false;
++}
++
++static Elf_Scn *
++nv_cubin_module_get_section(struct nv_cubin_module *module,
++                            const char *lookup_name)
++{
++   Elf_Scn *section = NULL;
++   while ((section = elf_nextscn(module->elf, section)) != NULL) {
++      GElf_Shdr header;
++      if (gelf_getshdr(section, &header) != &header)
++         continue;
++
++      const char *section_name =
++         elf_strptr(module->elf, module->shstrndx, header.sh_name);
++      if (!section_name || !*section_name)
++         continue;
++
++      if (!strcmp(section_name, lookup_name))
++         return section;
++   }
++
++   return NULL;
++}
++
++static uint32_t
++nv_cubin_module_get_static_smem_size(struct nv_cubin_module *module,
++                                     const char *name)
++{
++   char section_name[2048];
++   snprintf(section_name, sizeof(section_name), ".nv.shared.%s", name);
++
++   Elf_Scn *section = nv_cubin_module_get_section(module, section_name);
++   if (!section)
++      return 0;
++
++   Elf_Data *data = elf_getdata(section, NULL);
++   if (!data)
++      return 0;
++
++   /* Assume this is all zero'ed. */
++   return (uint32_t)data->d_size;
++}
++
++static bool
++nv_cubin_function_parse_base_nvinfo(struct nv_cubin_module *module,
++                                    struct nv_cubin_function *function)
++{
++   Elf_Scn *section = nv_cubin_module_get_section(module, ".nv.info");
++   if (!section)
++      return nv_cubin_error("No .nv.info section");
++
++   Elf_Data *data = elf_getdata(section, NULL);
++   if (!data)
++      return nv_cubin_error("No .nv.info section data");
++
++   const uint8_t *ptr = data->d_buf;
++   const uint8_t *end = ptr + data->d_size;
++
++   while (ptr < end) {
++      const struct nvinfo_attribute_header_t *attr_header =
++         (const struct nvinfo_attribute_header_t *)ptr;
++      ptr += sizeof(struct nvinfo_attribute_header_t);
++
++      const void *data = ptr;
++
++      switch (attr_header->attribute) {
++      case NVINFO_EIATTR_MIN_STACK_SIZE: {
++         assert(attr_header->format == NVINFO_EIFMT_SVAL);
++         const struct nvinfo_attr_min_stack_size_t *attr = data;
++         if (attr->symbol_index == function->symbol_index)
++            function->slm_size = attr->size;
++         break;
++      }
++      case NVINFO_EIATTR_REGCOUNT: {
++         assert(attr_header->format == NVINFO_EIFMT_SVAL);
++         const struct nvinfo_attr_regcount_t *attr = data;
++         if (attr->symbol_index == function->symbol_index)
++            function->gpr_count = attr->count;
++         break;
++      }
++      default:
++         break;
++      }
++
++      if (attr_header->format == NVINFO_EIFMT_SVAL)
++         ptr += attr_header->sval.size;
++   }
++
++   return true;
++}
++
++static bool
++nv_cubin_function_parse_extended_nvinfo(struct nv_cubin_module *module,
++                                        struct nv_cubin_function *function)
++{
++   char nvinfo_name[2048];
++   sprintf(nvinfo_name, ".nv.info.%s", function->name);
++
++   Elf_Scn *section = nv_cubin_module_get_section(module, nvinfo_name);
++   if (!section)
++      return nv_cubin_error("No .nv.info section");
++
++   Elf_Data *data = elf_getdata(section, NULL);
++   if (!data)
++      return nv_cubin_error("No .nv.info section data");
++
++   const uint8_t *ptr = data->d_buf;
++   const uint8_t *end = ptr + data->d_size;
++
++   while (ptr < end) {
++      const struct nvinfo_attribute_header_t *attr_header =
++         (const struct nvinfo_attribute_header_t *)ptr;
++      ptr += sizeof(struct nvinfo_attribute_header_t);
++
++      const void *data = ptr;
++
++      switch (attr_header->attribute) {
++      case NVINFO_EIATTR_PARAM_CBANK: {
++         assert(attr_header->format == NVINFO_EIFMT_SVAL);
++         const struct nvinfo_param_cbank_t *attr = data;
++         function->params_offset = attr->params_offset;
++         function->params_size = attr->params_size;
++         break;
++      }
++      case NVINFO_EIATTR_KPARAM_INFO: {
++         assert(attr_header->format == NVINFO_EIFMT_SVAL);
++         const struct nvinfo_kparam_info_t *attr = data;
++
++         uint32_t param_idx = function->param_info_count++;
++         function->param_infos = realloc(
++            function->param_infos, sizeof(struct nv_cubin_function_param_info) *
++                                      function->param_info_count);
++         struct nv_cubin_function_param_info *func_param =
++            &function->param_infos[param_idx];
++
++         func_param->index = attr->index;
++         func_param->ordinal = attr->ordinal;
++         func_param->offset = attr->offset;
++         func_param->size = (attr->packed >> 18) & 0x3fff;
++         break;
++      }
++      case NVINFO_EIATTR_CRS_STACK_SIZE: {
++         assert(attr_header->format == NVINFO_EIFMT_SVAL);
++         const struct nvinfo_crs_stack_size_t *attr = data;
++         function->crs_size = attr->size;
++         break;
++      }
++      case NVINFO_EIATTR_NUM_BARRIERS: {
++         /* new version has NUM_BARRIERS as an attribute. */
++         assert(attr_header->format == NVINFO_EIFMT_BVAL);
++         function->num_control_barriers = attr_header->bval.value;
++         break;
++      }
++      default:
++         break;
++      }
++
++      if (attr_header->format == NVINFO_EIFMT_SVAL)
++         ptr += attr_header->sval.size;
++   }
++
++   return true;
++}
++
++static bool
++nv_cubin_function_init(struct nv_cubin_module *module,
++                       struct nv_cubin_function *function,
++                       uint32_t symbol_index, const char *symbol_name,
++                       GElf_Sym symbol)
++{
++   memset(function, 0, sizeof(*function));
++
++   if (symbol.st_size == 0)
++      return nv_cubin_error("Function with no size!");
++
++   size_t code_section_index = symbol.st_shndx;
++   if (code_section_index == SHN_UNDEF)
++      return nv_cubin_error("Function with no code section!");
++
++   Elf_Scn *code_section = elf_getscn(module->elf, code_section_index);
++   if (!code_section)
++      return nv_cubin_error("Function with invalid code section!");
++
++   GElf_Shdr code_section_header;
++   if (gelf_getshdr(code_section, &code_section_header) != &code_section_header)
++      return nv_cubin_error("Couldn't get code section header");
++
++   Elf_Data *code_section_data = elf_getdata(code_section, NULL);
++   if (!code_section_data)
++      return nv_cubin_error("Couldn't get code section data");
++
++   size_t offset_in_section = symbol.st_value - code_section_header.sh_addr;
++   if (offset_in_section + symbol.st_size > code_section_data->d_size)
++      return nv_cubin_error("Function extends beyond section bounds");
++
++   function->symbol_index = symbol_index;
++   function->name = symbol_name;
++
++   function->code_ptr = code_section_data->d_buf;
++   function->code_size = code_section_data->d_size;
++   function->func_offset = offset_in_section;
++
++   function->static_smem_size =
++      nv_cubin_module_get_static_smem_size(module, symbol_name);
++
++   if (module->abi < NV_ELF_OSABI_41) {
++      /* old version has SHF_BARRIERS in .sectionheader */
++      const uint8_t shf_barriers = (code_section_header.sh_flags >> 20) & 0xf;
++      function->num_control_barriers = shf_barriers;
++   }
++
++   if (!nv_cubin_function_parse_base_nvinfo(module, function))
++      return nv_cubin_error("Couldn't parse base .nv.info");
++
++   if (!nv_cubin_function_parse_extended_nvinfo(module, function))
++      return nv_cubin_error("Couldn't parse extended .nv.info");
++
++   return true;
++}
++
++static void
++nv_cubin_function_fini(struct nv_cubin_function *function)
++{
++   free(function->param_infos);
++}
++
++static bool
++nv_cubin_module_parse_functions(struct nv_cubin_module *module)
++{
++   /* Iterate over the symbol table and extract the data about each function. */
++   Elf_Scn *symtab_section = NULL;
++   GElf_Shdr symtab_section_header;
++   while ((symtab_section = elf_nextscn(module->elf, symtab_section)) != NULL) {
++      if (gelf_getshdr(symtab_section, &symtab_section_header) !=
++          &symtab_section_header)
++         return nv_cubin_error("Couldn't get section header");
++
++      /* We only care about symbol tables. */
++      if (symtab_section_header.sh_type != SHT_SYMTAB)
++         continue;
++
++      Elf_Data *symtab_data = elf_getdata(symtab_section, NULL);
++      if (!symtab_data)
++         return nv_cubin_error("Couldn't get .symtab section data");
++
++      uint32_t num_symbols =
++         symtab_section_header.sh_size / symtab_section_header.sh_entsize;
++      for (uint32_t i = 0; i < num_symbols; i++) {
++         GElf_Sym symbol;
++         if (gelf_getsym(symtab_data, i, &symbol) != &symbol)
++            return nv_cubin_error("Couldn't get symbol");
++
++         char *symbol_name = elf_strptr(
++            module->elf, symtab_section_header.sh_link, symbol.st_name);
++         /* We don't care about any unnamed functions. */
++         if (!symbol_name || symbol_name[0] == '\0')
++            continue;
++
++         if (GELF_ST_TYPE(symbol.st_info) != STT_FUNC ||
++             GELF_ST_BIND(symbol.st_info) != STB_GLOBAL ||
++             GELF_ST_VISIBILITY(symbol.st_other) != STV_DEFAULT)
++            continue;
++
++         uint32_t function_idx = module->function_count++;
++         module->functions =
++            realloc(module->functions,
++                    sizeof(struct nv_cubin_function) * module->function_count);
++
++         struct nv_cubin_function *function = &module->functions[function_idx];
++         if (!nv_cubin_function_init(module, function, i, symbol_name, symbol))
++            return nv_cubin_error("Couldn't init function");
++      }
++   }
++
++   return true;
++}
++
++/* public interface */
++
++bool
++nv_cubin_module_init(struct nv_cubin_module *module, const void *data,
++                     size_t size)
++{
++   if (elf_version(EV_CURRENT) == EV_NONE)
++      return nv_cubin_error("Couldn't initialize libelf");
++
++   module->elf = elf_memory((char *)data, size);
++   if (!module->elf)
++      return nv_cubin_error("Couldn't load elf");
++
++   if (elf_kind(module->elf) != ELF_K_ELF)
++      return nv_cubin_error("Cubin was not an elf");
++
++   if (elf_getshdrstrndx(module->elf, &module->shstrndx) != 0)
++      return nv_cubin_error("Couldn't get section header string table index");
++
++   GElf_Ehdr ehdr;
++   if (gelf_getehdr(module->elf, &ehdr) != &ehdr)
++      return nv_cubin_error("Failed to get elf header");
++
++   if (ehdr.e_machine != EM_CUDA)
++      return nv_cubin_error("ELF is not targeting Cuda");
++
++   module->abi = ehdr.e_ident[EI_OSABI];
++
++   /* new version encodes e_flags differently... */
++   if (module->abi >= NV_ELF_OSABI_41)
++      module->sm = (ehdr.e_flags >> 8) & 0xFF;
++   else
++      module->sm = (ehdr.e_flags >> 16) & 0xFF;
++
++   if (!nv_cubin_module_parse_functions(module))
++      return nv_cubin_error("Couldn't parse functions");
++
++   return true;
++}
++
++void
++nv_cubin_module_fini(struct nv_cubin_module *module)
++{
++   if (module->elf) {
++      elf_end(module->elf);
++      module->elf = NULL;
++   }
++
++   for (uint32_t i = 0; i < module->function_count; i++)
++      nv_cubin_function_fini(&module->functions[i]);
++   module->function_count = 0;
++
++   free(module->functions);
++   module->functions = NULL;
++}
++
++const struct nv_cubin_function *
++nv_cubin_module_find_function(const struct nv_cubin_module *module,
++                              const char *name)
++{
++   for (uint32_t i = 0; i < module->function_count; i++) {
++      struct nv_cubin_function *function = &module->functions[i];
++      if (!strcmp(function->name, name))
++         return function;
++   }
++
++   return NULL;
++}
++
++const struct nv_cubin_function_param_info *
++nv_cubin_function_get_param_info(const struct nv_cubin_function *function,
++                                 uint32_t index)
++{
++   for (int i = 0; i < function->param_info_count; i++) {
++      if (function->param_infos[i].ordinal == index)
++         return &function->param_infos[i];
++   }
++   return NULL;
++}
+diff --git a/src/nouveau/cubin/nv_cubin.h b/src/nouveau/cubin/nv_cubin.h
+new file mode 100644
+index 0000000000000..75c5858620efa
+--- /dev/null
++++ b/src/nouveau/cubin/nv_cubin.h
+@@ -0,0 +1,71 @@
++/*
++ * Copyright © 2025 Autumn Ashton
++ * SPDX-License-Identifier: MIT
++ */
++
++#ifndef NV_CUBIN_PARSER_H
++#define NV_CUBIN_PARSER_H 1
++
++#include <stdbool.h>
++#include <stddef.h>
++#include <stdint.h>
++
++struct Elf;
++
++struct nv_cubin_function_param_info {
++   uint32_t index;
++   uint16_t ordinal;
++   uint16_t offset;
++   uint16_t size;
++};
++
++struct nv_cubin_function {
++   /* from symbol table */
++   uint32_t symbol_index;
++   const char *name;
++
++   uint8_t *code_ptr;
++   size_t code_size;
++   size_t func_offset; /* offset of function in the code section */
++
++   uint32_t static_smem_size;
++
++   /* from .nv.info */
++   uint32_t slm_size;
++   uint32_t gpr_count;
++
++   /* from .nv.info.funcname */
++   uint32_t crs_size;
++   uint8_t num_control_barriers; /* shf_barriers on old version */
++
++   uint16_t params_offset; /* offset of the param buffer in cb0 (root) */
++   uint16_t params_size;   /* size of the param buffer in cb0 (root) */
++
++   uint32_t param_info_count;
++   struct nv_cubin_function_param_info *param_infos;
++};
++
++struct nv_cubin_module {
++   struct Elf *elf;
++   size_t shstrndx; /* section header string table index */
++
++   uint32_t abi;
++   uint32_t sm; /* arch */
++
++   uint32_t function_count;
++   struct nv_cubin_function *functions;
++};
++
++bool nv_cubin_module_init(struct nv_cubin_module *module, const void *data,
++                          size_t size);
++void nv_cubin_module_fini(struct nv_cubin_module *module);
++
++const struct nv_cubin_function *
++nv_cubin_module_find_function(const struct nv_cubin_module *module,
++                              const char *name);
++
++const struct nv_cubin_function_param_info *
++nv_cubin_function_get_param_info(const struct nv_cubin_function *function,
++                                 uint32_t index);
++
++#endif
+\ No newline at end of file
+diff --git a/src/nouveau/cubin/nv_cubin_defs.h b/src/nouveau/cubin/nv_cubin_defs.h
+new file mode 100644
+index 0000000000000..0d3be62255e79
+--- /dev/null
++++ b/src/nouveau/cubin/nv_cubin_defs.h
+@@ -0,0 +1,69 @@
++/*
++ * Copyright © 2025 Autumn Ashton
++ * SPDX-License-Identifier: MIT
++ */
++
++#ifndef NV_CUBIN_DEFS_H
++#define NV_CUBIN_DEFS_H 1
++
++#include <stdint.h>
++
++/* common */
++
++#define NV_ELF_OSABI_41 0x41
++
++#define NVINFO_EIFMT_BVAL 2 /* byte value */
++#define NVINFO_EIFMT_HVAL 3 /* half (short) value */
++#define NVINFO_EIFMT_SVAL 4 /* sized value */
++
++struct nvinfo_attribute_header_t {
++   uint8_t format;
++   uint8_t attribute;
++   union {
++      struct { uint8_t value; } bval;
++      struct { uint16_t value; } hval;
++
++      struct { uint16_t size; } sval;
++   };
++};
++
++/* .nv.info */
++
++#define NVINFO_EIATTR_MIN_STACK_SIZE 18
++struct nvinfo_attr_min_stack_size_t {
++   uint32_t symbol_index;
++   uint32_t size;
++};
++
++#define NVINFO_EIATTR_REGCOUNT 47
++struct nvinfo_attr_regcount_t {
++   uint32_t symbol_index;
++   uint32_t count;
++};
++
++/* .nv.info.function_name */
++
++#define NVINFO_EIATTR_PARAM_CBANK 10
++struct nvinfo_param_cbank_t {
++   uint32_t unknown1;
++   uint16_t params_offset;
++   uint16_t params_size;
++};
++
++#define NVINFO_EIATTR_KPARAM_INFO 23
++struct nvinfo_kparam_info_t {
++   uint32_t index;
++   uint16_t ordinal;
++   uint16_t offset;
++   uint32_t packed;
++};
++
++#define NVINFO_EIATTR_CRS_STACK_SIZE 30
++struct nvinfo_crs_stack_size_t {
++   uint32_t size;
++};
++
++#define NVINFO_EIATTR_NUM_BARRIERS 76
++/* No structure, this is a BVAL. */
++
++#endif
+\ No newline at end of file
+diff --git a/src/nouveau/cubin/nv_fatbin.c b/src/nouveau/cubin/nv_fatbin.c
+new file mode 100644
+index 0000000000000..9c8dd8aecf2d5
+--- /dev/null
++++ b/src/nouveau/cubin/nv_fatbin.c
+@@ -0,0 +1,59 @@
++/*
++ * Copyright © 2025 Autumn Ashton
++ * SPDX-License-Identifier: MIT
++ */
++#include "nv_fatbin.h"
++
++#include "nv_fatbin_defs.h"
++
++#include "util/macros.h"
++
++bool
++nv_fatbin_init(struct nv_fatbin *fatbin, const void *data, size_t size)
++{
++   if (size < sizeof(struct nv_fatbin_header_t))
++      return false;
++
++   const struct nv_fatbin_header_t *header = data;
++   if (header->magic != NV_FATBIN_HEADER_MAGIC)
++      return false;
++
++   fatbin->header = data;
++   fatbin->data = ((const uint8_t *)data) + header->header_size;
++   fatbin->size = MIN2(header->size, size - sizeof(struct nv_fatbin_header_t));
++   return true;
++}
++
++bool
++nv_fatbin_get_bytecode(struct nv_fatbin *fatbin, uint32_t sm,
++                       const void **out_data, size_t *out_size)
++{
++   const uint8_t *ptr = fatbin->data;
++   const uint8_t *end = fatbin->data + fatbin->size;
++   while (ptr < end) {
++      const struct nv_fatbin_object_header_t *object =
++         (const struct nv_fatbin_object_header_t *)ptr;
++      ptr += object->header_size;
++
++      /* pick bytecode for our gpu */
++      if (object->kind == NV_FATBIN_OBJECT_KIND_BYTECODE &&
++          nv_is_sm_compatible(sm, object->sm)) {
++         *out_data = ptr;
++         *out_size = object->size;
++         return true;
++      }
++      ptr += object->size;
++   }
++
++   fprintf(stderr, "Could not find bytecode for GPU in fatbin\n");
++   return false;
++}
++
++bool
++nv_is_sm_compatible(uint32_t device_sm, uint32_t requested_sm)
++{
++   /* Binaries of the same SM major version are compatible if the minor version
++    * is lower or equal */
++   return (device_sm & 0xf0) == (requested_sm & 0xf0) &&
++          device_sm >= requested_sm;
++}
+diff --git a/src/nouveau/cubin/nv_fatbin.h b/src/nouveau/cubin/nv_fatbin.h
+new file mode 100644
+index 0000000000000..8ac1a18d6a9e2
+--- /dev/null
++++ b/src/nouveau/cubin/nv_fatbin.h
+@@ -0,0 +1,27 @@
++/*
++ * Copyright © 2025 Autumn Ashton
++ * SPDX-License-Identifier: MIT
++ */
++
++#ifndef NV_FATBIN_H
++#define NV_FATBIN_H 1
++
++#include <stdbool.h>
++#include <stddef.h>
++#include <stdint.h>
++
++struct nv_fatbin_header_t;
++
++struct nv_fatbin {
++   const struct nv_fatbin_header_t *header;
++   const uint8_t *data;
++   size_t size;
++};
++
++bool nv_fatbin_init(struct nv_fatbin *fatbin, const void *data, size_t size);
++bool nv_fatbin_get_bytecode(struct nv_fatbin *fatbin, uint32_t sm,
++                            const void **out_data, size_t *out_size);
++
++bool nv_is_sm_compatible(uint32_t device_sm, uint32_t requested_sm);
++
++#endif
+\ No newline at end of file
+diff --git a/src/nouveau/cubin/nv_fatbin_defs.h b/src/nouveau/cubin/nv_fatbin_defs.h
+new file mode 100644
+index 0000000000000..d4af529a1695d
+--- /dev/null
++++ b/src/nouveau/cubin/nv_fatbin_defs.h
+@@ -0,0 +1,34 @@
++/*
++ * Copyright © 2025 Autumn Ashton
++ * SPDX-License-Identifier: MIT
++ */
++
++#ifndef NV_FATBIN_DEFS_H
++#define NV_FATBIN_DEFS_H 1
++
++#include <stdint.h>
++
++#define NV_FATBIN_HEADER_MAGIC 0xBA55ED50
++
++struct nv_fatbin_header_t {
++   uint32_t magic;
++   uint16_t version;
++   uint16_t header_size;
++   uint64_t size;
++};
++
++#define NV_FATBIN_OBJECT_KIND_PTX      1
++#define NV_FATBIN_OBJECT_KIND_BYTECODE 2
++
++struct nv_fatbin_object_header_t {
++   uint16_t kind;
++   uint16_t unknown1;
++   uint32_t header_size;
++   uint64_t size;
++   uint32_t unknown2;
++   uint32_t unknown3;
++   uint32_t unknown4;
++   uint32_t sm;
++};
++
++#endif
+\ No newline at end of file
+diff --git a/src/nouveau/meson.build b/src/nouveau/meson.build
+index 89b50de511bd4..207d2a7f5ca38 100644
+--- a/src/nouveau/meson.build
++++ b/src/nouveau/meson.build
+@@ -14,6 +14,7 @@ if with_tools.contains('drm-shim')
+ endif
+ 
+ if with_nouveau_vk
++  subdir('cubin')
+   subdir('mme')
+   subdir('vulkan')
+ endif
+-- 
+GitLab
+
+
+From 56a48cf9a0b6e414e8c84eac07eb3b598fd24870 Mon Sep 17 00:00:00 2001
+From: Autumn Ashton <misyl@froggi.es>
+Date: Wed, 15 Oct 2025 18:52:05 +0000
+Subject: [PATCH 5/5] nvk: Implement VK_NVX_binary_import
+
+This commit implements the subset of cubin launch functionality in
+VK_NVX_binary_import used by DLSS.
+
+With this, DLSS works in Control on a RTX 2060 Super (sm_75) and a
+RTX 4060 (sm_89).
+
+Right now, this will only work where there is compatible bytecode
+available for the current physical device and will return an error in
+vkCreateCuModuleNVX if none is present.
+DXVK-NVAPI and DLSS handle this error gracefully and will disable the
+affected features.
+
+The NVIDIA driver would do PTX -> bytecode on the fly to handle this,
+but we don't have PTX->NIR yet, and that is a very large undertaking
+not done by this MR.
+
+This doesn't fully close #12439, as we don't have PTX->NIR, but
+is a big step towards it.
+
+Signed-off-by: Autumn Ashton <misyl@froggi.es>
+Reviewed-by: Mohamed Ahmed <mohamedahmedegypt2001@gmail.com>
+---
+ docs/features.txt                        |   1 +
+ docs/relnotes/new_features.txt           |   1 +
+ src/nouveau/vulkan/meson.build           |   4 +
+ src/nouveau/vulkan/nvk_cubin.c           | 336 +++++++++++++++++++++++
+ src/nouveau/vulkan/nvk_cubin.h           |  38 +++
+ src/nouveau/vulkan/nvk_physical_device.c |   1 +
+ 6 files changed, 381 insertions(+)
+ create mode 100644 src/nouveau/vulkan/nvk_cubin.c
+ create mode 100644 src/nouveau/vulkan/nvk_cubin.h
+
+diff --git a/docs/features.txt b/docs/features.txt
+index a6f1793aa9938..1c7777a783b26 100644
+--- a/docs/features.txt
++++ b/docs/features.txt
+@@ -682,6 +682,7 @@ Khronos extensions that are not part of any Vulkan version:
+   VK_IMG_filter_cubic                                   DONE (tu/a650+, vn)
+   VK_NV_compute_shader_derivatives                      DONE (anv, hasvk, nvk, radv, tu/a7xx+, vn)
+   VK_NVX_image_view_handle                              DONE (nvk)
++  VK_NVX_binary_import                                  DONE (nvk)
+   VK_EXT_acquire_drm_display                            DONE (anv, hk, nvk, radv, tu, v3dv, vn)
+   VK_VALVE_mutable_descriptor_type                      DONE (anv, hasvk, hk, nvk, radv, tu, vn)
+   VK_AMD_buffer_marker                                  DONE (anv, nvk, radv, tu)
+diff --git a/docs/relnotes/new_features.txt b/docs/relnotes/new_features.txt
+index e69de29bb2d1d..d749909c097d8 100644
+--- a/docs/relnotes/new_features.txt
++++ b/docs/relnotes/new_features.txt
+@@ -0,0 +1 @@
++VK_NVX_binary_import on NVK
+diff --git a/src/nouveau/vulkan/meson.build b/src/nouveau/vulkan/meson.build
+index bf6e2f7f74e9a..4f13e732db1c8 100644
+--- a/src/nouveau/vulkan/meson.build
++++ b/src/nouveau/vulkan/meson.build
+@@ -16,6 +16,8 @@ nvk_files = files(
+   'nvk_cmd_meta.c',
+   'nvk_cmd_pool.c',
+   'nvk_cmd_pool.h',
++  'nvk_cubin.c',
++  'nvk_cubin.h',
+   'nvk_debug.h',
+   'nvk_descriptor_set.h',
+   'nvk_descriptor_set.c',
+@@ -114,10 +116,12 @@ nvkcl = custom_target(
+ 
+ nvk_deps = [
+   dep_libdrm,
++  dep_elf,
+   idep_nak,
+   idep_nil,
+   idep_nir,
+   idep_mesautil,
++  idep_nouveau_cubin,
+   idep_nouveau_mme,
+   idep_nouveau_ws,
+   idep_nvidia_headers,
+diff --git a/src/nouveau/vulkan/nvk_cubin.c b/src/nouveau/vulkan/nvk_cubin.c
+new file mode 100644
+index 0000000000000..c39adf613100c
+--- /dev/null
++++ b/src/nouveau/vulkan/nvk_cubin.c
+@@ -0,0 +1,336 @@
++/*
++ * Copyright © 2025 Autumn Ashton
++ * SPDX-License-Identifier: MIT
++ */
++#include "nvk_cubin.h"
++
++#include "nvk_cmd_buffer.h"
++#include "nvk_device.h"
++#include "nvk_entrypoints.h"
++
++#include "nouveau/cubin/nv_cubin.h"
++#include "nouveau/cubin/nv_fatbin.h"
++
++#include "util/u_process.h"
++
++static void
++nvk_cubin_dump(const char *extension, const void *data, size_t size)
++{
++   static int dump_idx = 0;
++
++   char path[2048];
++   snprintf(path, sizeof(path), "/tmp/%s.%d.%s", util_get_process_name(),
++            dump_idx++, extension);
++   FILE *dump_file = fopen(path, "wb");
++   if (!dump_file) {
++      fprintf(stderr, "nvk_cubin_dump: Failed to dump to: %s\n", path);
++      return;
++   }
++
++   fwrite(data, 1, size, dump_file);
++   fclose(dump_file);
++}
++
++/* nvk_cubin_module */
++
++static VkResult
++nvk_cubin_module_init(struct nvk_device *dev, struct nvk_cubin_module *module,
++                      const VkCuModuleCreateInfoNVX *pCreateInfo,
++                      const VkAllocationCallbacks *pAllocator)
++{
++   const void *data;
++   size_t size;
++
++   struct nv_fatbin fatbin;
++   if (nv_fatbin_init(&fatbin, pCreateInfo->pData, pCreateInfo->dataSize)) {
++      /* Must be a fatbin. */
++#ifndef NDEBUG
++      if (debug_get_bool_option("NVK_CUBIN_DUMP", false))
++         nvk_cubin_dump("fatbin", pCreateInfo->pData, pCreateInfo->dataSize);
++#endif
++
++      if (!nv_fatbin_get_bytecode(&fatbin, nvk_device_physical(dev)->info.sm,
++                                  &data, &size)) {
++         fprintf(stderr, "Fatbin does not have compatible bytecode.\n");
++         return VK_ERROR_INITIALIZATION_FAILED;
++      }
++   } else {
++      /* Must be a cubin. */
++      data = pCreateInfo->pData;
++      size = pCreateInfo->dataSize;
++   }
++
++#ifndef NDEBUG
++   if (debug_get_bool_option("NVK_CUBIN_DUMP", false))
++      nvk_cubin_dump("cubin", data, size);
++#endif
++
++   module->info =
++      vk_zalloc2(&dev->vk.alloc, pAllocator, sizeof(struct nv_cubin_module), 8,
++                 VK_SYSTEM_ALLOCATION_SCOPE_OBJECT);
++
++   if (!nv_cubin_module_init(module->info, data, size))
++      return VK_ERROR_INITIALIZATION_FAILED;
++
++   if (!nv_is_sm_compatible(nvk_device_physical(dev)->info.sm,
++                            module->info->sm)) {
++      fprintf(stderr, "Incompatible cubin module: pdev sm_%u vs cubin sm_%u\n",
++              nvk_device_physical(dev)->info.sm, module->info->sm);
++      return VK_ERROR_INITIALIZATION_FAILED;
++   }
++
++   return VK_SUCCESS;
++}
++
++static void
++nvk_cubin_module_destroy(struct nvk_device *dev,
++                         struct nvk_cubin_module *module,
++                         const VkAllocationCallbacks *pAllocator)
++{
++   nv_cubin_module_fini(module->info);
++
++   vk_free2(&dev->vk.alloc, pAllocator, module->info);
++   vk_object_free(&dev->vk, pAllocator, module);
++}
++
++VKAPI_ATTR VkResult VKAPI_CALL
++nvk_CreateCuModuleNVX(VkDevice _device,
++                      const VkCuModuleCreateInfoNVX *pCreateInfo,
++                      const VkAllocationCallbacks *pAllocator,
++                      VkCuModuleNVX *pModule)
++{
++   VK_FROM_HANDLE(nvk_device, dev, _device);
++   struct nvk_cubin_module *module;
++   VkResult result;
++
++   module = vk_object_zalloc(&dev->vk, pAllocator, sizeof(*module),
++                             VK_OBJECT_TYPE_CU_MODULE_NVX);
++   if (!module)
++      return vk_error(dev, VK_ERROR_OUT_OF_HOST_MEMORY);
++
++   result = nvk_cubin_module_init(dev, module, pCreateInfo, pAllocator);
++   if (result != VK_SUCCESS) {
++      nvk_cubin_module_destroy(dev, module, pAllocator);
++      return vk_error(dev, result);
++   }
++
++   *pModule = nvk_cubin_module_to_handle(module);
++
++   return VK_SUCCESS;
++}
++
++VKAPI_ATTR void VKAPI_CALL
++nvk_DestroyCuModuleNVX(VkDevice _device, VkCuModuleNVX _module,
++                       const VkAllocationCallbacks *pAllocator)
++{
++   VK_FROM_HANDLE(nvk_device, dev, _device);
++   VK_FROM_HANDLE(nvk_cubin_module, module, _module);
++
++   if (!module)
++      return;
++
++   nvk_cubin_module_destroy(dev, module, pAllocator);
++}
++
++/* nvk_cubin_function */
++
++static VkResult
++nvk_cubin_function_init(struct nvk_device *dev,
++                        struct nvk_cubin_function *function,
++                        const VkCuFunctionCreateInfoNVX *pCreateInfo)
++{
++   VK_FROM_HANDLE(nvk_cubin_module, module, pCreateInfo->module);
++
++   function->module = module;
++   function->info =
++      nv_cubin_module_find_function(module->info, pCreateInfo->pName);
++   if (!function->info)
++      return VK_ERROR_INITIALIZATION_FAILED;
++
++   const int alignment = 0x80; /* maxwell+ */
++
++   VkResult result = nvk_heap_upload(
++      dev, &dev->shader_heap, function->info->code_ptr,
++      function->info->code_size, alignment, &function->upload_addr);
++   if (result != VK_SUCCESS)
++      return result;
++
++   function->upload_size = function->info->code_size;
++   function->max_warps_per_sm = nak_max_warps_per_sm(function->info->gpr_count);
++
++   return VK_SUCCESS;
++}
++
++static void
++nvk_cubin_function_destroy(struct nvk_device *dev,
++                           struct nvk_cubin_function *function,
++                           const VkAllocationCallbacks *pAllocator)
++{
++   if (function->upload_size) {
++      nvk_heap_free(dev, &dev->shader_heap, function->upload_addr,
++                    function->upload_size);
++   }
++
++   vk_object_free(&dev->vk, pAllocator, function);
++}
++
++VKAPI_ATTR VkResult VKAPI_CALL
++nvk_CreateCuFunctionNVX(VkDevice _device,
++                        const VkCuFunctionCreateInfoNVX *pCreateInfo,
++                        const VkAllocationCallbacks *pAllocator,
++                        VkCuFunctionNVX *pFunction)
++{
++   VK_FROM_HANDLE(nvk_device, dev, _device);
++   struct nvk_cubin_function *function;
++   VkResult result;
++
++   function = vk_object_zalloc(&dev->vk, pAllocator, sizeof(*function),
++                               VK_OBJECT_TYPE_CU_FUNCTION_NVX);
++   if (!function)
++      return vk_error(dev, VK_ERROR_OUT_OF_HOST_MEMORY);
++
++   result = nvk_cubin_function_init(dev, function, pCreateInfo);
++   if (result != VK_SUCCESS) {
++      nvk_cubin_function_destroy(dev, function, pAllocator);
++      return result;
++   }
++
++   *pFunction = nvk_cubin_function_to_handle(function);
++
++   return VK_SUCCESS;
++}
++
++VKAPI_ATTR void VKAPI_CALL
++nvk_DestroyCuFunctionNVX(VkDevice _device, VkCuFunctionNVX _function,
++                         const VkAllocationCallbacks *pAllocator)
++{
++   VK_FROM_HANDLE(nvk_device, dev, _device);
++   VK_FROM_HANDLE(nvk_cubin_function, function, _function);
++
++   if (!function)
++      return;
++
++   nvk_cubin_function_destroy(dev, function, pAllocator);
++}
++
++/* kernel launch */
++
++struct nvk_cubin_root_descriptor {
++   uint32_t block_dim[3];
++   uint32_t grid_dim[3];
++   uint8_t data[4096 - (6 * sizeof(uint32_t))];
++};
++
++/* extra launch parameters taken from vkd3d-proton */
++#define CU_LAUNCH_PARAM_BUFFER_POINTER ((const void *)0x01)
++#define CU_LAUNCH_PARAM_BUFFER_SIZE    ((const void *)0x02)
++#define CU_LAUNCH_PARAM_END            ((const void *)0x00)
++
++VKAPI_ATTR void VKAPI_CALL
++nvk_CmdCuLaunchKernelNVX(VkCommandBuffer commandBuffer,
++                         const VkCuLaunchInfoNVX *pLaunchInfo)
++{
++   VK_FROM_HANDLE(nvk_cmd_buffer, cmd, commandBuffer);
++   VK_FROM_HANDLE(nvk_cubin_function, function, pLaunchInfo->function);
++   const struct nv_cubin_function *function_info = function->info;
++
++   /*
++    * Use a root descriptor on the stack if its < 4kb,
++    * otherwise, allocate one big enough for us to hold
++    * the kernel parameters.
++    */
++   struct nvk_cubin_root_descriptor stack_root;
++   struct nvk_cubin_root_descriptor *root = NULL;
++   const size_t root_size =
++      ALIGN(MAX2(sizeof(struct nvk_cubin_root_descriptor),
++                 function_info->params_offset + function_info->params_size),
++            0x100);
++   if (root_size < 4096) {
++      root = &stack_root;
++   } else {
++      root = malloc(root_size);
++   }
++   memset(root, 0, root_size);
++   root->block_dim[0] = pLaunchInfo->blockDimX;
++   root->block_dim[1] = pLaunchInfo->blockDimY;
++   root->block_dim[2] = pLaunchInfo->blockDimZ;
++   root->grid_dim[0] = pLaunchInfo->gridDimX;
++   root->grid_dim[1] = pLaunchInfo->gridDimY;
++   root->grid_dim[2] = pLaunchInfo->gridDimZ;
++
++   const void *param_buffer = NULL;
++   const uint32_t *param_buffer_size = NULL;
++   if (pLaunchInfo->extraCount) {
++      /* pLaunchInfo->extraCount is erroneous, pExtras is not extraCount sized.
++       * It's a stream of options. Just use extraCount to key off presence. */
++      const void *const *extra = pLaunchInfo->pExtras;
++
++      while (*extra != CU_LAUNCH_PARAM_END) {
++         if (*extra == CU_LAUNCH_PARAM_BUFFER_POINTER) {
++            extra++;
++            param_buffer = *extra;
++         }
++         if (*extra == CU_LAUNCH_PARAM_BUFFER_SIZE) {
++            extra++;
++            param_buffer_size = *extra;
++         }
++         extra++;
++      }
++   }
++
++   if (param_buffer && param_buffer_size) {
++      /* CU_LAUNCH_PARAM_BUFFER_POINTER contains ALL parameters. */
++      assert(pLaunchInfo->paramCount == 0);
++
++      const struct nv_cubin_function_param_info *param_info =
++         nv_cubin_function_get_param_info(function_info, 0);
++      assert(param_info != NULL);
++
++      const size_t param_offset =
++         function_info->params_offset + param_info->offset;
++
++      void *param_root_dst = ((uint8_t *)root) + param_offset;
++      memcpy(param_root_dst, param_buffer, *param_buffer_size);
++   } else {
++      for (uint32_t i = 0; i < pLaunchInfo->paramCount; i++) {
++         const void *param_data = pLaunchInfo->pParams[i];
++
++         const struct nv_cubin_function_param_info *param_info =
++            nv_cubin_function_get_param_info(function_info, i);
++         assert(param_info != NULL);
++
++         const size_t param_offset =
++            function_info->params_offset + param_info->offset;
++
++         void *param_root_dst = ((uint8_t *)root) + param_offset;
++         memcpy(param_root_dst, param_data, param_info->size);
++      }
++   }
++
++   struct nvk_shader shader;
++   memset(&shader, 0, sizeof(shader));
++   shader.upload_size = function->upload_size;
++   shader.upload_addr = function->upload_addr;
++   shader.hdr_addr = function->upload_addr;
++   shader.data_addr = function->upload_addr + function_info->func_offset;
++   shader.info.stage = MESA_SHADER_COMPUTE;
++   shader.info.sm = function->module->info->sm;
++   shader.info.num_gprs = function_info->gpr_count;
++   shader.info.num_control_barriers = function_info->num_control_barriers;
++   shader.info.max_warps_per_sm = function->max_warps_per_sm;
++   shader.info.slm_size = function_info->slm_size;
++   shader.info.crs_size = function_info->crs_size;
++   shader.info.cs.local_size[0] = pLaunchInfo->blockDimX;
++   shader.info.cs.local_size[1] = pLaunchInfo->blockDimY;
++   shader.info.cs.local_size[2] = pLaunchInfo->blockDimZ;
++   shader.info.cs.smem_size =
++      function_info->static_smem_size + pLaunchInfo->sharedMemBytes;
++   shader.cbuf_map.cbuf_count = 1;
++   shader.cbuf_map.cbufs[0].type = NVK_CBUF_TYPE_ROOT_DESC;
++
++   nvk_cmd_dispatch_with_root(cmd, &shader, root, root_size, pLaunchInfo->gridDimX,
++                              pLaunchInfo->gridDimY, pLaunchInfo->gridDimZ);
++
++   if (root != &stack_root)
++      free(root);
++}
+diff --git a/src/nouveau/vulkan/nvk_cubin.h b/src/nouveau/vulkan/nvk_cubin.h
+new file mode 100644
+index 0000000000000..5d7e965757e04
+--- /dev/null
++++ b/src/nouveau/vulkan/nvk_cubin.h
+@@ -0,0 +1,38 @@
++/*
++ * Copyright © 2025 Autumn Ashton
++ * SPDX-License-Identifier: MIT
++ */
++
++#ifndef NVK_CUBIN_H
++#define NVK_CUBIN_H 1
++
++#include "nvk_private.h"
++
++struct nv_cubin_module;
++struct nv_cubin_function;
++
++struct nvk_cubin_module {
++   struct vk_object_base base;
++
++   struct nv_cubin_module *info;
++};
++
++struct nvk_cubin_function {
++   struct vk_object_base base;
++
++   struct nvk_cubin_module *module;
++   const struct nv_cubin_function *info;
++
++   uint32_t upload_size;
++   uint64_t upload_addr;
++
++   uint32_t max_warps_per_sm;
++};
++
++VK_DEFINE_NONDISP_HANDLE_CASTS(nvk_cubin_module, base, VkCuModuleNVX,
++                               VK_OBJECT_TYPE_CU_MODULE_NVX)
++
++VK_DEFINE_NONDISP_HANDLE_CASTS(nvk_cubin_function, base, VkCuFunctionNVX,
++                               VK_OBJECT_TYPE_CU_FUNCTION_NVX)
++
++#endif
+diff --git a/src/nouveau/vulkan/nvk_physical_device.c b/src/nouveau/vulkan/nvk_physical_device.c
+index 2ce531ca001d6..d6025dccc956e 100644
+--- a/src/nouveau/vulkan/nvk_physical_device.c
++++ b/src/nouveau/vulkan/nvk_physical_device.c
+@@ -291,6 +291,7 @@ nvk_get_device_extensions(const struct nvk_instance *instance,
+       .NV_compute_shader_derivatives = info->cls_eng3d >= TURING_A,
+       .NV_shader_sm_builtins = true,
+       .NVX_image_view_handle = info->cls_eng3d >= MAXWELL_A, /* needs true bindless descriptors */
++      .NVX_binary_import = info->cls_eng3d >= MAXWELL_A, /* needs true bindless descriptors */
+       .VALVE_mutable_descriptor_type = true,
+    };
+ }
+-- 
+GitLab
+
