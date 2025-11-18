@@ -7,10 +7,10 @@
 # lib exposes useful opts like lib.mkIf, config lets you manipulate config in this file
 {
   options = {
-    opensourcenvidia.enable =
-      lib.mkEnableOption "enables opensourcenvidia";
+    opensourcenvidia_mesa-git.enable =
+      lib.mkEnableOption "enables opensourcenvidia_mesa-git";
   };
-  config = lib.mkIf config.opensourcenvidia.enable {
+  config = lib.mkIf config.opensourcenvidia_mesa-git.enable {
     hardware.graphics.enable = true;
     boot.kernelParams = [
       "nouveau.config=NvGspRm=1"
