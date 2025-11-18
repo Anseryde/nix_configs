@@ -14,10 +14,10 @@
   ];
   # custom module selection
   # for full list of modules, as well as default modules, view nix-configs/modules/nixos/default.nix
-  nvidia-open-kernel-module.enable = false;
-  nvidia-optimus.enable = false;
+  nvidia-open-kernel-module.enable = true;
+  nvidia-optimus.enable = true;
   opensourcenvidia.enable = false;
-  opensourcenvidia_mesa-git.enable = true;
+  opensourcenvidia_mesa-git.enable = false;
   steam.enable = true;
   gamescopeandgamemode.enable = true;
   msi-ec.enable = true;
