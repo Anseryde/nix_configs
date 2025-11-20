@@ -69,6 +69,7 @@
       kdePackages.filelight
       zotero
       # winboat
+      (winboat.override {nodejs_24 = pkgs.nodejs_24;}) # temporary fix for winboat build breakage.
     ];
     fonts.packages = with pkgs; [
       noto-fonts
