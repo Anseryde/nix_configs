@@ -179,6 +179,7 @@
 
   # Waydroid
   virtualisation.waydroid.enable = true;
+  networking.nftables.enable = true; # There was an update that broke waydroid. Trying to enable this to troubleshoot I guess…
 
   # LACT GPU Control
   services.lact.enable = true;
