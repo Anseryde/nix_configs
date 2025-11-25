@@ -63,6 +63,15 @@
               params.cleanoutDays = "7";
             };
           };
+          "Miscellaneous Send" = {
+            id = "o3mvm-acyav";
+            path = "/home/ryann/Miscellaneous Send/";
+            devices = [ "SM-G781B" ];
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "7";
+            };
+          };
         };
         gui = {
           user = "ryanlupis";
