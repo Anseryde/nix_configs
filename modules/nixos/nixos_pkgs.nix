@@ -14,8 +14,29 @@
   config = lib.mkIf config.nixos_pkgs.enable {
     # List packages installed in system profile. To search, run:
     # $ nix search wget
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = 
+      let
+        freeimagere = with pkgs; stdenv.mkDerivation {
+          pname = "freeimagere";
+          version = "latest";
+          src = fetchzip {
+            url = "https://github.com/agruzdev/FreeImageRe/releases/download/latest/FreeImageRe-linux64.zip";
+            sha256 = "0r29msmaxfg54nyziaxdzr2y4ljp92086kcsbxz870ra21kw1q1h";
+            stripRoot = false;
+          };
+          installPhase = ''
+            mkdir -p $out/include
+            mkdir -p $out/lib
+            mv include/FreeImage.h $out/include
+            mv include/FreeImage.hpp $out/include
+            mv lib/libFreeImage.so $out/lib
+            mv lib/libheif.so $out/lib
+          '';
+        };
+      in 
+      with pkgs; [
       #vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      freeimagere
       micro
       helix
       wget
