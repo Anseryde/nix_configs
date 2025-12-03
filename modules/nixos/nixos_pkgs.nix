@@ -31,6 +31,7 @@
             mv include/FreeImage.hpp $out/include
             mv lib/libFreeImage.so $out/lib
             mv lib/libheif.so $out/lib
+            cp $out/lib/libFreeImage.so $out/lib/libfreeimage-3.18.0.so
           '';
         };
       in 
