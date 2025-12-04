@@ -91,7 +91,7 @@
       kdePackages.filelight
       zotero
       # winboat
-      xppen_4 # just to try
+      # xppen_4 # just to try
     ];
     fonts.packages = with pkgs; [
       noto-fonts
