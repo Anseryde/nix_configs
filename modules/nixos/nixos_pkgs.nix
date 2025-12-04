@@ -37,7 +37,7 @@
       # in 
       with pkgs; [
       #vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      freeimagere
+      # freeimagere
       micro
       helix
       wget
@@ -91,6 +91,7 @@
       kdePackages.filelight
       zotero
       # winboat
+      xppen_4 # just to try
     ];
     fonts.packages = with pkgs; [
       noto-fonts

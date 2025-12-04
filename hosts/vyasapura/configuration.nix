@@ -146,7 +146,7 @@
   };
 
   # drawing tablets
-  hardware.opentabletdriver.enable = true;
+  hardware.opentabletdriver.enable = false;
 
   #flatpaks
   services.flatpak.enable = true;
