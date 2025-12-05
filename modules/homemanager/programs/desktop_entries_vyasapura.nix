@@ -71,6 +71,24 @@
           X-KDE-SubstituteUID = "false";
         };
       };
+      unreal_engine_5_5_4 = {
+        name = "Unreal Engine 5.5.4";
+        genericName = "Game Engine";
+        icon = "/mnt/Lexar_SSD/UE_5_5_4/Engine/Source/Runtime/Launch/Resources/Linux/UnrealEngine.png";
+        exec = "steam-run /mnt/Lexar_SSD/UE_5_5_4/Engine/Binaries/Linux/UnrealEditor";
+        startupNotify = false;
+        type = "Application";
+        terminal = false;
+        categories = [
+          "Development"
+        ];
+        settings = {
+          MimeType = "application/uproject";
+          X-KDE-SubstituteUID = "false";
+          Keywords = "Unreal Engine;5.5.4";
+          Path = "/mnt/Lexar_SSD/UE_5_5_4/Engine/Binaries/Linux";
+        };
+      };
     };
   };
 }
