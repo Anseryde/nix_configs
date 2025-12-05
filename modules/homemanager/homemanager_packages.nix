@@ -89,6 +89,7 @@
       mermaid-cli # for snacks.nvim image module
       flyctl # for Actual Budget budgeting app hosting on fly.io 
       ungoogled-chromium
+      kdePackages.kclock
     ];
   };
 }
