@@ -15,6 +15,6 @@
     boot.kernelParams = [
       "nouveau.config=NvGspRm=1"
     ];
-    chaotic.mesa-git.enable = true;
+    # chaotic.mesa-git.enable = true;
   };
 }

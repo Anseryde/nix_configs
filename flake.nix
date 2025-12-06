@@ -27,9 +27,9 @@
       url = "github:nguyenvukhang/nvim-toggler";
       flake = false;
     };
-    chaotic = {
-      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    };
+    # chaotic = {
+    #   url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    # };
   };
   outputs = {
     self,
@@ -41,7 +41,7 @@
     lanzaboote,
     nix-alien,
     nvf,
-    chaotic,
+    # chaotic,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -109,7 +109,7 @@
           nur.modules.nixos.default
           lanzaboote.nixosModules.lanzaboote
           nvf.nixosModules.default
-          chaotic.nixosModules.default
+          # chaotic.nixosModules.default
           ({
             self,
             pkgs,
