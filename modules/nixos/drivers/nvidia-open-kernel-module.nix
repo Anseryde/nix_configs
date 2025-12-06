@@ -28,7 +28,18 @@
       powerManagement = {
         enable = true;
       };
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
+      # package = config.boot.kernelPackages.nvidiaPackages.latest;
+      package = config.boot.kernelPackages.nvidiaPackages.latest // {
+        open = config.boot.kernelPackages.nvidiaPackages.latest.open.overrideAttrs (old: {
+          patches = (old.patches or [ ]) ++ [
+            (pkgs.fetchpatch {
+              name = "get_dev_pagemap.patch";
+              url = "https://github.com/NVIDIA/open-gpu-kernel-modules/commit/3e230516034d29e84ca023fe95e284af5cd5a065.patch";
+              hash = "sha256-BhL4mtuY5W+eLofwhHVnZnVf0msDj7XBxskZi8e6/k8=";
+            })
+          ];
+        });
+      };
     };
     # hardware.nvidia-container-toolkit.enable = true;
     hardware.nvidia-container-toolkit = {
