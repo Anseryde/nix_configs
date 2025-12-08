@@ -90,6 +90,7 @@
       firefoxpwa
       kdePackages.filelight
       zotero
+      kdePackages.qtwayland
       # winboat
       # xppen_4 # just to try
     ];
