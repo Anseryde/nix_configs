@@ -91,9 +91,21 @@
   };
 
   # KDE
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.displayManager = {
+    # autoLogin = {
+    #   enable = true;
+    #   user = "ryann";
+    # };
+    cosmic-greeter.enable = false;
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+  };
+  services.desktopManager = {
+    cosmic.enable = false;
+    plasma6.enable = true;
+  };
   programs.kdeconnect.enable = true;
 
   # bluetooth
@@ -206,6 +218,7 @@
     startAgent = true;
     enableAskPassword = true;
   };
+  services.gnome.gcr-ssh-agent.enable = false;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
