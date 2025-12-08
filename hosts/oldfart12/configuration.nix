@@ -140,6 +140,8 @@
       pkgs.python312
       pkgs.fuse3
       pkgs.fuse
+      pkgs.libsForQt5.qtwayland
+      pkgs.kdePackages.qtwayland
     ];
   };
 
