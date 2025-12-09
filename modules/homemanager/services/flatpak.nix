@@ -61,6 +61,7 @@
       "org.gimp.GIMP.GMic"
       "org.gimp.GIMP.Plugins.Fourier"
       "org.gimp.GIMP.Plugins.Lensfun"
+      "org.jousse.vincent.Pomodorolm"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];
