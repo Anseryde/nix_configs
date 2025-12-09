@@ -106,6 +106,7 @@
     cosmic.enable = false;
     plasma6.enable = true;
   };
+  fonts.fontDir.enable = true;
   programs.kdeconnect.enable = true;
 
   # bluetooth
