@@ -23,7 +23,7 @@
       fishPlugins.fzf-fish
       # courier-prime
       # vollkorn
-      # gimp-with-plugins
+      gimp-with-plugins
       # gimpPlugins.resynthesizer
       prismlauncher
       # unityhub

@@ -54,13 +54,13 @@
       "org.onlyoffice.desktopeditors"
       "re.sonny.Eloquent" # dedicated proofreading app(at least for English and Mandarin)!
       "net.pixieditor.PixiEditor"
-      "org.gimp.GIMP"
-      "org.gimp.GIMP.Plugin.Resynthesizer"
-      "org.gimp.GIMP.Plugin.LiquidRescale"
-      "org.gimp.GIMP.Plugin.BIMP"
-      "org.gimp.GIMP.GMic"
-      "org.gimp.GIMP.Plugins.Fourier"
-      "org.gimp.GIMP.Plugins.Lensfun"
+      # "org.gimp.GIMP"
+      # "org.gimp.GIMP.Plugin.Resynthesizer"
+      # "org.gimp.GIMP.Plugin.LiquidRescale"
+      # "org.gimp.GIMP.Plugin.BIMP"
+      # "org.gimp.GIMP.GMic"
+      # "org.gimp.GIMP.Plugins.Fourier"
+      # "org.gimp.GIMP.Plugins.Lensfun"
       "org.jousse.vincent.Pomodorolm"
     ];
     services.flatpak.overrides = {
