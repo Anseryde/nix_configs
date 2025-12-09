@@ -99,6 +99,16 @@
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       liberation_ttf
+      courier-prime
+      vollkorn
+      corefonts
+      texlivePackages.arphic-ttf
+      wqy_microhei
+      wqy_zenhei
+      nerd-fonts.symbols-only
+      vista-fonts
+      vista-fonts-chs
+      vista-fonts-cht
     ];
   };
 }

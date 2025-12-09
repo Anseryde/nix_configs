@@ -21,17 +21,17 @@
       fastfetch
       hyfetch
       fishPlugins.fzf-fish
-      courier-prime
-      vollkorn
+      # courier-prime
+      # vollkorn
       # gimp-with-plugins
       # gimpPlugins.resynthesizer
       prismlauncher
       # unityhub
       tela-icon-theme
       thunderbird-latest
-      wqy_microhei
-      wqy_zenhei
-      texlivePackages.arphic-ttf
+      # wqy_microhei
+      # wqy_zenhei
+      # texlivePackages.arphic-ttf
       helix
       zed-editor
       vscodium-fhs
@@ -50,13 +50,13 @@
       inkscape-with-extensions
       kdePackages.kasts
       newsflash
-      nerd-fonts.symbols-only
+      # nerd-fonts.symbols-only
       wineWowPackages.stableFull
       raider
-      corefonts
-      vista-fonts
-      vista-fonts-chs
-      vista-fonts-cht
+      # corefonts
+      # vista-fonts
+      # vista-fonts-chs
+      # vista-fonts-cht
       wl-clipboard
       python313Packages.pyperclip
       kid3
