@@ -91,33 +91,20 @@
       kdePackages.filelight
       zotero
       kdePackages.qtwayland
-      portaudio
+      portaudio # needed for krita brushsfx plugin
       python3Packages.sounddevice
       # krita
       # winboat
       # xppen_4 # just to try
       (pkgs.krita.overrideDerivation (old: {
           buildInputs = old.buildInputs ++ [
-            portaudio
+            python3Packages.sounddevice
           ];
-          postPatch = let
-            pythonPath = python3Packages.makePythonPath (
-              [
-                python3Packages.sip
-                python3Packages.setuptools
-                python3Packages.sounddevice
-                portaudio
-              ]
-            );  
-          in 
-          ''
-            substituteInPlace cmake/modules/FindSIP.cmake \
-              --replace 'PYTHONPATH=''${_sip_python_path}' 'PYTHONPATH=${pythonPath}'
-            substituteInPlace cmake/modules/SIPMacros.cmake \
-              --replace 'PYTHONPATH=''${_krita_python_path}' 'PYTHONPATH=${pythonPath}'
-
-            substituteInPlace plugins/impex/jp2/jp2_converter.cc \
-              --replace '<openjpeg.h>' '<${openjpeg.incDir}/openjpeg.h>'
+          installPhase = ''
+            mkdir -p $out/lib
+            ln -s ${python3Packages.sounddevice}/${python3Packages.python.sitePackages}/sounddevice*.dist-info $out/lib/krita-python-libs/krita/sounddevice.dist-info
+            ln -s ${python3Packages.sounddevice}/${python3Packages.python.sitePackages}/sounddevice.py $out/lib/krita-python-libs/krita/sounddevice.py
+            ln -s ${python3Packages.sounddevice}/${python3Packages.python.sitePackages}/_sounddevice.py $out/lib/krita-python-libs/krita/_sounddevice.py
           '';
         })
       )
