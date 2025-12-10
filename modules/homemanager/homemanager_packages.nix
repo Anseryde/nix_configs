@@ -91,11 +91,11 @@
       ungoogled-chromium
       kdePackages.kclock
       (krita.override {
-        libpng = (libpng.overrideAttrs (oldAttrs: {
+        libpng = pkgs.libpng.overrideAttrs (oldAttrs: {
           patches = oldAttrs.patches ++ [
             ./patches/libpng.patch
           ];
-        }));
+        });
       })
       krita-plugin-gmic
     ];
