@@ -92,7 +92,7 @@
       zotero
       kdePackages.qtwayland
       portaudio
-      # python3Packages.sounddevice
+      python3Packages.sounddevice
       # krita
       # winboat
       # xppen_4 # just to try
