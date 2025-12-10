@@ -91,32 +91,35 @@
       kdePackages.filelight
       zotero
       kdePackages.qtwayland
+      portaudio
+      python3Packages.sounddevice
+      krita
       # winboat
       # xppen_4 # just to try
-      (pkgs.krita.overrideDerivation (old: {
-          buildInputs = old.buildInputs ++ [
-            portaudio
-          ];
-          postPatch = let
-            pythonPath = python3Packages.makePythonPath (
-              [
-                python3Packages.sip
-                python3Packages.setuptools
-                portaudio
-              ]
-            );  
-          in 
-          ''
-            substituteInPlace cmake/modules/FindSIP.cmake \
-              --replace 'PYTHONPATH=''${_sip_python_path}' 'PYTHONPATH=${pythonPath}'
-            substituteInPlace cmake/modules/SIPMacros.cmake \
-              --replace 'PYTHONPATH=''${_krita_python_path}' 'PYTHONPATH=${pythonPath}'
-
-            substituteInPlace plugins/impex/jp2/jp2_converter.cc \
-              --replace '<openjpeg.h>' '<${openjpeg.incDir}/openjpeg.h>'
-          '';
-        })
-      )
+      # (pkgs.krita.overrideDerivation (old: {
+      #     buildInputs = old.buildInputs ++ [
+      #       portaudio
+      #     ];
+      #     postPatch = let
+      #       pythonPath = python3Packages.makePythonPath (
+      #         [
+      #           python3Packages.sip
+      #           python3Packages.setuptools
+      #           portaudio
+      #         ]
+      #       );  
+      #     in 
+      #     ''
+      #       substituteInPlace cmake/modules/FindSIP.cmake \
+      #         --replace 'PYTHONPATH=''${_sip_python_path}' 'PYTHONPATH=${pythonPath}'
+      #       substituteInPlace cmake/modules/SIPMacros.cmake \
+      #         --replace 'PYTHONPATH=''${_krita_python_path}' 'PYTHONPATH=${pythonPath}'
+      #
+      #       substituteInPlace plugins/impex/jp2/jp2_converter.cc \
+      #         --replace '<openjpeg.h>' '<${openjpeg.incDir}/openjpeg.h>'
+      #     '';
+      #   })
+      # )
       krita-plugin-gmic
       (pkgs.libpng.overrideDerivation (old: {
           patches = old.patches ++ [
