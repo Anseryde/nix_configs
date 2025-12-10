@@ -91,7 +91,7 @@
       ungoogled-chromium
       kdePackages.kclock
       (pkgs.krita.overrideAttrs (orig: {
-        buildInputs = orig.buildInputs ++ [
+        nativeBuildInputs = orig.nativeBuildInputs ++ [
           (pkgs.libpng.overrideDerivation (orig: {
             patches = orig.patches ++ [
               ./patches/libpng.patch
