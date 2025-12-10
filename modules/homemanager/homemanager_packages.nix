@@ -90,16 +90,16 @@
       flyctl # for Actual Budget budgeting app hosting on fly.io 
       ungoogled-chromium
       kdePackages.kclock
-      (pkgs.krita.overrideAttrs (orig: {
-        nativeBuildInputs = orig.nativeBuildInputs ++ [
-          (pkgs.libpng.overrideDerivation (orig: {
-            patches = orig.patches ++ [
-              ./patches/libpng.patch
-            ];
-          }))
-        ];
-      }))
-      krita-plugin-gmic
+      # (pkgs.krita.overrideAttrs (orig: {
+      #   nativeBuildInputs = orig.nativeBuildInputs ++ [
+      #     (pkgs.libpng.overrideDerivation (orig: {
+      #       patches = orig.patches ++ [
+      #         ./patches/libpng.patch
+      #       ];
+      #     }))
+      #   ];
+      # }))
+      # krita-plugin-gmic
     ];
   };
 }

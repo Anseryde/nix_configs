@@ -93,6 +93,8 @@
       kdePackages.qtwayland
       # winboat
       # xppen_4 # just to try
+      patched-krita
+      krita-plugin-gmic
     ];
     fonts.packages = with pkgs; [
       noto-fonts
@@ -109,6 +111,19 @@
       vista-fonts
       vista-fonts-chs
       vista-fonts-cht
+    ];
+    nixpkgs.overlays = [
+      (self: super: {
+        patched-krita = pkgs.replaceDependency {
+          drv = pkgs.krita;
+          oldDependency = pkgs.libpng;
+          newDependency = pkgs.libpng.overrideAttrs (old: {
+            patches = old.patches or [ ] ++ [
+              ../homemanager/patches/libpng.patch
+            ];
+          });
+        };
+      })
     ];
   };
 }
