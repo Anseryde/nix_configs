@@ -93,8 +93,19 @@
       kdePackages.qtwayland
       # winboat
       # xppen_4 # just to try
-      patched-krita
+      (pkgs.krita.overrideAttrs (old: {
+        buildInputs = old.buildInputs ++ [
+            portaudio
+          ];
+        })
+      )
       krita-plugin-gmic
+      (pkgs.libpng.overrideDerivation (old: {
+          patches = old.patches ++ [
+            ../homemanager/patches/libpng.patch
+          ];
+        })
+      )
     ];
     fonts.packages = with pkgs; [
       noto-fonts
@@ -112,18 +123,18 @@
       vista-fonts-chs
       vista-fonts-cht
     ];
-    nixpkgs.overlays = [
-      (self: super: {
-        patched-krita = pkgs.replaceDependency {
-          drv = pkgs.krita;
-          oldDependency = pkgs.libpng;
-          newDependency = pkgs.libpng.overrideAttrs (old: {
-            patches = old.patches or [ ] ++ [
-              ../homemanager/patches/libpng.patch
-            ];
-          });
-        };
-      })
-    ];
+    # nixpkgs.overlays = [
+    #   (self: super: {
+    #     patched-krita = pkgs.replaceDependency {
+    #       drv = pkgs.krita;
+    #       oldDependency = pkgs.libpng;
+    #       newDependency = pkgs.libpng.overrideAttrs (old: {
+    #         patches = old.patches or [ ] ++ [
+    #           ../homemanager/patches/libpng.patch
+    #         ];
+    #       });
+    #     };
+    #   })
+    # ];
   };
 }
