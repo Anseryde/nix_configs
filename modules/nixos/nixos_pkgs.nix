@@ -98,7 +98,7 @@
       # xppen_4 # just to try
       (pkgs.krita.overrideDerivation (old: {
           buildInputs = old.buildInputs ++ [
-            python3Packages.sounddevice
+            python3Packages.sounddevice # this and the installPhase below are for the brushsfx krita python plugin to work
           ];
           installPhase = ''
             mkdir -p $out/lib
@@ -114,7 +114,7 @@
             ../homemanager/patches/libpng.patch
           ];
         })
-      )
+      ) # this patches libpng so that it no longer has a baffling 8mb cache size limit
     ];
     fonts.packages = with pkgs; [
       noto-fonts
