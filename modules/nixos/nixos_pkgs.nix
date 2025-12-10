@@ -92,7 +92,7 @@
       zotero
       kdePackages.qtwayland
       portaudio # needed for krita brushsfx plugin
-      python3Packages.sounddevice
+      # python3Packages.sounddevice
       # krita
       # winboat
       # xppen_4 # just to try
