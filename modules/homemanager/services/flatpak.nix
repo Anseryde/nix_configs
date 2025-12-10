@@ -43,7 +43,7 @@
       "org.audacityteam.Audacity"
       "org.beeref.BeeRef"
       "org.gustavoperedo.FontDownloader"
-      "org.kde.krita"
+      # "org.kde.krita"
       "org.telegram.desktop"
       "dev.pulsar_edit.Pulsar"
       "io.github.MakovWait.Godots"
