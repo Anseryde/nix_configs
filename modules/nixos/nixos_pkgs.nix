@@ -115,6 +115,8 @@
           ];
         })
       ) # this patches libpng so that it no longer has a baffling 8mb cache size limit
+      nps
+      vulkan-tools
     ];
     fonts.packages = with pkgs; [
       noto-fonts
