@@ -28,6 +28,7 @@
     ./programs/devenv.nix
     ./drivers/opensourcenvidia.nix
     ./drivers/opensourcenvidia_mesa-git.nix
+    ./programs/waydroid.nix
   ];
 
   nixos_pkgs.enable =

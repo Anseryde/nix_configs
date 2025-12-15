@@ -57,7 +57,7 @@
       # vista-fonts
       # vista-fonts-chs
       # vista-fonts-cht
-      wl-clipboard
+      # wl-clipboard
       python313Packages.pyperclip
       kid3
       lrcget

@@ -30,6 +30,7 @@
   virt-manager.enable = true;
   nvf-config.enable = true;
   devenv.enable = true;
+  waydroid.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot = {
     bootspec.enable = true;
@@ -193,8 +194,8 @@
   };
 
   # Waydroid
-  virtualisation.waydroid.enable = true;
-  networking.nftables.enable = true; # There was an update that broke waydroid. Trying to enable this to troubleshoot I guess…
+  # virtualisation.waydroid.enable = true;
+  # networking.nftables.enable = true; # There was an update that broke waydroid. Trying to enable this to troubleshoot I guess…
 
   # LACT GPU Control
   services.lact.enable = true;
