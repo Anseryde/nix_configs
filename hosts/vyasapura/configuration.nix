@@ -236,8 +236,8 @@
     zones = {
       trusted = {
         ports = [
-          "67/udp"
-          "53/udp"
+          67/udp
+          53/udp
         ];
       };
       home = {
