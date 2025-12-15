@@ -236,8 +236,14 @@
     zones = {
       trusted = {
         ports = [
-          67/udp
-          53/udp
+          {
+            port = 53;
+            protocol = "udp";
+          }
+          {
+            port = 67;
+            protocol = "udp";
+          }
         ];
       };
       home = {
