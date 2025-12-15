@@ -236,7 +236,7 @@
     enable = true;
     zones = {
       trusted = {
-        ports = [
+        ports = [# the following ports 53 and 67 are for waydroid
           {
             port = 53;
             protocol = "udp";
