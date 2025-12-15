@@ -233,6 +233,43 @@
   };
   services.firewalld = {
     enable = true;
+    zones = {
+      trusted = {
+        ports = [
+          "67/udp"
+          "53/udp"
+        ];
+      };
+      home = {
+        forward = true;
+        services = [
+          "kdeconnect"
+          "syncthing"
+          "ssh"
+          "mdns"
+          "samba-client"
+          "dhcpv6-client"
+        ];
+      };
+      work = {
+        forward = true;
+        services = [
+          "kdeconnect"
+          "syncthing"
+          "dhcpv6-client"
+          "ssh"
+        ];
+      };
+      public = {
+        forward = true;
+        services = [
+          "kdeconnect"
+          "syncthing"
+          "dhcpv6-client"
+          "ssh"
+        ];
+      };
+    };
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
