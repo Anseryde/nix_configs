@@ -50,7 +50,8 @@
       libdvdnav
       libbluray
       libaacs # for playing back AACS-protected blu-ray discs.
-      libreoffice-qt-fresh
+      # libreoffice-qt-fresh
+      libreoffice-fresh
       hunspell
       hunspellDicts.en_US
       vulkan-hdr-layer-kwin6
