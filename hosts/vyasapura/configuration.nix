@@ -31,7 +31,7 @@
   nvf-config.enable = true;
   devenv.enable = true;
   waydroid.enable = true;
-  nyx-loner.nyx.overlay.enable = true;
+  chaotic.nyx.overlay.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot = {
     bootspec.enable = true;
@@ -42,7 +42,7 @@
       "ntsync" # for ntsync functionality in games such as via proton or WINE
     ];
     # kernelPackages = pkgs.linuxPackages_latest; # switch to latest stable linux kernel
-    kernelPackages = pkgs.linux_cachyos-rc; 
+    kernelPackages = pkgs.linuxPackages_cachyos-rc;
     loader = {
       systemd-boot.enable = lib.mkForce false;
       efi = {

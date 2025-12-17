@@ -12,10 +12,9 @@
   };
   config = lib.mkIf config.opensourcenvidia_mesa-git.enable {
     hardware.graphics.enable = true;
-    nyx-loner.mesa-git.enable = true;
     boot.kernelParams = [
       "nouveau.config=NvGspRm=1"
     ];
-    # chaotic.mesa-git.enable = true;
+    chaotic.mesa-git.enable = true;
   };
 }
