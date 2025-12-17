@@ -16,8 +16,8 @@
   # for full list of modules, as well as default modules, view nix-configs/modules/nixos/default.nix
   nvidia-open-kernel-module.enable = false;
   nvidia-optimus.enable = false;
-  opensourcenvidia.enable = false;
-  opensourcenvidia_mesa-git.enable = true;
+  opensourcenvidia.enable = true;
+  opensourcenvidia_mesa-git.enable = false;
   steam.enable = true;
   gamescopeandgamemode.enable = true;
   msi-ec.enable = true;
