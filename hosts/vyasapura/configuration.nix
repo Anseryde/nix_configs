@@ -14,10 +14,10 @@
   ];
   # custom module selection
   # for full list of modules, as well as default modules, view nix-configs/modules/nixos/default.nix
-  nvidia-open-kernel-module.enable = true;
-  nvidia-optimus.enable = true;
+  nvidia-open-kernel-module.enable = false;
+  nvidia-optimus.enable = false;
   opensourcenvidia.enable = false;
-  opensourcenvidia_mesa-git.enable = false;
+  opensourcenvidia_mesa-git.enable = true;
   steam.enable = true;
   gamescopeandgamemode.enable = true;
   msi-ec.enable = true;
@@ -31,6 +31,7 @@
   nvf-config.enable = true;
   devenv.enable = true;
   waydroid.enable = true;
+  nyx-loner.nyx.overlay.enable = true;
   # Use the systemd-boot EFI boot loader.
   boot = {
     bootspec.enable = true;
@@ -40,7 +41,8 @@
       "uinput" # future-proofing for systemd 258 bug
       "ntsync" # for ntsync functionality in games such as via proton or WINE
     ];
-    kernelPackages = pkgs.linuxPackages_latest; # switch to latest stable linux kernel
+    # kernelPackages = pkgs.linuxPackages_latest; # switch to latest stable linux kernel
+    kernelPackages = pkgs.linux_cachyos-rc; 
     loader = {
       systemd-boot.enable = lib.mkForce false;
       efi = {

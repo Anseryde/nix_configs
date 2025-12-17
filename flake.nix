@@ -30,6 +30,9 @@
     # chaotic = {
     #   url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     # };
+    nyx-loner = {
+      url = "github:lonerOrz/nyx-loner"; # a fork of chaotic-cx/nyx that is, for now, still maintained.
+    };
   };
   outputs = {
     self,
@@ -42,6 +45,7 @@
     nix-alien,
     nvf,
     # chaotic,
+    nyx-loner,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -110,6 +114,7 @@
           lanzaboote.nixosModules.lanzaboote
           nvf.nixosModules.default
           # chaotic.nixosModules.default
+          nyx-loner.nixosModules.default
           ({
             self,
             pkgs,
