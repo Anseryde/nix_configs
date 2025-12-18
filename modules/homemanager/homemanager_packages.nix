@@ -100,6 +100,8 @@
       #   ];
       # }))
       # krita-plugin-gmic
+      protonplus
+      protontricks
     ];
   };
 }
