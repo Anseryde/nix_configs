@@ -202,6 +202,14 @@
   # LACT GPU Control
   services.lact.enable = true;
 
+  # Sunshine
+  services.sunshine = {
+    enable = true;  
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
+
   # sudo-rs
   security.sudo.enable = false;
   security.sudo-rs = {
