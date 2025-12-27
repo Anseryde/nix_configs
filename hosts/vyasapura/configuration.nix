@@ -271,6 +271,12 @@
           "samba-client"
           "dhcpv6-client"
         ];
+        ports = [
+          {
+            port = 47989;
+            protocol = "tcp";
+          }
+        ];
       };
       work = {
         forward = true;
@@ -280,6 +286,12 @@
           "dhcpv6-client"
           "ssh"
         ];
+        ports =  [
+          {
+            port = 47989;
+            protocol = "tcp";
+          }
+        ];
       };
       public = {
         forward = true;
@@ -288,6 +300,12 @@
           "syncthing"
           "dhcpv6-client"
           "ssh"
+        ];
+        ports = [
+          {
+            port = 47989;
+            protocol = "tcp";
+          }
         ];
       };
     };
