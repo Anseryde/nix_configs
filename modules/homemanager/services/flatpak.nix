@@ -62,6 +62,7 @@
       # "org.gimp.GIMP.Plugins.Fourier"
       # "org.gimp.GIMP.Plugins.Lensfun"
       "org.jousse.vincent.Pomodorolm"
+      "dev.lizardbyte.app.Sunshine"
     ];
     services.flatpak.overrides = {
       #"org.wezfurlong.wezterm".Context.devices = ["!dri"];
