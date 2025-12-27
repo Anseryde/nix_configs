@@ -255,6 +255,10 @@
             port = 67;
             protocol = "udp";
           }
+          {
+            port = 47989; # Sunshine
+            protocol = "tcp";
+          }
         ];
       };
       home = {
