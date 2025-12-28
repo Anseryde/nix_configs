@@ -262,6 +262,13 @@
             port = 47989; # Sunshine
             protocol = "tcp";
           }
+          {
+            port = 4161; # tailscale
+            protocol = "udp";
+          }
+        ];
+        interfaces = [
+          "tailscale0"
         ];
       };
       home = {
@@ -306,6 +313,10 @@
             port = 21;
             protocol = "tcp";
           }
+          {
+            port = 41641;
+            protocol = "udp";
+          }
         ];
       };
       work = {
@@ -321,6 +332,10 @@
             port = 47989;
             protocol = "tcp";
           }
+          {
+            port = 41641;
+            protocol = "udp";
+          }
         ];
       };
       public = {
@@ -335,6 +350,10 @@
           {
             port = 47989;
             protocol = "tcp";
+          }
+          {
+            port = 41641;
+            protocol = "udp";
           }
         ];
       };
