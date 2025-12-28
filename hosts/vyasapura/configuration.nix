@@ -240,76 +240,83 @@
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
-    # backend = "firewalld";
+    backend = "firewalld";
   };
-  # services.firewalld = {
-  #   enable = true;
-  #   zones = {
-  #     trusted = {
-  #       ports = [# the following ports 53 and 67 are for waydroid
-  #         {
-  #           port = 53;
-  #           protocol = "udp";
-  #         }
-  #         {
-  #           port = 67;
-  #           protocol = "udp";
-  #         }
-  #         {
-  #           port = 47989; # Sunshine
-  #           protocol = "tcp";
-  #         }
-  #       ];
-  #     };
-  #     home = {
-  #       forward = true;
-  #       services = [
-  #         "kdeconnect"
-  #         "syncthing"
-  #         "ssh"
-  #         "mdns"
-  #         "samba-client"
-  #         "dhcpv6-client"
-  #       ];
-  #       ports = [
-  #         {
-  #           port = 47989;
-  #           protocol = "tcp";
-  #         }
-  #       ];
-  #     };
-  #     work = {
-  #       forward = true;
-  #       services = [
-  #         "kdeconnect"
-  #         "syncthing"
-  #         "dhcpv6-client"
-  #         "ssh"
-  #       ];
-  #       ports =  [
-  #         {
-  #           port = 47989;
-  #           protocol = "tcp";
-  #         }
-  #       ];
-  #     };
-  #     public = {
-  #       forward = true;
-  #       services = [
-  #         "kdeconnect"
-  #         "syncthing"
-  #         "dhcpv6-client"
-  #         "ssh"
-  #       ];
-  #       ports = [
-  #         {
-  #           port = 47989;
-  #           protocol = "tcp";
-  #         }
-  #       ];
-  #     };
-  #   };
-  # };
+  services.firewalld = {
+    enable = true;
+    zones = {
+      trusted = {
+        ports = [# the following ports 53 and 67 are for waydroid
+          {
+            port = 53;
+            protocol = "udp";
+          }
+          {
+            port = 67;
+            protocol = "udp";
+          }
+          {
+            port = 47989; # Sunshine
+            protocol = "tcp";
+          }
+        ];
+      };
+      home = {
+        forward = true;
+        services = [
+          "kdeconnect"
+          "syncthing"
+          "ssh"
+          "mdns"
+          "samba-client"
+          "dhcpv6-client"
+        ];
+        ports = [
+          {
+            port = 47989;
+            protocol = "tcp";
+          }
+          {
+            port = {
+              from = 47998;
+              to = 48000;
+            };
+            protocol = "udp";
+          }
+        ];
+      };
+      work = {
+        forward = true;
+        services = [
+          "kdeconnect"
+          "syncthing"
+          "dhcpv6-client"
+          "ssh"
+        ];
+        ports =  [
+          {
+            port = 47989;
+            protocol = "tcp";
+          }
+        ];
+      };
+      public = {
+        forward = true;
+        services = [
+          "kdeconnect"
+          "syncthing"
+          "dhcpv6-client"
+          "ssh"
+        ];
+        ports = [
+          {
+            port = 47989;
+            protocol = "tcp";
+          }
+        ];
+      };
+    };
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
