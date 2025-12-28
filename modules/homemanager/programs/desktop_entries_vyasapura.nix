@@ -55,22 +55,22 @@
           X-KDE-SubstituteUID = "false";
         };
       };
-      meshroom = {
-        name = "Meshroom";
-        genericName = "photogrammetry scanning software";
-        icon = "/mnt/Lexar_SSD/Meshroom-2025.1.0/Meshroom-logo-1024x896-3831460149.png";
-        categories = [
-          "Graphics"
-        ];
-        exec = "steam-run /mnt/Lexar_SSD/Meshroom-2025.1.0/Meshroom";
-        startupNotify = false;
-        terminal = false;
-        type = "Application";
-        settings = {
-          Path = "/mnt/Lexar_SSD/Meshroom-2025.1.0";
-          X-KDE-SubstituteUID = "false";
-        };
-      };
+      # meshroom = {
+      #   name = "Meshroom";
+      #   genericName = "photogrammetry scanning software";
+      #   icon = "/mnt/Lexar_SSD/Meshroom-2025.1.0/Meshroom-logo-1024x896-3831460149.png";
+      #   categories = [
+      #     "Graphics"
+      #   ];
+      #   exec = "steam-run /mnt/Lexar_SSD/Meshroom-2025.1.0/Meshroom";
+      #   startupNotify = false;
+      #   terminal = false;
+      #   type = "Application";
+      #   settings = {
+      #     Path = "/mnt/Lexar_SSD/Meshroom-2025.1.0";
+      #     X-KDE-SubstituteUID = "false";
+      #   };
+      # };
       unreal_engine_5_5_4 = {
         name = "Unreal Engine 5.5.4";
         genericName = "Game Engine";
