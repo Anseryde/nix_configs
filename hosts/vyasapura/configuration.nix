@@ -209,6 +209,9 @@
     capSysAdmin = true;
     openFirewall = true;
   };
+  services.tailscale = {
+    enable = true;
+  };
 
   # sudo-rs
   security.sudo.enable = false;
