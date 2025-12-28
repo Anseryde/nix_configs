@@ -278,10 +278,30 @@
           }
           {
             port = {
-              from = 47998;
-              to = 48000;
+              from = 9;
+              to = 13;
             };
             protocol = "udp";
+          }
+          {
+            port = 21;
+            protocol = "udp";
+          }
+          # {
+          #   port = (-5);
+          #   protocol = "tcp";
+          # }
+          {
+            port = 0;
+            protocol = "tcp";
+          }
+          {
+            port = 1;
+            protocol = "tcp";
+          }
+          {
+            port = 21;
+            protocol = "tcp";
           }
         ];
       };
