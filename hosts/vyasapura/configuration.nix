@@ -267,6 +267,21 @@
             protocol = "tcp";
           }
           {
+            port = 48010;
+            protocol = "tcp";
+          }
+          {
+            port = 48010;
+            protocol = "udp";
+          }
+          {
+            port = {
+              from = 47998;
+              to = 48000;
+            };
+            protocol = "udp";
+          }
+          {
             port = 4161; # tailscale
             protocol = "udp";
           }
@@ -293,6 +308,21 @@
           {
             port = 47984; # Sunshine for S6 Lite
             protocol = "tcp";
+          }
+          {
+            port = 48010;
+            protocol = "tcp";
+          }
+          {
+            port = 48010;
+            protocol = "udp";
+          }
+          {
+            port = {
+              from = 47998;
+              to = 48000;
+            };
+            protocol = "udp";
           }
           {
             port = {
@@ -345,6 +375,21 @@
             protocol = "tcp";
           }
           {
+            port = 48010;
+            protocol = "tcp";
+          }
+          {
+            port = 48010;
+            protocol = "udp";
+          }
+          {
+            port = {
+              from = 47998;
+              to = 48000;
+            };
+            protocol = "udp";
+          }
+          {
             port = 41641;
             protocol = "udp";
           }
@@ -366,6 +411,21 @@
           {
             port = 47984;
             protocol = "tcp";
+          }
+          {
+            port = 48010;
+            protocol = "tcp";
+          }
+          {
+            port = 48010;
+            protocol = "udp";
+          }
+          {
+            port = {
+              from = 47998;
+              to = 48000;
+            };
+            protocol = "udp";
           }
           {
             port = 41641;
