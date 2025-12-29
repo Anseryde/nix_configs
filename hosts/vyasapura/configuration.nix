@@ -263,6 +263,10 @@
             protocol = "tcp";
           }
           {
+            port = 47984; # Sunshine fot S6 Lite
+            protocol = "tcp";
+          }
+          {
             port = 4161; # tailscale
             protocol = "udp";
           }
@@ -284,6 +288,10 @@
         ports = [
           {
             port = 47989;
+            protocol = "tcp";
+          }
+          {
+            port = 47984; # Sunshine for S6 Lite
             protocol = "tcp";
           }
           {
@@ -333,6 +341,10 @@
             protocol = "tcp";
           }
           {
+            port = 47984; #Sunshine
+            protocol = "tcp";
+          }
+          {
             port = 41641;
             protocol = "udp";
           }
@@ -349,6 +361,10 @@
         ports = [
           {
             port = 47989;
+            protocol = "tcp";
+          }
+          {
+            port = 47984;
             protocol = "tcp";
           }
           {
