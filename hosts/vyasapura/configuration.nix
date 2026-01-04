@@ -179,6 +179,7 @@
       pkgs.fuse
       pkgs.kdePackages.qtwayland
       pkgs.libsForQt5.qtwayland
+      pkgs.zstd
     ];
   };
 
