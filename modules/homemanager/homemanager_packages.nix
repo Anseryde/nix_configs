@@ -33,7 +33,6 @@
       # wqy_zenhei
       # texlivePackages.arphic-ttf
       helix
-      zed-editor
       vscodium-fhs
       kew
       omnisharp-roslyn
