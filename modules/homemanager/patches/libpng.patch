@@ -8,8 +8,8 @@ index fe8e481..ecaffe7 100644
  # Use 0 for unlimited
 -setting USER_CHUNK_CACHE_MAX default     1000
 -setting USER_CHUNK_MALLOC_MAX default 8000000
-+setting USER_CHUNK_CACHE_MAX default  0
-+setting USER_CHUNK_MALLOC_MAX default 0
++setting USER_CHUNK_CACHE_MAX default  1000000000
++setting USER_CHUNK_MALLOC_MAX default 16000000000
 
  # If this option is enabled APIs to set the above limits at run time are added;
  # without this the hardwired (compile time) limits will be used.
